@@ -25,6 +25,11 @@ Match UnityCommon and the other GCC projects:
 - Reuse UnityCommon types (`Singleton<T>`, `SoundDef`, `Hypertag`, `CooldownTimer`, ...) before writing new ones.
 - Character animation goes through UnityCommon's `PlayableHandler` (on the model, next to an `Animator` with no
   controller), with the clips referenced directly by the scripts that play them. No Animator controllers.
+  Characters get a `CharacterAnimation` for idle/walk and one-shots; play other clips through it, not straight on
+  the handler, or idle/walk overrides them the next frame.
+- Scripted sequences (what verbs do) are lists of UnityCommon `GameAction`s; new behaviour the script needs becomes
+  a new `GameAction_*` / `Condition_*` with a `[GameActionName]` / `[ConditionName]` path, so it shows in the
+  Verb inspector's "Add" menu.
 
 ## Root README
 

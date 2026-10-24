@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UC;
+using UC.Interaction;
 using UnityEngine;
 
-// Something on the set the actor can interact with. When the actor is close and facing it, it gets outlined and
-// the interaction prompt shows its name and verbs; the selected verb is performed through Interact.
+// Something on the set the actor can interact with. What can be done with it are the Verbs on this object and its
+// children, found on Start, in hierarchy order (which is the order the prompt cycles through them). When the actor
+// is close and facing it, and at least one verb is available, it gets outlined and the interaction prompt shows
+// its name and available verbs.
 [RequireComponent(typeof(ScreenSpaceOutline))]
 public class Interactable : MonoBehaviour
 {
     [SerializeField, Tooltip("Name shown on the prompt; the object's name if left empty")]
     private string          displayName;
-    [SerializeField, Tooltip("What the actor can do with it, in the order the prompt cycles through them")]
-    private List<string>    _verbs = new List<string>() { "Use" };
     [SerializeField, Tooltip("Where the prompt is anchored, as an offset from this object's position")]
     private Vector3         promptOffset = new Vector3(0.0f, 0.5f, 0.0f);
 
@@ -21,11 +22,10 @@ public class Interactable : MonoBehaviour
 
     ScreenSpaceOutline  outline;
     Collider            mainCollider;
+    List<Verb>          verbs = new List<Verb>();
 
     public string objectName => (string.IsNullOrEmpty(displayName)) ? (name) : (displayName);
-    public IReadOnlyList<string> verbs => _verbs;
     public Vector3 promptPosition => transform.position + promptOffset;
-    public bool canInteract => (isActiveAndEnabled) && (_verbs.Count > 0);
 
     // Added in the editor: the outline only shows while the actor is targeting this
     void Reset()
@@ -46,6 +46,11 @@ public class Interactable : MonoBehaviour
         SetHighlight(false);
     }
 
+    void Start()
+    {
+        GetComponentsInChildren(true, verbs);
+    }
+
     void OnEnable()
     {
         _all.Add(this);
@@ -62,6 +67,19 @@ public class Interactable : MonoBehaviour
         if (outline) outline.enabled = highlight;
     }
 
+    // Fills result with the verbs that can be performed right now, in order (verbs destroyed by an action are skipped)
+    public void GetAvailableVerbs(ActionContext context, List<Verb> result)
+    {
+        result.Clear();
+        if (!isActiveAndEnabled) return;
+
+        context.targetGameObject = gameObject;
+        foreach (var verb in verbs)
+        {
+            if ((verb != null) && (verb.IsAvailable(context))) result.Add(verb);
+        }
+    }
+
     // Point of the object closest to a position: on its collider, or its pivot when it has none that supports it
     public Vector3 ClosestPoint(Vector3 position)
     {
@@ -71,10 +89,18 @@ public class Interactable : MonoBehaviour
         return mainCollider.ClosestPoint(position);
     }
 
-    public void Interact(Player player, int verbIndex)
+    public void Interact(GameObject actor, ActionRunner runner, Verb verb)
     {
-        if ((verbIndex < 0) || (verbIndex >= _verbs.Count)) return;
+        if (verb == null) return;
 
-        Debug.Log($"{player.name}: {_verbs[verbIndex]} {objectName}");
+        Debug.Log($"{actor.name}: {verb.displayName} {objectName}");
+
+        var context = new ActionContext
+        {
+            triggerGameObject = actor,
+            targetGameObject = gameObject,
+            runner = runner
+        };
+        verb.Perform(context);
     }
 }

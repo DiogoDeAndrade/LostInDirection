@@ -1,25 +1,18 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UC;
+using UC.Interaction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// The actor. Animation goes through a PlayableHandler on the model (no Animator controller): idle while
-// standing, walk while moving, cross-fading between them.
-// Interaction: the closest-to-facing Interactable in range is the target (outlined, with the prompt next to it);
-// one button cycles its verbs, another performs the selected one.
+// The actor (its animation is a CharacterAnimation next to it).
+// Interaction: the closest-to-facing Interactable in range with an available verb is the target (outlined, with
+// the prompt next to it); one button cycles its available verbs, another performs the selected one. Verb actions
+// run on the actor (it's their ActionRunner). During a cutscene the controls are locked: no movement, no aiming,
+// no interaction.
 [RequireComponent(typeof(MovementDirectionalXZ))]
-public class Player : MonoBehaviour
+public class Player : ActionRunner
 {
-    [Header("Animation")]
-    [SerializeField, Tooltip("On the model; the first one in the children if left empty")]
-    private PlayableHandler playableHandler;
-    [SerializeField]
-    private AnimationClip   idleAnim;
-    [SerializeField]
-    private AnimationClip   walkAnim;
-    [SerializeField, Min(0), Tooltip("Cross-fade time between animations, in seconds")]
-    private float           transitionTime = 0.15f;
-
     [Header("Interaction")]
     [SerializeField, Min(0), Tooltip("How far the actor can be from an object (its collider) to interact with it")]
     private float               interactRange = 0.6f;
@@ -33,71 +26,102 @@ public class Player : MonoBehaviour
     private UC.InputControl     nextVerbInput;
     [SerializeField, Tooltip("The first one in the scene if left empty")]
     private InteractionPrompt   prompt;
+    [SerializeField]
+    private Hypertag            uiInventoryDisplay;
 
-    MovementDirectionalXZ   movement;
+    MovementDirectionalXZ movement;
     Interactable            target;
-    int                     verbIndex;
+    Verb                    selectedVerb;
+    List<Verb>              verbs = new List<Verb>();
+    List<Verb>              candidateVerbs = new List<Verb>();
+    ActionContext           context = new ActionContext();
 
     public bool needNewInputSystem => (interactInput != null) && (interactInput.type == UC.InputControl.InputType.NewInput);
 
     // What the actor is facing and can interact with (null when nothing is)
     public Interactable currentTarget => target;
 
+    // Movement, aiming and interaction switched off (cutscenes)
+    public bool controlsLocked { get; private set; }
+
+    public void LockControls(bool locked)
+    {
+        if (controlsLocked == locked) return;
+        controlsLocked = locked;
+
+        movement.SetActive(!locked);
+        if (locked) SetTarget(null);
+    }
+
     void Start()
     {
         movement = GetComponent<MovementDirectionalXZ>();
-        if (playableHandler == null) playableHandler = GetComponentInChildren<PlayableHandler>();
         if (prompt == null) prompt = FindAnyObjectByType<InteractionPrompt>();
 
         if (interactInput != null) interactInput.playerInput = playerInput;
         if (nextVerbInput != null) nextVerbInput.playerInput = playerInput;
+
+        // Used to check verb conditions; the target is filled in by each interactable
+        context.triggerGameObject = gameObject;
+        context.runner = this;
+
+        // 
+        var inventoryDisplay = uiInventoryDisplay.FindFirst<InventoryDisplay>();
+        inventoryDisplay.SetInventory(GetComponent<Inventory>());
     }
 
     void Update()
     {
-        UpdateAnimation();
+        LockControls(Cutscene.isActive);
         UpdateInteraction();
     }
 
-    void UpdateAnimation()
+    void SetTarget(Interactable newTarget)
     {
-        if (playableHandler == null) return;
+        // An action may have destroyed the target
+        if (!target) target = null;
+        if (newTarget == target) return;
 
-        AnimationClip clip = (movement.isMoving) ? (walkAnim) : (idleAnim);
-        if (clip == null) return;
-
-        // While cross-fading, the clip that counts is the one fading in
-        AnimationClip playing = (playableHandler.IsTransitioning) ? (playableHandler.TransitionToClip) : (playableHandler.currentClip);
-        if (playing == clip) return;
-
-        playableHandler.Play(clip, false, transitionTime);
+        if (target) target.SetHighlight(false);
+        target = newTarget;
+        selectedVerb = null;
+        if (target) target.SetHighlight(true);
     }
 
     void UpdateInteraction()
     {
-        Interactable newTarget = FindTarget();
-        if (newTarget != target)
+        SetTarget((controlsLocked) ? (null) : (FindTarget()));
+
+        // Conditions can change while the target stays the same, so the list is rebuilt every frame; the selection
+        // follows the verb, and goes back to the first one if that verb is gone
+        verbs.Clear();
+        if (target != null) target.GetAvailableVerbs(context, verbs);
+
+        int verbIndex = verbs.IndexOf(selectedVerb);
+        if (verbIndex < 0)
         {
-            if (target) target.SetHighlight(false);
-            target = newTarget;
             verbIndex = 0;
-            if (target) target.SetHighlight(true);
+            selectedVerb = (verbs.Count > 0) ? (verbs[0]) : (null);
         }
 
-        if (target != null)
+        if (selectedVerb != null)
         {
-            if (nextVerbInput.IsDown()) verbIndex = (verbIndex + 1) % target.verbs.Count;
-            if (interactInput.IsDown()) target.Interact(this, verbIndex);
+            if (nextVerbInput.IsDown())
+            {
+                verbIndex = (verbIndex + 1) % verbs.Count;
+                selectedVerb = verbs[verbIndex];
+            }
+            if (interactInput.IsDown()) target.Interact(gameObject, this, selectedVerb);
         }
 
         if (prompt != null)
         {
             bool gamepad = (playerInput != null) && (playerInput.currentControlScheme == "Gamepad");
-            prompt.Show(target, verbIndex, gamepad);
+            prompt.Show(target, verbs, verbIndex, gamepad);
         }
     }
 
-    // The interactable in range that is closest to straight ahead
+    // The interactable in range, with something available to do, that is closest to straight ahead
     Interactable FindTarget()
     {
         Vector3 position = transform.position;
@@ -109,8 +133,6 @@ public class Player : MonoBehaviour
 
         foreach (var obj in Interactable.all)
         {
-            if (!obj.canInteract) continue;
-
             Vector3 toObject = obj.ClosestPoint(position) - position;
             toObject.y = 0.0f;
 
@@ -120,12 +142,14 @@ public class Player : MonoBehaviour
             // Touching (or inside) it counts as facing it
             float angle = (distance > 0.001f) ? (Vector3.Angle(forward, toObject)) : (0.0f);
             if (angle > interactAngle) continue;
+            if (angle >= bestAngle) continue;
 
-            if (angle < bestAngle)
-            {
-                best = obj;
-                bestAngle = angle;
-            }
+            // Nothing to do with it right now: it doesn't count as interactable
+            obj.GetAvailableVerbs(context, candidateVerbs);
+            if (candidateVerbs.Count == 0) continue;
+
+            best = obj;
+            bestAngle = angle;
         }
 
         return best;

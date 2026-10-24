@@ -26,7 +26,8 @@ don't add it back unless asked.
 `Assets/Externals/UnityCommon` = https://github.com/DiogoDeAndrade/UnityCommon, namespace `UC`, tracking branch
 **`unity6.6`** (`main` doesn't compile on 6.6; `.gitmodules` has `branch = unity6.6`). No asmdefs: it compiles into
 `Assembly-CSharp` with the game code. Provides `Singleton<T>`, `SoundDef`/`SoundManager`, `Hypertag`,
-`CooldownTimer`, `PlayableHandler`, `OrbitCameraController` (added from this project, with box limits), UI helpers,
+`CooldownTimer`, `PlayableHandler`, `OrbitCameraController` (added from this project, with box limits),
+`LightFlicker` (added from this project), `CanvasGroup.FadeIn/FadeOut`, the `UC.Interaction` actions system, UI helpers,
 a `.dialogue` system and more; check it before writing a generic utility. Generic code written here can move into
 it when the user asks; UnityCommon files use CRLF line endings.
 
@@ -80,6 +81,12 @@ change, and GUIDs/fileIDs are easy to break.
   player with a virtual pad instead: `InputSystem.AddDevice<Gamepad>("TestPad")`, then
   `InputSystem.QueueStateEvent(pad, new GamepadState { leftStick = ... })`; remove it with
   `InputSystem.RemoveDevice` before leaving Play mode.
+- Timed sequences (cutscenes): CLI round trips take about a second each, too coarse to sample them. Start a
+  coroutine from an eval on a scene MonoBehaviour (e.g. the `Player`) that presses the pad buttons, logs state at
+  set times into a file and calls `ScreenCapture.CaptureScreenshot` (Game view, UI included); then read the file.
+  Build file paths with `Path.Combine`: a `\r` sneaking in through shell escaping gives "Name has invalid chars".
+- `capture game_view --source screen` (no `save_path`) returns the Game view with its overlay UI as base64;
+  `capture screenshot` doesn't include overlay canvases.
 - `unity pipeline upgrade --project-path <path>` moves to a newer package version when one is published.
 - The package also ships a deeper `unity-pipeline` skill; `unity skill install claude-code --local` mirrors it
   into the project if it's wanted.

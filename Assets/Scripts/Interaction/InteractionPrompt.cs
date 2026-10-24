@@ -33,6 +33,7 @@ public class InteractionPrompt : MonoBehaviour
 
     List<TextMeshProUGUI>   verbTexts = new List<TextMeshProUGUI>();
     Interactable            target;
+    List<Verb>              shownVerbs = new List<Verb>();
     int                     shownVerb = -1;
     bool                    shownGamepad;
     Canvas                  canvas;
@@ -47,21 +48,22 @@ public class InteractionPrompt : MonoBehaviour
         panel.gameObject.SetActive(false);
     }
 
-    // Called every frame by the actor; only rebuilds the text when something changed
-    public void Show(Interactable newTarget, int verbIndex, bool gamepad)
+    // Called every frame by the actor with the target's available verbs; only rebuilds the text when something changed
+    public void Show(Interactable newTarget, List<Verb> verbs, int verbIndex, bool gamepad)
     {
-        if ((newTarget == target) && (verbIndex == shownVerb) && (gamepad == shownGamepad)) return;
+        if ((newTarget == target) && (verbIndex == shownVerb) && (gamepad == shownGamepad) && (SameVerbs(verbs))) return;
 
         target = newTarget;
+        shownVerbs.Clear();
+        shownVerbs.AddRange(verbs);
         shownVerb = verbIndex;
         shownGamepad = gamepad;
 
-        panel.gameObject.SetActive(target != null);
-        if (target == null) return;
+        panel.gameObject.SetActive((target != null) && (verbs.Count > 0));
+        if (!panel.gameObject.activeSelf) return;
 
         nameText.text = target.objectName;
 
-        var verbs = target.verbs;
         while (verbTexts.Count < verbs.Count)
         {
             var text = Instantiate(verbTemplate, verbTemplate.transform.parent);
@@ -74,7 +76,7 @@ public class InteractionPrompt : MonoBehaviour
             if (!used) continue;
 
             bool selected = (i == verbIndex);
-            verbTexts[i].text = ((selected) ? (selectedPrefix) : (unselectedPrefix)) + verbs[i];
+            verbTexts[i].text = ((selected) ? (selectedPrefix) : (unselectedPrefix)) + verbs[i].displayName;
             verbTexts[i].color = (selected) ? (selectedVerbColor) : (verbColor);
         }
 
@@ -85,9 +87,19 @@ public class InteractionPrompt : MonoBehaviour
         Place();
     }
 
+    bool SameVerbs(List<Verb> verbs)
+    {
+        if (verbs.Count != shownVerbs.Count) return false;
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            if (verbs[i] != shownVerbs[i]) return false;
+        }
+        return true;
+    }
+
     void LateUpdate()
     {
-        if (target != null) Place();
+        if ((target != null) && (panel.gameObject.activeSelf)) Place();
     }
 
     // Puts the panel next to the target on screen, kept inside the canvas

@@ -21,6 +21,13 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Build the set (zombie movie scene)
 - [x] Player movement with the 45 degree camera
 - [x] Interaction: get close to an object and face it (right stick aims while standing still), cycle its options, perform one
+- [x] Verbs with conditions and actions (add item, destroy object, spawn prefab, cutscenes, wait, animation,
+      particles, zombie follow)
+- [x] Cutscenes: letterbox bars, controls locked, UI faded out, cutscene camera
+- [x] Atmosphere: candles and fire baskets with flames and flickering lights
+- [x] Inventory, with the shovel's icon
+- [ ] Zombie scene: pick up the shovel, dig the grave, a zombie comes out and follows the actor (done), reach the
+      crypt, "Cut!" and restart when touching a zombie
 - [ ] Scene targets: where to stand, where to face, which interaction is right
 - [ ] Director hot/cold meter: position and orientation cues
 - [ ] Director life system: wrong interactions make him angrier
