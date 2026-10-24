@@ -31,7 +31,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [ ] Scene targets: where to stand, where to face, which interaction is right
 - [ ] Director hot/cold meter: position and orientation cues
 - [ ] Director life system: wrong interactions make him angrier
-- [ ] Director image in the bottom-left corner, showing his mood
+- [x] Director in the bottom-left corner (3D, in his own scene): body language for hot/cold, face for mood
 - [ ] Director gibberish (speech balloons and voice)
 - [ ] Scene complete and fired / game over
 - [ ] Main menu/credits screen

@@ -22,12 +22,21 @@ the scene needs them to do, reading the director's body language.
 - **Movement**: the player moves in 3D, with a fixed 45 degree camera, as in SkinFactory (`../SkinFactory`).
 - **Interaction**: get close to an object and press Interact; a menu shows the interactions that object offers,
   and the player picks one.
-- **Director**: a 2D image in the bottom-left corner. He works as a hot/cold meter: he gets more or less angry as
+- **Director**: shown in the bottom-left corner. He works as a hot/cold meter: he gets more or less angry as
   the player does the right things, and the player reads his body cues to work out what to do.
   - **Position cue**: how close the player is to where they should be. Updates continuously as the player moves.
   - **Orientation cue**: once close to that position, whether the player is aiming in the right direction to
     interact with the right object.
   - **"Life system"**: interactions that are wrong for that moment make him angrier.
+- **Director, decided 2026-10-24** (the user's call):
+  - The scene's script is a sequence of beats, each with a current target (the shovel, the grave, the crypt).
+  - **Body language = hot/cold**, more frustrated the colder it is. Far from the current target, it's the distance
+    that counts; close to it, it's the orientation (which object the actor is aiming at).
+  - **Face = mood**, which is the health: right actions improve it, wrong actions lower it, and staying far from
+    the target too long, or aiming at the wrong object too long, makes it worse and worse over time.
+  - "Cut!" and the restart (touching a zombie, running out of mood) come after the director.
+  - Display: a 3D model with its own camera (the user's choice, 2026-10-24), in its own scene so every movie can
+    reuse it. See Director below.
 
 ### Scenes
 
@@ -182,7 +191,7 @@ fire baskets and the lamps.
 
 - Lamps: `Assets/Prefabs/LightpostDouble.prefab` and `LightpostSingle.prefab` (the user's) carry their own point
   light, and use `Assets/Materials/lightpost-double Variant.mat`, whose emission map
-  (`GraveyardKit/FBX format/Textures/colormap_lightpost.png`, derived from Kenney's colormap) makes only the lamp
+  (`Assets/Materials/Textures/colormap_lightpost.png`, derived from Kenney's colormap) makes only the lamp
   glass glow. Two of each on the set; the old `Set/Lamps` lights are gone (the empty group remains).
 
 - `UC.LightFlicker` (written here, moved to UnityCommon's `Animation/` on 2026-10-24) on a Light: its color follows a
@@ -201,6 +210,34 @@ fire baskets and the lamps.
   wall, both back corners, flanking the front of the path), under `Set/Props`. The NavMesh was rebaked after
   placing them.
 
+### Director
+
+- The model is the user's `Assets/Prefabs/Director.prefab`: a variant of Blocky Characters' `character-a` with
+  `Assets/Materials/Director.mat` (`Assets/Materials/Textures/director_base.png`, beret, moustache, red scarf).
+  Blocky characters are rigid parts under `root` (`leg-left`, `leg-right`, `torso` with `arm-left`, `arm-right`,
+  `head`), all on the `Director` layer (6).
+- `Assets/Scenes/Director.unity`, loaded additively by every movie (`SceneLoader` object with
+  `AdditiveSceneLoader`, `Assets/Scripts/Scenes`; both scenes are in the build list). It holds the director at
+  (0, -100, 0), far below any set, turned 165 degrees; `DirectorCamera` (FOV 30, Director layer only, solid dark
+  background, no post-processing) renders him into `Assets/Materials/Textures/DirectorView.renderTexture`
+  (512x512, MSAA 4); three short-range spot lights (key, fill, rim) on the Director layer. No directional light
+  there, since it would compete with the movie's sun. The user will add a background (a camera, ...) later.
+- The movie's cameras leave out the Director layer. The portrait is `HUD/DirectorPortrait` (bottom-left, 300x300,
+  a dark frame with a RawImage of the render texture), so it fades with the HUD in cutscenes. The inventory is in
+  the bottom-right.
+- `Director` (`Assets/Scripts/Director`, on the prefab root, `Director.instance`): `frustration` (0 pleased,
+  1 losing it) and `mood` (1 delighted, 0 furious), both inspector sliders; what's shown eases towards them at
+  1.5 per second. Nothing sets them yet: that's the scene beats logic, next.
+- `DirectorBody`: procedural body language on the rigid parts (no clips, no Animator), from the frustration, all
+  blended continuously with a tempo that rises with it. Calm: breathing, slow nod, arms hanging. Impatient
+  (around 0.5): leaning in, right arm gesturing forward, left arm held out, head shaking, right foot tapping.
+  Furious (towards 1): arms waving over the head, hopping, stomping, head shaking fast and looking up.
+- `DirectorFace`: the faces are `Assets/Materials/Textures/director_faces.png`, 8 sprites (`director_faces_0` to
+  `_7`, 380x380, happiest to furious), each a whole head area as laid out in the top-left 380x380 of
+  `director_base.png`. At runtime the director's material and texture are replaced by copies, and showing a face
+  copies that sprite over the head area (CPU `GetPixels`/`SetPixels`, only when the face changes), so both
+  textures have Read/Write enabled. Mood picks the face: 1 is face 0, 0 is face 7.
+
 ### Font
 
 UI font: Barlow Condensed Black (Google Fonts, SIL OFL; the same file SkinFactory uses), as a dynamic TMP font asset
@@ -211,9 +248,6 @@ imported (`Assets/TextMesh Pro`).
 
 ### Open questions
 
-- Beats within a scene: one target, or a sequence (stand there, face that, do this)?
-- Both cues and the life system show as anger on the same face. How does the player tell "cold" (far from the
-  mark, recovers as they move) from lost patience (wrong interactions, cumulative)?
 - What happens when patience runs out (fired, retake, game over), and what finishing a scene looks like.
 - How the gibberish is presented: speech balloons with nonsense text, a babble voice, an interpreter whose
   "translation" is too short to be useful (as in the film).
@@ -255,14 +289,14 @@ README's `## Todo` list.
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
-| `Assets/Scenes` | Scenes; `ZombieMovie/` holds that scene's baked NavMesh |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Editor/` (`VerbEditor`) |
+| `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`) |
 | `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset) |
 | `Assets/TextMesh Pro` | TMP essential resources |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`); `Items/` (`Shovel`) |
-| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `NoFriction.physicMaterial` (player capsule) |
+| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`) |
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
 | `docs/` | This context |
 | `README.md`, `LICENSE` | Player-facing description and credits; MIT license |
