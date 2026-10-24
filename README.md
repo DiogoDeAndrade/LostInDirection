@@ -20,7 +20,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 
 - [x] Build the set (zombie movie scene)
 - [x] Player movement with the 45 degree camera
-- [ ] Interaction: get close to an object, press Interact, pick from its list of options
+- [x] Interaction: get close to an object and face it (right stick aims while standing still), cycle its options, perform one
 - [ ] Scene targets: where to stand, where to face, which interaction is right
 - [ ] Director hot/cold meter: position and orientation cues
 - [ ] Director life system: wrong interactions make him angrier
@@ -36,6 +36,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [Blocky Characters](https://kenney.nl/assets/blocky-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Graveyard Kit](https://kenney.nl/assets/graveyard-kit) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Mini Characters](https://kenney.nl/assets/mini-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- Font [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed) by Jeremy Tribby, [SIL Open Font License].
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 
 ## Sound
@@ -60,6 +61,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 [CC-BY-SA 4.0]:http://creativecommons.org/licenses/by-sa/4.0/
 [CC-BY 4.0]:https://creativecommons.org/licenses/by/4.0/
 [CC-BY-NC 4.0]:https://creativecommons.org/licenses/by-nc/4.0/
+[SIL Open Font License]:https://openfontlicense.org/
 [NaughtyAttributes]:https://github.com/dbrizov/NaughtyAttributes
 [Unity Common]:https://github.com/DiogoDeAndrade/UnityCommon
 [Game Creator's Club]:https://game-creators-club.itch.io/

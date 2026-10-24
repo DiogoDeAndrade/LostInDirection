@@ -21,6 +21,8 @@ public class MovementDirectionalXZ : MonoBehaviour
     private PlayerInput playerInput;
     [SerializeField, InputPlayer(nameof(playerInput))]
     private UC.InputControl moveInput;
+    [SerializeField, InputPlayer(nameof(playerInput)), Tooltip("Turns the object on the spot while there's no move input (camera-relative), e.g. a right stick. Only read when it's an input action")]
+    private UC.InputControl aimInput;
     [SerializeField]
     private Hypertag cameraTag;
     [SerializeField]
@@ -52,6 +54,7 @@ public class MovementDirectionalXZ : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         moveInput.playerInput = playerInput;
+        if (aimInput != null) aimInput.playerInput = playerInput;
 
         FetchCamera();
     }
@@ -101,6 +104,13 @@ public class MovementDirectionalXZ : MonoBehaviour
                 break;
         }
 
+        // Standing still: the aim input turns the object on the spot
+        if (moveDirection.sqrMagnitude == 0.0f)
+        {
+            Vector2 aim = GetAimInput();
+            if (aim.magnitude >= inputEpsilonZero) facing = right * aim.x + forward * aim.y;
+        }
+
         if (facing.sqrMagnitude > 0.0f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(facing, Vector3.up);
@@ -110,6 +120,14 @@ public class MovementDirectionalXZ : MonoBehaviour
             }
             rb.MoveRotation(targetRotation);
         }
+    }
+
+    // Only input actions are read: the other input types can't give a 2D axis (and an unset one would throw)
+    Vector2 GetAimInput()
+    {
+        if ((aimInput == null) || (aimInput.type != UC.InputControl.InputType.NewInput)) return Vector2.zero;
+
+        return aimInput.GetAxis2();
     }
 
     void FetchCamera()

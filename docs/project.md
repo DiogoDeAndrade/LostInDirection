@@ -68,6 +68,37 @@ path and other flat pieces have none. The layout was generated once by a script 
   `Position`: the camera position is clamped to the disabled `BoxCollider` on `Studio/CameraLimits`
   (x -4.07..3.74, z -6.2..-0.8, tuned by the user), which keeps the actor in frame in every corner of the set.
   Changing the camera distance or angle means resizing that box.
+- Aiming: while there's no move input, `MovementDirectionalXZ.aimInput` (the `Aim` action, gamepad right stick)
+  turns the actor on the spot, camera-relative, at the normal turn speed. Keyboard players turn by moving.
+
+### Interaction
+
+- `Interactable` (`Assets/Scripts/Interaction`) on any object the actor can interact with: a display name (the
+  object's name if empty), a list of verbs (plain strings, in the order they cycle) and a prompt anchor offset.
+  It requires a `UC.ScreenSpaceOutline` (warm yellow, 3 px), kept disabled except while it's the target.
+  `Interact(player, verbIndex)` only logs `"<player>: <verb> <name>"` for now; what verbs do comes with the
+  scene's script.
+- Targeting is in `Player`: among enabled interactables, those whose collider's closest point is within
+  `interactRange` (0.6) on the ground plane and within `interactAngle` (45 degrees) of the actor's facing; the one
+  closest to straight ahead wins. A new target starts on its first verb.
+- Inputs (Player map of `InputSystem_Actions`): `Interact` performs the selected verb (gamepad west / E; the
+  template's Hold interaction removed, it used to be on north), `NextOption` cycles the verbs (gamepad north / Q),
+  `Aim` turns the actor (right stick). The template's `Look` isn't used for aiming because it's also bound to the
+  mouse delta.
+- Prompt: the `HUD` canvas (screen space overlay, scaled from 1920x1080) holds `InteractionPrompt`, a dark panel
+  placed to the right of the target's anchor on screen and kept inside the canvas. It shows the name, the verbs
+  (the selected one in yellow, prefixed with `»`) and a hint for the active control scheme (`(Y) next (X) do it` on
+  gamepad, `[Q] next [E] do it` otherwise).
+- Outlines need `UC.ScreenSpaceOutlineFeature` on the URP renderer: both `PC_Renderer` and `Mobile_Renderer` have it.
+- Test object: the shovel (`shovel-dirt`, front right of the set) with Dig / Pick up / Lean on.
+
+### Font
+
+UI font: Barlow Condensed Black (Google Fonts, SIL OFL; the same file SkinFactory uses), as a dynamic TMP font asset
+in `Assets/Fonts`. Chequered Ink's "World" fonts were tried first and rejected for UI text: they swap letters on
+purpose ("Not the far east" draws X like an H, "Typingrad" draws Y and B like Cyrillic letters), which breaks button
+hints. "Not the far east" would suit the director's gibberish, though. TextMesh Pro's essential resources are
+imported (`Assets/TextMesh Pro`).
 
 ### Open questions
 
@@ -90,14 +121,16 @@ README's `## Todo` list.
   Animator parameters), and `OrbitCameraController` went from there into UnityCommon. Still to take: `SpeechBalloon` /
   `SpeechBalloonManager` / `BossBabble` and `GameSounds.BabbleCR` (a talking boss with speech balloons and voice blips).
 - UnityCommon `UC.Interaction` (`Systems/Actions`): `Interactable` with an `InteractionVerb`, conditions and
-  `GameAction`s. Several on one object could make up its option menu.
+  `GameAction`s. Not used: the user wanted verbs as plain strings on one component, so the game has its own
+  `Interactable` (no namespace); `UC.ScreenSpaceOutline` is used for the highlight.
 
 ## Current state (2026-10-24)
 
 - Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and `com.unity.pipeline` (Unity
   CLI control of the Editor). Compiles cleanly.
-- Done: the zombie movie set, and the player walking around it with idle/walk animations and the follow camera
-  (tested in Play mode). Next on the Todo list: interaction.
+- Done: the zombie movie set; the player walking around it with idle/walk animations, the limited follow camera
+  and right-stick aiming; interaction (targeting, outline, prompt, verb cycling, performing logs). All tested in
+  Play mode. Next on the Todo list: scene targets (where to stand, where to face, which interaction is right).
 - Only scene: `Assets/Scenes/ZombieMovie.unity` (the template's `SampleScene`, renamed; also the only build-list
   entry). It keeps the template's Global Volume.
 - Art so far: three Kenney 3D packs (see Layout), added by the user; third-party assets go under
@@ -112,7 +145,9 @@ README's `## Todo` list.
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Scenes` | Scenes |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Interaction/` (`Interactable`, `InteractionPrompt`) |
+| `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset) |
+| `Assets/TextMesh Pro` | TMP essential resources |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`) |
 | `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `NoFriction.physicMaterial` (player capsule) |
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
