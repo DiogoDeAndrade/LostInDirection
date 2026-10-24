@@ -182,8 +182,9 @@ fire baskets and the lamps.
 
 - `UC.LightFlicker` (written here, moved to UnityCommon's `Animation/` on 2026-10-24) on a Light: its color follows a
   gradient that loops every `duration` seconds, the gradient's alpha scaling the light's own intensity, and its
-  position wanders around its start with Perlin noise (`frequency`, per-axis `amplitude`). Random start per light,
-  so they don't flicker in step.
+  position wanders around its start with Perlin noise (`frequency`, per-axis `amplitude`). `randomStart` (on by
+  default) starts each light at a random point of the gradient so they don't flicker in step; off, they all start
+  at its beginning. The position noise always starts at a random point.
 - `Assets/Prefabs/Candles.prefab` (the user's: Kenney `candle-multiple` and a point light): a small flame particle
   system on each of the three wicks (local space, about 12 particles each) and `LightFlicker` (warm, 0.8 s cycle).
   The wick tops in the mesh are at (-0.064, 0.120, 0.078), (-0.067, 0.170, -0.068), (0.049, 0.200, 0.019).
