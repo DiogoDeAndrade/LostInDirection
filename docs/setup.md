@@ -26,7 +26,9 @@ don't add it back unless asked.
 `Assets/Externals/UnityCommon` = https://github.com/DiogoDeAndrade/UnityCommon, namespace `UC`, tracking branch
 **`unity6.6`** (`main` doesn't compile on 6.6; `.gitmodules` has `branch = unity6.6`). No asmdefs: it compiles into
 `Assembly-CSharp` with the game code. Provides `Singleton<T>`, `SoundDef`/`SoundManager`, `Hypertag`,
-`CooldownTimer`, UI helpers, a `.dialogue` system and more; check it before writing a generic utility.
+`CooldownTimer`, `PlayableHandler`, `OrbitCameraController` (added from this project, with box limits), UI helpers,
+a `.dialogue` system and more; check it before writing a generic utility. Generic code written here can move into
+it when the user asks; UnityCommon files use CRLF line endings.
 
 - Changes to UnityCommon are commits in the submodule's own repo: commit (and push) there first, then commit the
   pointer bump here.
@@ -37,7 +39,8 @@ don't add it back unless asked.
 1. `git lfs install`, then `git clone --recurse-submodules https://github.com/DiogoDeAndrade/LostInTranslation.git`
    (or `git submodule update --init --recursive` on an existing clone). Remote `origin`, branch `main`. Check `git -C Assets/Externals/UnityCommon branch --show-current` is `unity6.6`.
 2. Set the identity per repository, as in the other GCC repos:
-   `git config user.name "Diogo de Andrade"` and `git config user.email "diogo.g.andrade@gmail.com"`.
+   `git config user.name "Diogo de Andrade"` and `git config user.email "diogo.g.andrade@gmail.com"`, in this
+   repository and again inside `Assets/Externals/UnityCommon` (the submodule has its own config).
 3. Unity CLI (`unity --version`; install from https://docs.unity.com/en-us/unity-cli if missing), signed in
    (`unity auth status`) and licensed (`unity license status`). Install the editor with
    `unity install 6000.6.0f1 --yes --accept-eula` if `unity editors --installed` lacks it.

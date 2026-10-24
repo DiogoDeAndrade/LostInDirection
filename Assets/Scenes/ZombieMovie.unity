@@ -1713,6 +1713,8 @@ MonoBehaviour:
   displayFocusPoint: 0
   displayFocusPointRadius: 0.25
   zoomSpeed: 4
+  limitMode: 1
+  cameraLimits: {fileID: 480357399}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,6 +2428,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.8804287, z: 0.32483292}
   m_Center: {x: 0, y: 0.4387272, z: -0.21758366}
+--- !u!1 &480357397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480357398}
+  - component: {fileID: 480357399}
+  m_Layer: 0
+  m_Name: CameraLimits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480357398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480357397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1555542837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &480357399
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480357397}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 7.810553, y: 10, z: 5.396394}
+  m_Center: {x: -0.1642201, y: 5, z: -3.498197}
 --- !u!1001 &525785222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3540,7 +3595,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736563551}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2aa6fc8776d7c32468d9996424affdac, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -7455,6 +7510,7 @@ Transform:
   - {fileID: 1791552773}
   - {fileID: 1553322364}
   - {fileID: 1198104550}
+  - {fileID: 480357398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1576068746

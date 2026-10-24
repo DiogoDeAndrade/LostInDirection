@@ -60,8 +60,14 @@ path and other flat pieces have none. The layout was generated once by a script 
   map), `HypertaggedObject` (`Assets/Data/MainPlayer`), `MovementDirectionalXZ` (camera-relative, speed 2, turns to
   face the input), `Player` (cross-fades `idle`/`walk` through the model's `PlayableHandler`). The model is the
   `Model` child.
-- Main Camera: `OrbitCameraController` following `MainPlayer` at a 45 degree pitch, no yaw, distance 10, FOV 40
-  (about half the set in view); tagged `Assets/Data/MainCamera`.
+- The capsule uses `Assets/Materials/NoFriction.physicMaterial` (zero friction, combine Minimum). Movement sets the
+  velocity directly, so with friction the actor stuck to whatever it pushed against; without it, it slides along
+  walls at the tangential part of its speed (moving at 45 degrees into the back fence slides at speed x cos 45).
+- Main Camera: `UC.OrbitCameraController` (moved to UnityCommon on 2026-10-24) following `MainPlayer` at a
+  45 degree pitch, no yaw, distance 5 (the user's value), FOV 40; tagged `Assets/Data/MainCamera`. Limit mode
+  `Position`: the camera position is clamped to the disabled `BoxCollider` on `Studio/CameraLimits`
+  (x -4.07..3.74, z -6.2..-0.8, tuned by the user), which keeps the actor in frame in every corner of the set.
+  Changing the camera distance or angle means resizing that box.
 
 ### Open questions
 
@@ -80,8 +86,8 @@ README's `## Todo` list.
 
 ### Code to reuse
 
-- SkinFactory (`../SkinFactory/Assets/Scripts`): `OrbitCameraController` and `MovementDirectionalXZ` are already
-  copied here (the movement one without its Animator parameters). Still to take: `SpeechBalloon` /
+- SkinFactory (`../SkinFactory/Assets/Scripts`): `MovementDirectionalXZ` is already copied here (without its
+  Animator parameters), and `OrbitCameraController` went from there into UnityCommon. Still to take: `SpeechBalloon` /
   `SpeechBalloonManager` / `BossBabble` and `GameSounds.BabbleCR` (a talking boss with speech balloons and voice blips).
 - UnityCommon `UC.Interaction` (`Systems/Actions`): `Interactable` with an `InteractionVerb`, conditions and
   `GameAction`s. Several on one object could make up its option menu.
@@ -106,9 +112,9 @@ README's `## Todo` list.
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Scenes` | Scenes |
-| `Assets/Scripts` | Game code: `Camera/` (`OrbitCameraController`), `Player/` (`Player`, `MovementDirectionalXZ`) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`) |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`) |
-| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours) |
+| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `NoFriction.physicMaterial` (player capsule) |
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
 | `docs/` | This context |
 | `README.md`, `LICENSE` | Player-facing description and credits; MIT license |
