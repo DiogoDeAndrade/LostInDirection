@@ -68,8 +68,8 @@ change, and GUIDs/fileIDs are easy to break.
 - The package also ships a deeper `unity-pipeline` skill; `unity skill install claude-code --local` mirrors it
   into the project if it's wanted.
 
-On the main machine a global `unity-mcp` MCP server is still registered for other projects; it has nothing to
-connect to here (no AI Assistant package), so ignore its tools in this project.
+The user's global Unity MCP registration (`unity-mcp`, the AI Assistant relay) was removed on 2026-10-24 as well;
+don't set up MCP for Unity unless asked.
 
 ## Compile checks without the Editor
 
