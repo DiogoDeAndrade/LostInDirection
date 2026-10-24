@@ -1,72 +1,71 @@
-# Setup
+# Setup and tooling
 
-## Getting the project
+## Project facts
 
-The repository uses Git LFS and a submodule, so clone with both:
+- Editor **6000.6.0f1** (Unity 6.6). Don't upgrade unless asked: UnityCommon is tracked on a 6.6-specific branch.
+- **URP** 17.6.0, 3D renderer.
+- **Input System only** (`activeInputHandler: 1`): the legacy `UnityEngine.Input` API is unavailable.
+- Enter Play Mode Options on, **domain reload and scene reload disabled** (`m_EnterPlayModeOptions: 3`): statics
+  survive between play sessions, so reset them explicitly
+  (`[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]`).
+- Git LFS for binaries (`.gitattributes` copied from the other GCC projects: images, audio, video, models, fonts,
+  archives, DLLs, PDFs). `.gitignore` is the standard Unity one, same as the other GCC projects.
 
-```
-git lfs install
-git clone --recurse-submodules <url>
-```
-
-On an existing clone without the submodule: `git submodule update --init --recursive`.
-
-Git identity is set per repository (`git config user.name` / `user.email`), as in the other GCC projects.
-
-## Unity
-
-- Editor: **6000.6.0f1** (Unity 6.6). Do not upgrade the editor without deciding to; UnityCommon is tracked on a 6.6-specific branch.
-- Render pipeline: **URP** (`com.unity.render-pipelines.universal` 17.6.0), 3D renderer. `PC_RPAsset` / `Mobile_RPAsset` in `Assets/Settings`.
-- Input: **Input System only** (`activeInputHandler: 1`); the legacy `UnityEngine.Input` API is not available.
-- Enter Play Mode Options are enabled with **domain reload and scene reload disabled** (`m_EnterPlayModeOptions: 3`).
-  Static fields keep their values between play sessions, so reset statics explicitly (e.g. with
-  `[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]`) instead of relying on a reload.
-
-## Packages
-
-Added on top of the URP template (`Packages/manifest.json`):
+## Packages added on top of the template
 
 | Package | Source | Why |
 |---|---|---|
 | `com.dbrizov.naughtyattributes` | `https://github.com/dbrizov/NaughtyAttributes.git#upm` | Inspector attributes; required by UnityCommon |
-| `com.unity.ai.assistant` | Unity registry, `2.21.0-pre.1` | Provides the Unity MCP server (see below) |
+| `com.unity.ai.assistant` | Unity registry `2.21.0-pre.1` | Ships the Unity MCP server (bridge in the Editor) |
 
 ## UnityCommon submodule
 
-`Assets/Externals/UnityCommon` is [UnityCommon](https://github.com/DiogoDeAndrade/UnityCommon) (namespace `UC`),
-tracking the **`unity6.6`** branch (`main` does not compile on Unity 6.6). It has no assembly definitions, so it
-compiles into `Assembly-CSharp` together with the game code. It provides `Singleton<T>`, `SoundDef`/`SoundManager`,
-`Hypertag`, `CooldownTimer`, UI helpers, the dialogue system and more; check it before writing a generic utility.
+`Assets/Externals/UnityCommon` = https://github.com/DiogoDeAndrade/UnityCommon, namespace `UC`, tracking branch
+**`unity6.6`** (`main` doesn't compile on 6.6; `.gitmodules` has `branch = unity6.6`). No asmdefs: it compiles into
+`Assembly-CSharp` with the game code. Provides `Singleton<T>`, `SoundDef`/`SoundManager`, `Hypertag`,
+`CooldownTimer`, UI helpers, a `.dialogue` system and more; check it before writing a generic utility.
 
-Working with it:
+- Changes to UnityCommon are commits in the submodule's own repo: commit (and push) there first, then commit the
+  pointer bump here.
+- Latest `unity6.6`: `git submodule update --remote Assets/Externals/UnityCommon`, then commit the pointer.
 
-- Changes to UnityCommon are commits in the submodule's own repository: commit (and push) there first, then commit
-  the updated submodule pointer in this repository.
-- To pull the latest `unity6.6`: `git submodule update --remote Assets/Externals/UnityCommon`, then commit the pointer.
+## New machine
 
-## MCP
+1. `git lfs install`, then `git clone --recurse-submodules <url>` (or `git submodule update --init --recursive`
+   on an existing clone). Check `git -C Assets/Externals/UnityCommon branch --show-current` is `unity6.6`.
+2. Set the identity per repository, as in the other GCC repos:
+   `git config user.name "Diogo de Andrade"` and `git config user.email "diogo.g.andrade@gmail.com"`.
+3. Unity CLI (`unity --version`; install from https://docs.unity.com/en-us/unity-cli if missing), signed in
+   (`unity auth status`) and licensed (`unity license status`). Install the editor with
+   `unity install 6000.6.0f1 --yes --accept-eula` if `unity editors --installed` lacks it.
+4. Open the project once (`unity open <path>`) so Packages and the MCP bridge come up, then set up MCP (below).
 
-The Unity MCP server ships inside `com.unity.ai.assistant`. With the project open in the Editor, the bridge starts
-automatically: **Edit > Project Settings > AI > Unity MCP Server** should show **Unity Bridge: Running**. Clients
-connect through the relay at `%USERPROFILE%\.unity\relay\relay_win.exe --mcp`; the **Integrations** section on that
-settings page can write the client configuration.
+## Driving the Editor
 
-Unity marks this MCP server as deprecated in favour of the Unity CLI (`unity` command, Editor side provided by
-`com.unity.pipeline`, added with `unity pipeline install`). It works on 6.6 today; move to the CLI if it stops being maintained.
+Two ways to act on a running Editor. Never hand-edit `.unity` / `.prefab` / `.asset` YAML while an Editor is open on
+the project: it won't see the change, and GUIDs/fileIDs are easy to break.
 
-## Compile-checking without the Editor
+**Unity MCP server (installed).** Comes with `com.unity.ai.assistant`. The bridge starts with the Editor
+(Edit > Project Settings > AI > Unity MCP Server shows "Unity Bridge: Running"); clients launch the relay
+`%USERPROFILE%\.unity\relay\relay_win.exe --mcp` (the Integrations section on that page writes client configs). It
+shows up as the `unity-mcp` MCP server with tools such as `Unity_ManageScene`, `Unity_ManageGameObject`,
+`Unity_ManageAsset`, `Unity_ManageScript`, `Unity_RunCommand` (C#), `Unity_ReadConsole`/`Unity_GetConsoleLogs`
+and `Unity_SceneView_*` captures. Unity has marked this server deprecated in favour of the Unity CLI.
 
-Either build the generated project files (gitignored, regenerated by Unity; new `.cs` files are not in them until
-Unity regenerates them):
+**Unity CLI live control (not installed yet).** Needs the `com.unity.pipeline` package (experimental, latest
+`0.9.1-exp.1`), added with `unity pipeline install --project-path <path>`. Then, with the Editor open:
+`unity status` (state `ready`), `unity command` lists the Editor's commands (`create_gameobject`, `add_component`,
+`set_transform`, `get_scene_hierarchy`, `save_scene`, `create_script`, `screenshot`, `eval` for C#, ...),
+`unity command <name> --project-path <path> ...` runs one. `unity pipeline list` diagnoses connection problems
+(including Safe Mode after compile errors).
 
-```
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" Assembly-CSharp.csproj /t:Build /p:BuildProjectReferences=false /nologo /v:q /clp:ErrorsOnly
-```
+## Compile checks without the Editor
 
-or run a headless import with the Unity CLI and check the log for `error CS` (the Editor must not have the project open):
-
-```
-unity run "C:/projects/GCC/LostInTranslation" --editor-version 6000.6.0f1 -- -logFile "C:/projects/GCC/LostInTranslation/Logs/import.log"
-```
-
-The log has to go inside the project (or another normal folder); Unity exits with code 127 if it cannot open the log path.
+- Build the generated project files (gitignored, regenerated by Unity; a new `.cs` file isn't in them until Unity
+  regenerates them, so add a `<Compile Include=...>` line temporarily if needed):
+  `& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" Assembly-CSharp.csproj /t:Build /p:BuildProjectReferences=false /nologo /v:q /clp:ErrorsOnly`
+  (the MSBuild path is machine-specific).
+- Or, only when no Editor has the project open, a headless import:
+  `unity run "<project>" --editor-version 6000.6.0f1 -- -logFile "<project>/Logs/import.log"`, then grep the log
+  for `error CS`. The log path must be somewhere Unity can write (e.g. inside the project): with an unwritable path
+  Unity exits with code 127 and writes nothing.

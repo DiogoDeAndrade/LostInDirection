@@ -23,7 +23,7 @@ TBD
 
 - Uses [Unity Common], [MIT] license.
 - [NaughtyAttributes] by Denis Rizov available through the [MIT] license: https://github.com/dbrizov/NaughtyAttributes.git#upm
-- AI assistance was used in this game.
+- AI assistance was used in this game (Claude Code).
 - All remaining game source code by Diogo de Andrade is licensed under the [MIT] license.
 
 ## Metadata
