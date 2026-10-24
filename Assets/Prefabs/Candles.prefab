@@ -2442,8 +2442,8 @@ MonoBehaviour:
   colorOverLifetime:
     serializedVersion: 2
     key0: {r: 0.9, g: 0.62, b: 0.09, a: 1}
-    key1: {r: 1, g: 0.72, b: 0.2, a: 0.75}
-    key2: {r: 0.85, g: 0.5, b: 0.06, a: 0.95}
+    key1: {r: 1, g: 0.42005825, b: 0.19999999, a: 0.75}
+    key2: {r: 0.8509804, g: 0.17620054, b: 0.05882351, a: 0.95}
     key3: {r: 0.9, g: 0.62, b: 0.09, a: 0.7}
     key4: {r: 0, g: 0, b: 0, a: 1}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -2466,7 +2466,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: -1
+    m_ColorSpace: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 5
   frequency: 4

@@ -180,6 +180,11 @@ them in the editor.
 The user darkened the lighting (flat ambient around 0.03, directional light 0.05), so the set is lit by candles,
 fire baskets and the lamps.
 
+- Lamps: `Assets/Prefabs/LightpostDouble.prefab` and `LightpostSingle.prefab` (the user's) carry their own point
+  light, and use `Assets/Materials/lightpost-double Variant.mat`, whose emission map
+  (`GraveyardKit/FBX format/Textures/colormap_lightpost.png`, derived from Kenney's colormap) makes only the lamp
+  glass glow. Two of each on the set; the old `Set/Lamps` lights are gone (the empty group remains).
+
 - `UC.LightFlicker` (written here, moved to UnityCommon's `Animation/` on 2026-10-24) on a Light: its color follows a
   gradient that loops every `duration` seconds, the gradient's alpha scaling the light's own intensity, and its
   position wanders around its start with Perlin noise (`frequency`, per-axis `amplitude`). `randomStart` (on by
@@ -252,7 +257,7 @@ README's `## Todo` list.
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Scenes` | Scenes; `ZombieMovie/` holds that scene's baked NavMesh |
 | `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Editor/` (`VerbEditor`) |
-| `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `UI_InventoryItem` |
+| `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset) |
 | `Assets/TextMesh Pro` | TMP essential resources |
