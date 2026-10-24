@@ -227,7 +227,7 @@ fire baskets and the lamps.
   the bottom-right.
 - `Director` (`Assets/Scripts/Director`, on the prefab root, `Director.instance`): `frustration` (0 pleased,
   1 losing it) and `mood` (1 delighted, 0 furious), both inspector sliders; what's shown eases towards them at
-  1.5 per second. Nothing sets them yet: that's the scene beats logic, next.
+  1.5 per second. `DirectorDriver` sets them during play.
 - `DirectorBody`: procedural body language on the rigid parts (no clips, no Animator), from the frustration, all
   blended continuously with a tempo that rises with it. Calm: breathing, slow nod, arms hanging. Impatient
   (around 0.5): leaning in, right arm gesturing forward, left arm held out, head shaking, right foot tapping.
@@ -237,6 +237,37 @@ fire baskets and the lamps.
   `director_base.png`. At runtime the director's material and texture are replaced by copies, and showing a face
   copies that sprite over the head area (CPU `GetPixels`/`SetPixels`, only when the face changes), so both
   textures have Read/Write enabled. Mood picks the face: 1 is face 0, 0 is face 7.
+
+### Director driver (hot/cold and mood)
+
+- The movie's script sets the actor's current target with the `Director/Set Player Target` action: an
+  Interactable (go to it and aim at it) or a place (the first object with a hypertag); neither set clears it.
+- `StartupActions` (`Assets/Scripts/Interaction`, an `ActionRunner` with the same action list and inspector as a
+  Verb) runs actions when the scene starts, for the first beat. The actor is the context's trigger object.
+- `DirectorDriver` (`Assets/Scripts/Director`, `DirectorDriver.instance`, one per movie, on `MovieScript` with the
+  StartupActions) owns frustration and mood and writes them into `Director.instance` every frame (the Director scene
+  may load a moment later). Frustration only moves at rates per second, so it never jumps (and the Director eases
+  what he shows on top of that). All of it is in the inspector:
+  - Far (straight-line distance to the target above `nearDistance`, 1.2): progress decides. The distance is
+    measured every `measureInterval` (0.2 s) along the NavMesh (`usePathDistance`; straight line if the path
+    fails), so going round obstacles doesn't count as moving away. Getting closer faster than `progressThreshold`
+    (0.2 u/s): -`approachRate` (0.3/s); getting farther: +`retreatRate` (0.4/s); neither: +`idleRate` (0.08/s).
+  - Near: aim decides. When the actor is aiming at an object (his current target, the one he'd interact with),
+    that object decides: the target, -`aimRate` (0.4/s); any other, +`wrongObjectRate` (0.5/s). Only when he's
+    aiming at nothing does the angle count: facing the target's closest point within `aimAngle` (45 degrees, the
+    same as the actor's interaction angle): -`aimRate`; otherwise +`lookAwayRate` (0.25/s). (Fixed 2026-10-24: with
+    the angle always deciding, at 30 degrees, an actor who had the grave selected 40 degrees off its closest point
+    counted as looking away, and frustration climbed.)
+  - Mood: frustration above `moodThreshold` (0.7) for longer than `moodGraceTime` (2 s) drains it at
+    `moodDecayRate` (0.05/s). `ChangeMood(delta)` is there for right and wrong actions (not used yet).
+  - No target: -`relaxRate` (0.2/s). During cutscenes nothing changes. Starts at frustration 0.3, mood 1.
+  - The inspector shows the live state, frustration, mood, distance and progress.
+- Zombie scene targets: StartupActions targets the shovel; "Pick up" ends with the grave; "Dig" ends with
+  `CryptEntrance` (hypertag `Assets/Data/CryptEntrance`, a child of the crypt in front of its door; the crypt is
+  rotated 180 degrees, so that's its local +z).
+- Measured in Play mode with the default values: standing far away 0.34 to 0.46 in 1.5 s; walking to the shovel
+  0.68 to 0 in about 2.3 s; near and facing it stays at 0; turning away 0 to 0.37 in 1.5 s; walking away up to 1,
+  then the mood drops 0.05/s from 2 s after passing 0.7.
 
 ### Font
 
@@ -290,12 +321,12 @@ README's `## Todo` list.
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`, `StartupActionsEditor`) |
 | `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset) |
 | `Assets/TextMesh Pro` | TMP essential resources |
-| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`); `Items/` (`Shovel`) |
+| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`) |
 | `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`) |
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
 | `docs/` | This context |

@@ -29,7 +29,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [ ] Zombie scene: pick up the shovel, dig the grave, a zombie comes out and follows the actor (done), reach the
       crypt, "Cut!" and restart when touching a zombie
 - [ ] Scene targets: where to stand, where to face, which interaction is right
-- [ ] Director hot/cold meter: position and orientation cues
+- [x] Director hot/cold meter: position and orientation cues (current target set by the script)
 - [ ] Director life system: wrong interactions make him angrier
 - [x] Director in the bottom-left corner (3D, in his own scene): body language for hot/cold, face for mood
 - [ ] Director gibberish (speech balloons and voice)

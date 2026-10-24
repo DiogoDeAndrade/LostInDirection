@@ -3627,6 +3627,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624877787}
   m_CullTransparentMesh: 1
+--- !u!1 &626932546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 626932547}
+  - component: {fileID: 626932548}
+  m_Layer: 0
+  m_Name: CryptEntrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &626932547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626932546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1858431460}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &626932548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626932546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
+  hypertag: {fileID: 11400000, guid: e648d9b8c5a73ed449922ab3c2f81ed4, type: 2}
 --- !u!1001 &643623751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4341,6 +4386,7 @@ MonoBehaviour:
   - rid: 625735922916786294
   - rid: 625735922916786295
   - rid: 625735922916786296
+  - rid: 625735922916786320
   references:
     version: 2
     RefIds:
@@ -4438,6 +4484,13 @@ MonoBehaviour:
           obj: {fileID: 0}
           hypertag: {fileID: 11400000, guid: 24647262a0ffe1f4a89f1606c0aedf49, type: 2}
         follow: 1
+    - rid: 625735922916786320
+      type: {class: GameAction_SetPlayerTarget, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        interactable: {fileID: 0}
+        hypertag: {fileID: 11400000, guid: e648d9b8c5a73ed449922ab3c2f81ed4, type: 2}
 --- !u!1 &736563551
 GameObject:
   m_ObjectHideFlags: 0
@@ -12215,6 +12268,92 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
   m_PrefabInstance: {fileID: 1584622410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1610010414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610010417}
+  - component: {fileID: 1610010416}
+  - component: {fileID: 1610010415}
+  m_Layer: 0
+  m_Name: MovieScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1610010415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610010414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c938e42fde4aa4c80b35c28e5a0dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartupActions
+  actions:
+  - rid: 625735922916786318
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786318
+      type: {class: GameAction_SetPlayerTarget, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        interactable: {fileID: 2104686941}
+        hypertag: {fileID: 0}
+--- !u!114 &1610010416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610010414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b04a4befb034a41b9c98e9492c4dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectorDriver
+  startFrustration: 0.3
+  startMood: 1
+  nearDistance: 1.2
+  usePathDistance: 1
+  measureInterval: 0.2
+  progressThreshold: 0.2
+  approachRate: 0.3
+  retreatRate: 0.4
+  idleRate: 0.08
+  aimAngle: 45
+  aimRate: 0.4
+  lookAwayRate: 0.25
+  wrongObjectRate: 0.5
+  moodThreshold: 0.7
+  moodGraceTime: 2
+  moodDecayRate: 0.05
+  relaxRate: 0.2
+--- !u!4 &1610010417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610010414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1616010341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14276,7 +14415,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c25a8530812ba2f44b3bb53ac7c6aa81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 626932547}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c25a8530812ba2f44b3bb53ac7c6aa81, type: 3}
       insertIndex: -1
@@ -15823,6 +15965,7 @@ MonoBehaviour:
   actions:
   - rid: 625735922916786276
   - rid: 625735922916786277
+  - rid: 625735922916786319
   references:
     version: 2
     RefIds:
@@ -15842,6 +15985,13 @@ MonoBehaviour:
           mode: 0
           obj: {fileID: 0}
           hypertag: {fileID: 0}
+    - rid: 625735922916786319
+      type: {class: GameAction_SetPlayerTarget, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        interactable: {fileID: 1383253940}
+        hypertag: {fileID: 0}
 --- !u!114 &2104686945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16206,3 +16356,4 @@ SceneRoots:
   - {fileID: 783985261}
   - {fileID: 1732337017}
   - {fileID: 760606647}
+  - {fileID: 1610010417}
