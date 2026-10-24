@@ -1,6 +1,7 @@
 # LOST IN TRANSLATION
 
 Developed for the October'2026 [Game Creator's Club] at Lusofona University.
+This month, the theme is "Lost In Translation".
 
 ## Game
 
@@ -22,7 +23,7 @@ TBD
 
 - Uses [Unity Common], [MIT] license.
 - [NaughtyAttributes] by Denis Rizov available through the [MIT] license: https://github.com/dbrizov/NaughtyAttributes.git#upm
-- AI assistance was used in this game (Claude Code).
+- AI assistance was used in this game.
 - All remaining game source code by Diogo de Andrade is licensed under the [MIT] license.
 
 ## Metadata
