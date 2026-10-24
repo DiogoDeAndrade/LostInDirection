@@ -3,7 +3,8 @@ using UC;
 using UnityEngine;
 using UnityEngine.AI;
 
-// A zombie. Stands still until follow mode is switched on (an action), then walks after the actor on the NavMesh.
+// A zombie. Stands still until follow mode is switched on (an action), then walks after the actor on the NavMesh,
+// stopping where it is while gameplay is on hold.
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : MonoBehaviour
 {
@@ -61,6 +62,14 @@ public class Zombie : MonoBehaviour
     void Update()
     {
         if (!following) return;
+
+        bool held = Gameplay.isHeld;
+        if ((agent.isOnNavMesh) && (agent.isStopped != held))
+        {
+            agent.isStopped = held;
+            if (held) agent.velocity = Vector3.zero;
+        }
+        if (held) return;
 
         if (target == null)
         {

@@ -27,7 +27,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Atmosphere: candles and fire baskets with flames and flickering lights
 - [x] Inventory, with the shovel's icon
 - [ ] Zombie scene: pick up the shovel, dig the grave, a zombie comes out and follows the actor (done), reach the
-      crypt, "Cut!" and restart when touching a zombie
+      crypt
 - [ ] Scene targets: where to stand, where to face, which interaction is right
 - [x] Director hot/cold meter: position and orientation cues (current target set by the script)
 - [x] Director life system: wrong interactions make him angrier (red herrings on the candles, graves, pumpkins,
@@ -39,8 +39,11 @@ directions, and he doesn't understand any of it and feels the translation is not
       Interact skips to the next balloon
 - [x] Slate claps in front of the director's camera before the take starts
 - [ ] Director voice (babble blips while he talks)
-- [ ] Scene complete and fired / game over
-- [ ] Main menu/credits screen
+- [x] "Cut!" when the director's mood runs out: everything stops, fade out, the take starts again
+- [x] Takes (lives): three for the whole movie, shown as slates in the top-right corner; losing the last one gets
+      a "YOU'RE FIRED!"
+- [ ] Scene complete
+- [ ] Main menu/credits screen (being fired should go back to it; for now the scene starts again with all the takes)
 - [ ] Sounds and music
 - [ ] Itch.io page
 

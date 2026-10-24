@@ -11,6 +11,7 @@ using UnityEngine.AI;
 //   aiming at nothing, he faces it), up while he faces away, and faster while he's aiming at another object.
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
 // - A following zombie within zombieRange of the actor makes the mood drop too, target or not.
+// - When the mood runs out, the GameManager cuts the take.
 // Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
 // changes. One per movie scene.
 public class DirectorDriver : MonoBehaviour
@@ -77,6 +78,7 @@ public class DirectorDriver : MonoBehaviour
     float           measureElapsed;
     float           progressSpeed;
     float           timeAboveThreshold;
+    bool            warnedNoGameManager;
 
     [ShowNativeProperty]
     public State state { get; private set; }
@@ -130,9 +132,26 @@ public class DirectorDriver : MonoBehaviour
         mood = Mathf.Clamp01(mood + delta);
     }
 
+    // Straight away, not at a rate (the cut: no body language, so it's the face that shows)
+    public void SetFrustration(float value)
+    {
+        frustration = Mathf.Clamp01(value);
+    }
+
     void Update()
     {
         float dt = Time.deltaTime;
+
+        // Out of mood (after whatever holds the gameplay, e.g. the cutscene a wrong action started)
+        if ((mood <= 0.0f) && (!Gameplay.isHeld))
+        {
+            if (GameManager.instance != null) GameManager.instance.Cut();
+            else if (!warnedNoGameManager)
+            {
+                Debug.LogWarning("DirectorDriver: out of mood, but there's no GameManager to cut the take");
+                warnedNoGameManager = true;
+            }
+        }
 
         if (Gameplay.isHeld)
         {

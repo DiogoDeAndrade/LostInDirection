@@ -34,7 +34,9 @@ the scene needs them to do, reading the director's body language.
     that counts; close to it, it's the orientation (which object the actor is aiming at).
   - **Face = mood**, which is the health: right actions improve it, wrong actions lower it, and staying far from
     the target too long, or aiming at the wrong object too long, makes it worse and worse over time.
-  - "Cut!" and the restart (touching a zombie, running out of mood) come after the director.
+  - "Cut!" and the restart come when the mood runs out (decided 2026-10-25; a zombie next to the actor drains the
+    mood rather than cutting on touch). The actor has a few takes (3) for the whole movie; losing the last gets him
+    fired. See Takes below.
   - Display: a 3D model with its own camera (the user's choice, 2026-10-24), in its own scene so every movie can
     reuse it. See Director below.
 
@@ -325,7 +327,8 @@ fire baskets and the lamps.
 - `DirectorSpeech` (`HUD/DirectorSpeech`, with `Balloon`: an off-white panel to the right of the portrait, growing
   up, with a tail pointing at him; 620 wide, text in Barlow Condensed, 30): types each line out at
   `charactersPerSecond` (30), with an optional `voice` SoundDef blip every `charactersPerBlip` (3) characters (none
-  assigned yet), then holds it `holdTime` (1 s) + `holdPerCharacter` (0.03 s) per character. `skipInput` (the
+  assigned yet), then holds it `holdTime` (1 s) + `holdPerCharacter` (0.03 s) per character (the user set 60 characters a second and
+  0.5 s in the scene). `skipInput` (the
   Player map's `Interact`, gamepad west / E, through the actor's `PlayerInput`) goes straight to the next line,
   typing or holding, and ends the speech on the last one. A press on the frame a line comes up doesn't count (the
   press that skipped the previous line, or an Interact that started the speech), and `Say` runs after the actor's
@@ -351,10 +354,40 @@ fire baskets and the lamps.
   `clapSound`), waits `clapTime` (0.55 s) + `holdAfterClap` (0.4 s), slides back (easing in) and resets to `Idle`.
 - `Director/Slate` action (created with "wait" on): waits up to 3 s for the Director scene, then plays the slate.
 - `Gameplay.isHeld` (`Assets/Scripts/Gameplay.cs`) is the one place that says gameplay is on hold: a cutscene, the
-  director talking, or the slate playing. `Player` locks the controls and `DirectorDriver` pauses on it.
+  director talking, the slate playing, or the take cut (`GameManager.isCut`). `Player` locks the controls,
+  `DirectorDriver` pauses, and following zombies stop where they are (`NavMeshAgent.isStopped`, velocity zeroed).
 - Measured with the briefing sped up: the slate arrives 0.4 s after starting, claps 0.3 s later, is gone and reset
   about 1.1 s after that, and the actor can move straight away.
 - The slate is lit only by spill from the director's lights, so it reads dark in the portrait.
+
+### Takes (lives) and the cut
+
+Added 2026-10-25, the user's design.
+
+- `GameManager` (`Assets/Scripts/GameManager.cs`, `Assets/Prefabs/GameManager.prefab`, at the root of every movie
+  scene): the first one keeps itself (`DontDestroyOnLoad`) and the copies that come with later scenes destroy
+  themselves (the pattern of the user's other games, e.g. Golf). It holds `maxTakes` (3) and `takesLeft`, which
+  survives scene loads.
+- `DirectorDriver`: when the mood is 0 and gameplay isn't held (a cutscene a wrong action started finishes first),
+  it calls `GameManager.Cut()` (a warning, once, if there's no GameManager).
+- The cut (a coroutine on the GameManager, so it outlives the scene): `isCut` holds the gameplay (actor and
+  zombies stop); `DirectorDriver.SetFrustration(0)`, so the body calms down and the furious face is what shows; the
+  director says `cutLine` (`{CUT!}`, braces so it isn't translated); a take is lost; `pauseAfterLine` (1 s). With no
+  takes left he says `firedLine` (`{YOU'RE FIRED!}`) and waits again. Then `FullscreenFader.FadeOut` (0.75 s,
+  black) and the active scene loads again (the Director scene with it, through its `AdditiveSceneLoader`); being
+  fired resets the takes and goes to `mainMenuScene`, which is empty for now (no menu yet), so the scene starts
+  again. `isCut` clears once the new scene is loaded. The skip button works on those lines too.
+- Fader: UnityCommon's `QuickPrefabs/FaderCanvas` prefab at the scene root as `Fader` (sorting order 100, over the
+  cutscene bars at 10): it starts black and fades in over 0.5 s on every load.
+- `TakesDisplay` (`Assets/Scripts/UI`, on `HUD/Takes`, top right, a right-aligned `HorizontalLayoutGroup`): one
+  `Assets/Prefabs/UI_TakeIcon.prefab` (120x120) per take left; a lost take's icon, the leftmost, so the others stay
+  put, swells to 1.5 and fades out over 0.6 s. The icon `Assets/Sprites/UI/Slate.png` (256x256) is the slate model
+  rendered from the front with an 8 px white outline baked in (it's black, the set is dark).
+- The script runs again on every take: the briefing (skippable), the slate, the shovel. Retakes keep the briefing
+  (the user's call, 2026-10-25).
+- Measured in Play mode: a cut with the zombie chasing, the stick held: neither the zombie nor the actor moved in
+  the next second; frustration 0 at once (the body eases to it in 0.5 s). Takes 3, 2, 1, then fired: "YOU'RE
+  FIRED!", and back to 3 takes. The new scene's fader is black when it loads and down to 0.38 a third of a second later.
 
 ### Outlines in the Director scene
 
@@ -432,9 +465,9 @@ README's `## Todo` list.
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`, `StartupActionsEditor`); `Gameplay.cs` (gameplay hold) |
-| `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText` |
-| `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`), `Editor/` (`VerbEditor`, `StartupActionsEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut) |
+| `Assets/Prefabs` | `GameManager`, `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon` |
+| `Assets/Sprites` | `Items/` (item icons: `Shovel`), `UI/` (`Slate`, the takes icon) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text |
 | `Assets/TextMesh Pro` | TMP essential resources |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`) |
