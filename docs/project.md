@@ -10,8 +10,8 @@ keep the player-facing summary in the root README's `## Game` section and the ta
 
 ## Current state (2026-10-24)
 
-- Fresh project from the Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and the
-  AI Assistant (Unity MCP) package. Compiles cleanly; no game code yet.
+- Fresh project from the Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and
+  `com.unity.pipeline` (Unity CLI control of the Editor). Compiles cleanly; no game code yet.
 - Only scene: `Assets/Scenes/SampleScene.unity` (also the only build-list entry).
 - Template tutorial content (`Assets/TutorialInfo/`, `Assets/Readme.asset`) removed by the user.
 - Player Settings `companyName` is still `DefaultCompany`.

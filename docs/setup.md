@@ -16,7 +16,10 @@
 | Package | Source | Why |
 |---|---|---|
 | `com.dbrizov.naughtyattributes` | `https://github.com/dbrizov/NaughtyAttributes.git#upm` | Inspector attributes; required by UnityCommon |
-| `com.unity.ai.assistant` | Unity registry `2.21.0-pre.1` | Ships the Unity MCP server (bridge in the Editor) |
+| `com.unity.pipeline` | Unity registry `0.9.1-exp.1` (experimental) | Lets the Unity CLI drive the open Editor (see below) |
+
+`com.unity.ai.assistant` (Unity MCP server) was installed at first and removed on 2026-10-24 in favour of the CLI;
+don't add it back unless asked.
 
 ## UnityCommon submodule
 
@@ -38,26 +41,35 @@
 3. Unity CLI (`unity --version`; install from https://docs.unity.com/en-us/unity-cli if missing), signed in
    (`unity auth status`) and licensed (`unity license status`). Install the editor with
    `unity install 6000.6.0f1 --yes --accept-eula` if `unity editors --installed` lacks it.
-4. Open the project once (`unity open <path>`) so Packages and the MCP bridge come up, then set up MCP (below).
+4. Open the project (`unity open <path>`) and wait for `unity status` to show it as `ready`; nothing else to configure.
 
-## Driving the Editor
+## Driving the Editor (Unity CLI)
 
-Two ways to act on a running Editor. Never hand-edit `.unity` / `.prefab` / `.asset` YAML while an Editor is open on
-the project: it won't see the change, and GUIDs/fileIDs are easy to break.
+Act on the open Editor through the Unity CLI and the `com.unity.pipeline` package; this project does not use MCP.
+Never hand-edit `.unity` / `.prefab` / `.asset` YAML while an Editor is open on the project: it won't see the
+change, and GUIDs/fileIDs are easy to break.
 
-**Unity MCP server (installed).** Comes with `com.unity.ai.assistant`. The bridge starts with the Editor
-(Edit > Project Settings > AI > Unity MCP Server shows "Unity Bridge: Running"); clients launch the relay
-`%USERPROFILE%\.unity\relay\relay_win.exe --mcp` (the Integrations section on that page writes client configs). It
-shows up as the `unity-mcp` MCP server with tools such as `Unity_ManageScene`, `Unity_ManageGameObject`,
-`Unity_ManageAsset`, `Unity_ManageScript`, `Unity_RunCommand` (C#), `Unity_ReadConsole`/`Unity_GetConsoleLogs`
-and `Unity_SceneView_*` captures. Unity has marked this server deprecated in favour of the Unity CLI.
+- `unity status --format json`: the project's Editor should be listed with state `ready`.
+- `unity command --format json`: the commands this Editor exposes (166 with package 0.9.1-exp.1), each with a
+  `group` and a parameter schema; filter with `--query <term>` or `--tag <tag>`. Commands are invoked as
+  `unity command <group> <name> ...` (the flat names in older docs, e.g. `get_scene_hierarchy`, no longer exist).
+  Groups: `scene` (get_hierarchy, open, create, save, set_active, add_to_build), `gameobject` (create, create_many,
+  find, set_transform, set_parent, rename, delete, set_active, set_layer, set_tag, selection), `component` (add,
+  remove, get_properties, set_properties, set_field), `prefab`, `asset`, `material`, `script` (create, attach,
+  recompile, eval, eval_file, run), `console` (get, clear), `capture` (screenshot, scene_view, game_view),
+  `editor` / `editor.playmode` (start, stop, pause), `package`, `build`, `lighting`, `navmesh`, `test`,
+  `animation.*`, `settings.*`, `runtime`, `job`.
+- Run one with `unity command <group> <name> --project-path "C:/projects/GCC/LostInTranslation" --caller plugin --skill unity-cli ...`.
+  Always pass `--project-path`, since other Editors may be open. Quick check that it's alive:
+  `unity command eval 'return Application.unityVersion;' --project-path ...` returns `6000.6.0f1`.
+- Can't connect? `unity pipeline list` shows whether the package is there, the server is reachable, or the
+  Editor is in Safe Mode (compile errors stop the Pipeline from loading: fix the errors, then restart Unity).
+- `unity pipeline upgrade --project-path <path>` moves to a newer package version when one is published.
+- The package also ships a deeper `unity-pipeline` skill; `unity skill install claude-code --local` mirrors it
+  into the project if it's wanted.
 
-**Unity CLI live control (not installed yet).** Needs the `com.unity.pipeline` package (experimental, latest
-`0.9.1-exp.1`), added with `unity pipeline install --project-path <path>`. Then, with the Editor open:
-`unity status` (state `ready`), `unity command` lists the Editor's commands (`create_gameobject`, `add_component`,
-`set_transform`, `get_scene_hierarchy`, `save_scene`, `create_script`, `screenshot`, `eval` for C#, ...),
-`unity command <name> --project-path <path> ...` runs one. `unity pipeline list` diagnoses connection problems
-(including Safe Mode after compile errors).
+On the main machine a global `unity-mcp` MCP server is still registered for other projects; it has nothing to
+connect to here (no AI Assistant package), so ignore its tools in this project.
 
 ## Compile checks without the Editor
 

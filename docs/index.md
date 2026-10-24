@@ -6,7 +6,7 @@ needed to pick the project up. It is not player- or contributor-facing documenta
 Read all of it before starting:
 
 - [project.md](project.md) - what the project is, current state, layout
-- [setup.md](setup.md) - Unity version, packages, UnityCommon submodule, new-machine setup, driving the Editor (MCP / CLI), compile checks
+- [setup.md](setup.md) - Unity version, packages, UnityCommon submodule, new-machine setup, driving the Editor with the Unity CLI, compile checks
 - [conventions.md](conventions.md) - code style, root README and credits, releases, commit messages
 
 ## Working rules (from the user)
