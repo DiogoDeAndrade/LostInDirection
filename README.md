@@ -5,11 +5,31 @@ This month, the theme is "Lost In Translation".
 
 ## Game
 
-TBD
+You are an actor on a film set, and the director is very passionate about what he wants from this scene.
+The problem is that you don't understand a single word he says.
+
+Walk around the set and interact with the props, and keep an eye on the director in the corner of the screen.
+He calms down as you get closer to where you should be and face the right way, and gets angrier every time you
+do something you are not supposed to. Work out what he wants before he loses his patience.
+
+The idea came from the scene in [Lost in Translation](https://en.wikipedia.org/wiki/Lost_in_Translation_(film))
+(2003) where Bill Murray's character is shooting a commercial: the director gives him long, passionate
+directions, and he doesn't understand any of it and feels the translation is not accurate.
 
 ## Todo
 
-- [ ] TBD
+- [x] Build the set (zombie movie scene)
+- [x] Player movement with the 45 degree camera
+- [ ] Interaction: get close to an object, press Interact, pick from its list of options
+- [ ] Scene targets: where to stand, where to face, which interaction is right
+- [ ] Director hot/cold meter: position and orientation cues
+- [ ] Director life system: wrong interactions make him angrier
+- [ ] Director image in the bottom-left corner, showing his mood
+- [ ] Director gibberish (speech balloons and voice)
+- [ ] Scene complete and fired / game over
+- [ ] Main menu/credits screen
+- [ ] Sounds and music
+- [ ] Itch.io page
 
 ## Art
 

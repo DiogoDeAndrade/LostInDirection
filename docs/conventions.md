@@ -23,6 +23,8 @@ Match UnityCommon and the other GCC projects:
 - Conditions often fully parenthesised: `if ((!prevState) && (state))`.
 - NaughtyAttributes for inspector polish (`[Button]`, `[ShowIf]`, `[Expandable]`, ...).
 - Reuse UnityCommon types (`Singleton<T>`, `SoundDef`, `Hypertag`, `CooldownTimer`, ...) before writing new ones.
+- Character animation goes through UnityCommon's `PlayableHandler` (on the model, next to an `Animator` with no
+  controller), with the clips referenced directly by the scripts that play them. No Animator controllers.
 
 ## Root README
 

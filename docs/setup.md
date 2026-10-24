@@ -64,6 +64,19 @@ change, and GUIDs/fileIDs are easy to break.
   `unity command eval 'return Application.unityVersion;' --project-path ...` returns `6000.6.0f1`.
 - Can't connect? `unity pipeline list` shows whether the package is there, the server is reachable, or the
   Editor is in Safe Mode (compile errors stop the Pipeline from loading: fix the errors, then restart Unity).
+- `script eval` / `script eval_file` code runs as a method body: no `using` lines, so fully qualify types
+  (`UnityEditor.AssetDatabase`, ...) and end with `return <value>;`. For anything bigger, write a static class in a
+  `.cs` file outside `Assets/` and run it with `unity command script run --file <path> --entry Type.Method`
+  (compiled in memory, no domain reload, normal `using`s work).
+- `capture game_view --save_path` writes under `Assets/` (it creates an asset folder); to keep screenshots out of the
+  project use `capture screenshot --view game --output <absolute path>`, or render `Camera.main` to a
+  RenderTexture in an eval and write the PNG yourself.
+- Testing Play mode from the CLI: the Editor isn't the foreground app, so Play mode doesn't tick. Set
+  `Application.runInBackground = true` in an eval once in Play mode (session only; `PlayerSettings.runInBackground`
+  stays off). Synthetic keyboard events don't reach the input actions while the Editor is unfocused, so drive the
+  player with a virtual pad instead: `InputSystem.AddDevice<Gamepad>("TestPad")`, then
+  `InputSystem.QueueStateEvent(pad, new GamepadState { leftStick = ... })`; remove it with
+  `InputSystem.RemoveDevice` before leaving Play mode.
 - `unity pipeline upgrade --project-path <path>` moves to a newer package version when one is published.
 - The package also ships a deeper `unity-pipeline` skill; `unity skill install claude-code --local` mirrors it
   into the project if it's wanted.
