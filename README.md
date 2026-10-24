@@ -13,6 +13,9 @@ TBD
 
 ## Art
 
+- [Blocky Characters](https://kenney.nl/assets/blocky-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Graveyard Kit](https://kenney.nl/assets/graveyard-kit) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Mini Characters](https://kenney.nl/assets/mini-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 
 ## Sound

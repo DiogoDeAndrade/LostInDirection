@@ -13,6 +13,8 @@ keep the player-facing summary in the root README's `## Game` section and the ta
 - Fresh project from the Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and
   `com.unity.pipeline` (Unity CLI control of the Editor). Compiles cleanly; no game code yet.
 - Only scene: `Assets/Scenes/SampleScene.unity` (also the only build-list entry).
+- Art so far: three Kenney 3D packs (see Layout), added by the user; third-party assets go under
+  `Assets/Externals/<Source>/<Pack>/`, each with a README credit line.
 - Template tutorial content (`Assets/TutorialInfo/`, `Assets/Readme.asset`) removed by the user.
 - Player Settings `companyName` is still `DefaultCompany`.
 
@@ -21,6 +23,7 @@ keep the player-facing summary in the root README's `## Game` section and the ta
 | Path | What it is |
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
+| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Scenes` | Scenes |
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
 | `docs/` | This context |
