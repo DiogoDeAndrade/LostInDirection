@@ -221,7 +221,9 @@ fire baskets and the lamps.
   (0, -100, 0), far below any set, turned 165 degrees; `DirectorCamera` (FOV 30, Director layer only, solid dark
   background, no post-processing) renders him into `Assets/Materials/Textures/DirectorView.renderTexture`
   (512x512, MSAA 4); three short-range spot lights (key, fill, rim) on the Director layer. No directional light
-  there, since it would compete with the movie's sun. The user will add a background (a camera, ...) later.
+  there, since it would compete with the movie's sun. Background by the user: a film set behind him
+  (`Assets/Materials/MovieSet.mat`, `Textures/movie_set.png`) and zanerlak's Low-Poly Movie Camera
+  (`Assets/Externals/Zanerlak/camera.fbx`, CC-BY 4.0, credited in the README).
 - The movie's cameras leave out the Director layer. The portrait is `HUD/DirectorPortrait` (bottom-left, 300x300,
   a dark frame with a RawImage of the render texture), so it fades with the HUD in cutscenes. The inventory is in
   the bottom-right.
@@ -269,13 +271,72 @@ fire baskets and the lamps.
   0.68 to 0 in about 2.3 s; near and facing it stays at 0; turning away 0 to 0.37 in 1.5 s; walking away up to 1,
   then the mood drops 0.05/s from 2 s after passing 0.7.
 
+### Director speech (briefing)
+
+- `Director/Says` action: lines of what the director means, shown one balloon per line as gibberish (`translate`,
+  on by default; `{braces}` keep their text, without the braces, e.g. `{Action!}`). Created with "wait" on, so the
+  script goes on when he's done; it waits up to `maxWaitForDirector` (3 s) for the Director scene to load first.
+- `Gibberish.Translate` (`Assets/Scripts/Director`): each word becomes 1 to 4 kana-like syllables picked from an
+  FNV-1a hash of its letters, so a word always translates the same ("you" is "tepo", "the" is "gasu"); punctuation
+  and capitals are kept.
+- `DirectorSpeech` (`HUD/DirectorSpeech`, with `Balloon`: an off-white panel to the right of the portrait, growing
+  up, with a tail pointing at him; 620 wide, text in Barlow Condensed, 30): types each line out at
+  `charactersPerSecond` (30), with an optional `voice` SoundDef blip every `charactersPerBlip` (3) characters (none
+  assigned yet), then holds it `holdTime` (1 s) + `holdPerCharacter` (0.03 s) per character. While it runs,
+  `DirectorSpeech.isTalking` is true, which holds the gameplay (below). The director's `talking` (set while a line
+  types) adds nods, looking around and right-arm gestures to his body language.
+- Zombie scene: `MovieScript`'s startup actions are the briefing (4 lines: come in through the gate as a
+  gravedigger; pick up the shovel and dig the grave with passion; run to the crypt when the zombie comes out,
+  don't let him touch you; "{Action!}"), the slate, then Set Player Target (the shovel). With the defaults the
+  briefing lasts about 21 s and the slate about 2 s.
+
+### Slate and gameplay hold
+
+- The slate (clapperboard) is the user's, in the Director scene: `Slate`, an instance of
+  `Assets/Externals/tech.service.allwe/Slate.fbx` (tech.service.allwe's "Black film slate or clapper", Sketchfab,
+  CC-BY 4.0, credited in the README), with the user's
+  `SlateCtrl.controller` (`Idle`, looping and default; `Clap`, the FBX's 2.04 s clip at speed 4, from the `Clap`
+  trigger, no exit) on an Animator added at its root. It waits out of the director camera's view (left of him).
+- `Slate` (`Assets/Scripts/Director`, on it, `Slate.instance`): `Play` slides it to `SlateShown` (a point in front of
+  the director camera where it fills a bit under half the view, slightly left and down of centre; it keeps its
+  rotation) in `moveTime` (0.4 s, easing out), waits `holdBeforeClap` (0.3 s), fires the trigger (and an optional
+  `clapSound`), waits `clapTime` (0.55 s) + `holdAfterClap` (0.4 s), slides back (easing in) and resets to `Idle`.
+- `Director/Slate` action (created with "wait" on): waits up to 3 s for the Director scene, then plays the slate.
+- `Gameplay.isHeld` (`Assets/Scripts/Gameplay.cs`) is the one place that says gameplay is on hold: a cutscene, the
+  director talking, or the slate playing. `Player` locks the controls and `DirectorDriver` pauses on it.
+- Measured with the briefing sped up: the slate arrives 0.4 s after starting, claps 0.3 s later, is gone and reset
+  about 1.1 s after that, and the actor can move straight away.
+- The slate is lit only by spill from the director's lights, so it reads dark in the portrait.
+
+### Outlines in the Director scene
+
+- Black `UC.ScreenSpaceOutline` (4 px, the renderer feature's Max Width; visible only) on the Director prefab root,
+  the `Slate` and the `CameraProp`. The feature runs for the director camera like for any other (tested in magenta).
+- What to expect: the ring is drawn outside the silhouettes, over the background, so a black one only shows where
+  the backdrop isn't black (the user's first try looked like it didn't work for that reason: black on near-black);
+  and touching objects share one silhouette, so there are no lines between the director's parts.
+- `SimpleOutline3d` (inverted hull, which does draw inner lines) was tried and dropped (the user wants the
+  screen-space one). Found on the way: its shader (`FX/Outline/Simple/Resources/OutlineBackface.shader`) turned the
+  extrude direction to world space with the inverse matrix instead of the inverse transpose (`mul(I_M, dir)`),
+  which points the hull the wrong way on rotated objects. Fixed in UnityCommon on 2026-10-24 (the user asked): it
+  now uses URP's `TransformObjectToWorldNormal`; tested on the rotated, non-uniformly scaled movie camera (its
+  tripod went from scraps to a full outline). And in the component (`SimpleOutline3d.cs`): an outline material
+  added past the last submesh only draws that submesh, so multi-material meshes were only partly outlined; fixed
+  in UnityCommon on 2026-10-24 too (the user asked): `Update` draws the other submeshes of mesh renderers with
+  `Graphics.RenderMesh` (outline material, the renderer's layer, no shadows) every frame. Skinned meshes with
+  several submeshes still only get the last one. Tested in Play mode on the movie camera (two submeshes: body,
+  reels and lens got their outline, not just the tripod).
+- `DirectorFace` swaps only the material slots that hold the director's material (so an extra material on a part
+  survives it).
+
 ### Font
 
 UI font: Barlow Condensed Black (Google Fonts, SIL OFL; the same file SkinFactory uses), as a dynamic TMP font asset
 in `Assets/Fonts`. Chequered Ink's "World" fonts were tried first and rejected for UI text: they swap letters on
 purpose ("Not the far east" draws X like an H, "Typingrad" draws Y and B like Cyrillic letters), which breaks button
-hints. "Not the far east" would suit the director's gibberish, though. TextMesh Pro's essential resources are
-imported (`Assets/TextMesh Pro`).
+hints. "Not the far east" was then tried for the director's gibberish balloon; it looked right but was hard to read,
+so the user switched the balloon to Barlow Condensed too (2026-10-24) and the font was removed. Barlow is the only
+font. TextMesh Pro's essential resources are imported (`Assets/TextMesh Pro`).
 
 ### Open questions
 
@@ -320,11 +381,13 @@ README's `## Todo` list.
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
+| `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
+| `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`, `StartupActionsEditor`) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`, `StartupActionsEditor`); `Gameplay.cs` (gameplay hold) |
 | `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
-| `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset) |
+| `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text |
 | `Assets/TextMesh Pro` | TMP essential resources |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`) |
 | `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`) |

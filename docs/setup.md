@@ -75,6 +75,10 @@ change, and GUIDs/fileIDs are easy to break.
 - `capture game_view --save_path` writes under `Assets/` (it creates an asset folder); to keep screenshots out of the
   project use `capture screenshot --view game --output <absolute path>`, or render `Camera.main` to a
   RenderTexture in an eval and write the PNG yourself.
+- The user works in the same Editor while the CLI drives it. Before starting or stopping Play mode, or opening and
+  closing scenes, check `EditorApplication.isPlaying` and which scenes are open (and dirty); if the user is in Play
+  mode or has a different scene open, don't take it over, ask. (On 2026-10-24 a test stopped a Play session the
+  user had started in the Director scene.)
 - Testing Play mode from the CLI: the Editor isn't the foreground app, so Play mode doesn't tick. Set
   `Application.runInBackground = true` in an eval once in Play mode (session only; `PlayerSettings.runInBackground`
   stays off). Synthetic keyboard events don't reach the input actions while the Editor is unfocused, so drive the

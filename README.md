@@ -32,7 +32,9 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Director hot/cold meter: position and orientation cues (current target set by the script)
 - [ ] Director life system: wrong interactions make him angrier
 - [x] Director in the bottom-left corner (3D, in his own scene): body language for hot/cold, face for mood
-- [ ] Director gibberish (speech balloons and voice)
+- [x] Director gibberish in speech balloons (the briefing); no control and no frustration change while he talks
+- [x] Slate claps in front of the director's camera before the take starts
+- [ ] Director voice (babble blips while he talks)
 - [ ] Scene complete and fired / game over
 - [ ] Main menu/credits screen
 - [ ] Sounds and music
@@ -43,6 +45,8 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [Blocky Characters](https://kenney.nl/assets/blocky-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Graveyard Kit](https://kenney.nl/assets/graveyard-kit) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Mini Characters](https://kenney.nl/assets/mini-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Low-Poly Movie Camera](https://sketchfab.com/3d-models/low-poly-movie-camera-39240299af7344f687c25b2e76493ddd) by [zanerlak](https://sketchfab.com/zanerlak), licensed through the [CC-BY 4.0] license.
+- [Black film slate or clapper](https://sketchfab.com/3d-models/black-film-slate-or-clapper-1638e9374913402daf115e62cfd080a4) by [tech.service.allwe](https://sketchfab.com/tech.service.allwe), licensed through the [CC-BY 4.0] license.
 - Font [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed) by Jeremy Tribby, [SIL Open Font License].
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 
@@ -68,8 +72,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 [CC-BY-SA 4.0]:http://creativecommons.org/licenses/by-sa/4.0/
 [CC-BY 4.0]:https://creativecommons.org/licenses/by/4.0/
 [CC-BY-NC 4.0]:https://creativecommons.org/licenses/by-nc/4.0/
-[SIL Open Font License]:https://openfontlicense.org/
-[NaughtyAttributes]:https://github.com/dbrizov/NaughtyAttributes
+[SIL Open Font License]:https://openfontlicense.org/[NaughtyAttributes]:https://github.com/dbrizov/NaughtyAttributes
 [Unity Common]:https://github.com/DiogoDeAndrade/UnityCommon
 [Game Creator's Club]:https://game-creators-club.itch.io/
 [MIT]:LICENSE

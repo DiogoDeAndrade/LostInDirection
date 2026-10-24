@@ -121,6 +121,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb89e47df2720d84f8d4d0cd7d445b9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5743488631003920248}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb89e47df2720d84f8d4d0cd7d445b9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3578088203040657208}
   m_SourcePrefab: {fileID: 100100000, guid: fb89e47df2720d84f8d4d0cd7d445b9b, type: 3}
 --- !u!4 &1971432185315396390 stripped
 Transform:
@@ -162,6 +165,8 @@ MonoBehaviour:
   legLeft: {fileID: 3869358040370389359}
   legRight: {fileID: 5228501729993457791}
   _frustration: 0
+  _talking: 0
+  talkBlendSpeed: 4
 --- !u!114 &2017589658991609647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +205,25 @@ MonoBehaviour:
   _frustration: 0
   _mood: 1
   easeSpeed: 1.5
+--- !u!114 &3578088203040657208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298344992641207760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 0, g: 0, b: 0, a: 1}
+  width: 4
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &3869358040370389359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1492312403021943278, guid: fb89e47df2720d84f8d4d0cd7d445b9b, type: 3}

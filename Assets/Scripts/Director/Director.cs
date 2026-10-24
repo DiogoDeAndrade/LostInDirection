@@ -35,6 +35,13 @@ public class Director : MonoBehaviour
         set => _mood = Mathf.Clamp01(value);
     }
 
+    // Talking gestures (DirectorSpeech sets it while a line is being typed)
+    public bool talking
+    {
+        get => (body != null) && (body.talking);
+        set { if (body != null) body.talking = value; }
+    }
+
     void Awake()
     {
         instance = this;

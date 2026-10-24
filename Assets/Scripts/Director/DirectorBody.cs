@@ -3,7 +3,8 @@ using UnityEngine;
 // The director's body language, done procedurally on the rigid parts of the Kenney blocky character (no animation
 // clips), from a single frustration value: 0 is relaxed (breathing, a slow nod), the middle is impatient (leaning
 // in, one arm gesturing, the other held out, shaking his head, tapping a foot), 1 is losing it (arms waving over his
-// head, hopping, shouting up). Everything blends continuously, and the tempo rises with the frustration.
+// head, hopping, shouting up). Everything blends continuously, and the tempo rises with the frustration. While he's
+// talking he also nods along, looks around and gestures with his right arm.
 public class DirectorBody : MonoBehaviour
 {
     [SerializeField]
@@ -22,6 +23,10 @@ public class DirectorBody : MonoBehaviour
     private Transform   legRight;
     [SerializeField, Range(0.0f, 1.0f)]
     private float       _frustration;
+    [SerializeField]
+    private bool        _talking;
+    [SerializeField, Min(0.01f), Tooltip("How fast the talking gestures blend in and out (per second)")]
+    private float       talkBlendSpeed = 4.0f;
 
     struct Rest
     {
@@ -31,11 +36,18 @@ public class DirectorBody : MonoBehaviour
 
     Rest    rootRest, torsoRest, headRest, armLeftRest, armRightRest, legLeftRest, legRightRest;
     float   phase;
+    float   talk;
 
     public float frustration
     {
         get => _frustration;
         set => _frustration = Mathf.Clamp01(value);
+    }
+
+    public bool talking
+    {
+        get => _talking;
+        set => _talking = value;
     }
 
     void Awake()
@@ -66,26 +78,31 @@ public class DirectorBody : MonoBehaviour
 
         // Integrated, so changing the tempo doesn't make the motion jump
         phase += Time.deltaTime * Mathf.Lerp(0.8f, 2.6f, f);
+        talk = Mathf.MoveTowards(talk, (_talking) ? (1.0f) : (0.0f), talkBlendSpeed * Time.deltaTime);
+        // Talking gestures fade out as the frustration takes over
+        float talkGesture = talk * (1.0f - furious);
 
         // Hopping when furious
         Pose(root, rootRest, new Vector3(0.0f, Mathf.Abs(Wave(1.0f)) * 0.12f * furious, 0.0f), Vector3.zero);
 
-        // Breathing, leaning in
-        Pose(torso, torsoRest, new Vector3(0.0f, Wave(0.5f) * 0.015f, 0.0f),
+        // Breathing, leaning in, bobbing along when talking
+        Pose(torso, torsoRest, new Vector3(0.0f, Wave(0.5f) * 0.015f + Wave(2.0f) * 0.01f * talkGesture, 0.0f),
              new Vector3(6.0f * impatient + 12.0f * furious, 0.0f, 0.0f));
 
-        // Nodding when calm, shaking his head when impatient (and faster, looking up, when furious)
+        // Nodding when calm, shaking his head when impatient (and faster, looking up, when furious); quick nods and
+        // looking around when talking
         Pose(head, headRest, Vector3.zero,
-             new Vector3(Wave(0.5f) * 4.0f * calm - 12.0f * furious,
-                         Wave(1.0f) * 15.0f * impatient + Wave(3.0f) * 25.0f * furious,
+             new Vector3(Wave(0.5f) * 4.0f * calm - 12.0f * furious + Wave(4.0f) * 5.0f * talkGesture,
+                         Wave(1.0f) * 15.0f * impatient + Wave(3.0f) * 25.0f * furious + Wave(0.7f) * 8.0f * talkGesture,
                          0.0f));
 
-        // Left arm: hanging, then held out ("come on!"), then waving over his head
-        float leftOut = Mathf.Lerp(4.0f + Wave(0.5f) * 2.0f * calm + 30.0f * impatient, 140.0f + Wave(2.0f) * 25.0f, furious);
+        // Left arm: hanging, then held out ("come on!"), then waving over his head; a bit out when talking
+        float leftOut = Mathf.Lerp(4.0f + Wave(0.5f) * 2.0f * calm + 30.0f * impatient + (12.0f + Wave(1.1f, 0.3f) * 10.0f) * talkGesture,
+                                   140.0f + Wave(2.0f) * 25.0f, furious);
         Pose(armLeft, armLeftRest, Vector3.zero, new Vector3(0.0f, 0.0f, -leftOut));
 
-        // Right arm: hanging, then gesturing forward, then waving over his head
-        float rightForward = (60.0f + Wave(2.0f) * 15.0f) * impatient * (1.0f - furious);
+        // Right arm: hanging, then gesturing forward, then waving over his head; gesturing when talking
+        float rightForward = ((60.0f + Wave(2.0f) * 15.0f) * impatient + (35.0f + Wave(1.5f) * 25.0f) * talkGesture) * (1.0f - furious);
         float rightOut = Mathf.Lerp(4.0f + Wave(0.5f, 0.25f) * 2.0f * calm, 140.0f + Wave(2.0f, 0.25f) * 25.0f, furious);
         Pose(armRight, armRightRest, Vector3.zero, new Vector3(-rightForward, 0.0f, rightOut));
 

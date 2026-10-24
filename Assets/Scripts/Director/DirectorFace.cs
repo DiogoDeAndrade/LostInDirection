@@ -25,13 +25,23 @@ public class DirectorFace : MonoBehaviour
         texture.SetPixels(baseTexture.GetPixels());
         texture.Apply(true);
 
-        // One material for every part, with the runtime texture
+        // One material for every part, with the runtime texture. Only the slots holding the director's material are
+        // swapped, so extra materials (an outline) stay.
         var renderers = GetComponentsInChildren<Renderer>(true);
         if (renderers.Length == 0) return;
-        material = new Material(renderers[0].sharedMaterial);
+        var original = renderers[0].sharedMaterial;
+        material = new Material(original);
         material.name = "Director (runtime)";
         material.SetTexture("_BaseMap", texture);
-        foreach (var r in renderers) r.sharedMaterial = material;
+        foreach (var r in renderers)
+        {
+            var materials = r.sharedMaterials;
+            for (int i = 0; i < materials.Length; i++)
+            {
+                if (materials[i] == original) materials[i] = material;
+            }
+            r.sharedMaterials = materials;
+        }
     }
 
     void OnDestroy()

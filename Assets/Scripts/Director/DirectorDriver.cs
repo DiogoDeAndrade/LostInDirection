@@ -10,7 +10,8 @@ using UnityEngine.AI;
 // - Near the target it follows the aim: down while the actor aims at the target (it's what he'd interact with, or,
 //   aiming at nothing, he faces it), up while he faces away, and faster while he's aiming at another object.
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
-// Without a target the director calms down; during cutscenes nothing changes. One per movie scene.
+// Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
+// changes. One per movie scene.
 public class DirectorDriver : MonoBehaviour
 {
     public enum State { NoTarget = 0, Far = 1, Near = 2, Paused = 3 };
@@ -123,7 +124,7 @@ public class DirectorDriver : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        if (Cutscene.isActive)
+        if (Gameplay.isHeld)
         {
             state = State.Paused;
         }

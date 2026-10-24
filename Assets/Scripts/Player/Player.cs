@@ -8,8 +8,8 @@ using UnityEngine.InputSystem;
 // The actor (its animation is a CharacterAnimation next to it).
 // Interaction: the closest-to-facing Interactable in range with an available verb is the target (outlined, with
 // the prompt next to it); one button cycles its available verbs, another performs the selected one. Verb actions
-// run on the actor (it's their ActionRunner). During a cutscene the controls are locked: no movement, no aiming,
-// no interaction.
+// run on the actor (it's their ActionRunner). While gameplay is on hold (cutscene, director talking, slate) the
+// controls are locked: no movement, no aiming, no interaction.
 [RequireComponent(typeof(MovementDirectionalXZ))]
 public class Player : ActionRunner
 {
@@ -72,7 +72,7 @@ public class Player : ActionRunner
 
     void Update()
     {
-        LockControls(Cutscene.isActive);
+        LockControls(Gameplay.isHeld);
         UpdateInteraction();
     }
 
