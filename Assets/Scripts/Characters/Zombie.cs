@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UC;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +14,11 @@ public class Zombie : MonoBehaviour
     [SerializeField, Min(0.05f), Tooltip("Seconds between path updates while following")]
     private float       repathInterval = 0.25f;
 
+    static List<Zombie> _all = new List<Zombie>();
+
+    // Every enabled zombie in the scene
+    public static IReadOnlyList<Zombie> all => _all;
+
     NavMeshAgent    agent;
     Transform       target;
     bool            following;
@@ -23,6 +29,16 @@ public class Zombie : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    void OnEnable()
+    {
+        _all.Add(this);
+    }
+
+    void OnDisable()
+    {
+        _all.Remove(this);
     }
 
     void Start()

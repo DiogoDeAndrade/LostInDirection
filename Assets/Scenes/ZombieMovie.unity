@@ -182,6 +182,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
       insertIndex: -1
       addedObject: {fileID: 21845357}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21845364}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21845363}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21845362}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21845361}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21845360}
   m_SourcePrefab: {fileID: 100100000, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
 --- !u!4 &21845355 stripped
 Transform:
@@ -214,6 +229,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8500004, y: 0.5703522, z: 0.3}
   m_Center: {x: 0, y: 0.2851761, z: -0.000000014901161}
+--- !u!114 &21845360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21845356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786382
+  - rid: 625735922916786383
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786382
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786383
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &21845361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21845356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786379
+  actions:
+  - rid: 625735922916786380
+  - rid: 625735922916786381
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786379
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786380
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786381
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &21845362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21845356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786377
+  - rid: 625735922916786378
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786377
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Rex Takes
+
+          1931 - 1966
+
+          Take 48 was the last one.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786378
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &21845363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21845356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &21845364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21845356}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &31110994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,6 +449,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 31110997}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 31111004}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 31111003}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 31111002}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 31111001}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 31111000}
   m_SourcePrefab: {fileID: 100100000, guid: b48e4315f4fa39343b556b161542f10c, type: 3}
 --- !u!4 &31110995 stripped
 Transform:
@@ -309,6 +496,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5100794, y: 0.59424126, z: 0.25}
   m_Center: {x: 0, y: 0.29712063, z: 0}
+--- !u!114 &31111000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31110996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786368
+  - rid: 625735922916786369
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786368
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786369
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &31111001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31110996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786365
+  actions:
+  - rid: 625735922916786366
+  - rid: 625735922916786367
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786365
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786366
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786367
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &31111002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31110996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786363
+  - rid: 625735922916786364
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786363
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Extra #47
+
+          1972 - 1972
+
+          No lines. No regrets.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786364
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &31111003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31110996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &31111004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31110996}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &32642686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -897,6 +1241,60 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.87890005, z: 0.11000013}
   m_Center: {x: 0, y: 0.43945003, z: -0.32500005}
+--- !u!1 &173255692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 173255693}
+  - component: {fileID: 173255694}
+  m_Layer: 0
+  m_Name: CombatText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &173255693
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173255692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 928194258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &173255694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173255692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af8cfc81aa7663448e38aa136ca4229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.CombatTextManager
+  textPrefab: {fileID: 7579868597916668696, guid: 1c4c018020ea8984e8b02db13cb0572e, type: 3}
+  _defaultTime: 4
+  movementVector: {x: 0, y: 12}
+  fadeRate: 1
+  cameraFollow: 1
+  uiCamera: {fileID: 0}
 --- !u!1 &188708624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,6 +1531,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
       insertIndex: -1
       addedObject: {fileID: 227318416}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227318423}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227318422}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227318421}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227318420}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 227318419}
   m_SourcePrefab: {fileID: 100100000, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
 --- !u!4 &227318414 stripped
 Transform:
@@ -1165,6 +1578,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45000005, y: 0.575, z: 0.24999999}
   m_Center: {x: 0, y: 0.2875, z: 0.000000007450581}
+--- !u!114 &227318419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227318415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786424
+  - rid: 625735922916786425
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786424
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786425
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &227318420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227318415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786421
+  actions:
+  - rid: 625735922916786422
+  - rid: 625735922916786423
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786421
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786422
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786423
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &227318421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227318415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786419
+  - rid: 625735922916786420
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786419
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Director''s Cut
+
+          1928 - 1974
+
+          Too long.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786420
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &227318422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227318415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &227318423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227318415}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &231034850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1323,6 +1893,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 235043193}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 235043200}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 235043199}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 235043198}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 235043197}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 235043196}
   m_SourcePrefab: {fileID: 100100000, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
 --- !u!4 &235043191 stripped
 Transform:
@@ -1355,6 +1940,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.50902534, y: 0.341081, z: 0.39154518}
   m_Center: {x: -0.029512763, y: 0.1705405, z: 0.0707726}
+--- !u!114 &235043196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235043192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786396
+  - rid: 625735922916786397
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786396
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786397
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &235043197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235043192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786393
+  actions:
+  - rid: 625735922916786394
+  - rid: 625735922916786395
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786393
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786394
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786395
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &235043198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235043192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786391
+  - rid: 625735922916786392
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786391
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Bo Moperator
+
+          1960 - 1991
+
+          Got in the shot.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786392
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &235043199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235043192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &235043200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235043192}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &264993229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1039980656900443254, guid: 2dff896a98d1ed54f9ed6e43ea142a70, type: 3}
@@ -1560,6 +2302,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 277721245}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277721251}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277721250}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277721249}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277721248}
   m_SourcePrefab: {fileID: 100100000, guid: cc0e8dbff6844ae4494eac97f27703e6, type: 3}
 --- !u!4 &277721243 stripped
 Transform:
@@ -1592,6 +2346,113 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.37749195, y: 0.32114783, z: 0.37749213}
   m_Center: {x: 0, y: 0.16057391, z: 0}
+--- !u!114 &277721248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277721244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Carve
+  conditions: []
+  actions:
+  - rid: 625735922916786442
+  - rid: 625735922916786443
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786442
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786443
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &277721249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277721244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Kick
+  conditions: []
+  actions:
+  - rid: 625735922916786440
+  - rid: 625735922916786441
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786440
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 6419675311559632947, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786441
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &277721250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277721244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Pumpkin
+  promptOffset: {x: 0, y: 0.45, z: 0}
+--- !u!114 &277721251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277721244}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &319341262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +3083,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
       insertIndex: -1
       addedObject: {fileID: 373805700}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373805707}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373805706}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373805705}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373805704}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373805703}
   m_SourcePrefab: {fileID: 100100000, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
 --- !u!4 &373805698 stripped
 Transform:
@@ -2254,6 +3130,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45000005, y: 0.91499555, z: 0.32999992}
   m_Center: {x: 0, y: 0.45749778, z: 0}
+--- !u!114 &373805703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373805699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786347
+  - rid: 625735922916786348
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786347
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786348
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &373805704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373805699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786344
+  actions:
+  - rid: 625735922916786345
+  - rid: 625735922916786346
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786344
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786345
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786346
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &373805705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373805699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786342
+  - rid: 625735922916786343
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786342
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Here lies Ima Goner
+
+          1921 - 1969
+
+          Told you I was sick.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786343
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &373805706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373805699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &373805707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373805699}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &388013597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3344,6 +4377,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 590687806}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590687813}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590687812}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590687811}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590687810}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590687809}
   m_SourcePrefab: {fileID: 100100000, guid: 9bcf18602586c55479540baa46ec3f09, type: 3}
 --- !u!4 &590687804 stripped
 Transform:
@@ -3376,6 +4424,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.50902534, y: 0.341081, z: 0.39154518}
   m_Center: {x: -0.029512763, y: 0.1705405, z: 0.0707726}
+--- !u!114 &590687809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590687805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786403
+  - rid: 625735922916786404
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786403
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786404
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &590687810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590687805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786400
+  actions:
+  - rid: 625735922916786401
+  - rid: 625735922916786402
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786400
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786401
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786402
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &590687811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590687805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786398
+  - rid: 625735922916786399
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786398
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Barry D. Alive
+
+          1910 - 1958
+
+          He got better.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786399
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &590687812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590687805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &590687813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590687805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &607728927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3439,6 +4644,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
       insertIndex: -1
       addedObject: {fileID: 607728930}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607728937}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607728936}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607728935}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607728934}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607728933}
   m_SourcePrefab: {fileID: 100100000, guid: 1146cad8660f00c46bc039dcc911a773, type: 3}
 --- !u!4 &607728928 stripped
 Transform:
@@ -3471,6 +4691,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4499998, y: 0.91499555, z: 0.32999998}
   m_Center: {x: 0, y: 0.45749778, z: -0.000000014901161}
+--- !u!114 &607728933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607728929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786431
+  - rid: 625735922916786432
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786431
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786432
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &607728934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607728929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786428
+  actions:
+  - rid: 625735922916786429
+  - rid: 625735922916786430
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786428
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786429
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786430
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &607728935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607728929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786426
+  - rid: 625735922916786427
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786426
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Ivana B. Alone
+
+          1912 - 1977
+
+          Finally.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786427
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &607728936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607728929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &607728937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607728929}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &616452262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4754,6 +6131,7 @@ MonoBehaviour:
   - rid: 625735922916786294
   - rid: 625735922916786295
   - rid: 625735922916786296
+  - rid: 625735922916786457
   - rid: 625735922916786320
   references:
     version: 2
@@ -4859,6 +6237,12 @@ MonoBehaviour:
         wait: 0
         interactable: {fileID: 0}
         hypertag: {fileID: 11400000, guid: e648d9b8c5a73ed449922ab3c2f81ed4, type: 2}
+    - rid: 625735922916786457
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: 0.14285715
 --- !u!1 &736563551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,6 +6790,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
       insertIndex: -1
       addedObject: {fileID: 789153439}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789153445}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789153444}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789153443}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789153442}
   m_SourcePrefab: {fileID: 100100000, guid: 73dc64cfa2891bd459f50888b6ddf332, type: 3}
 --- !u!4 &789153437 stripped
 Transform:
@@ -5438,6 +6834,113 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.37749195, y: 0.32114783, z: 0.37749195}
   m_Center: {x: 0, y: 0.16057391, z: 0}
+--- !u!114 &789153442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789153438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Carve
+  conditions: []
+  actions:
+  - rid: 625735922916786450
+  - rid: 625735922916786451
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786450
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786451
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &789153443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789153438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Kick
+  conditions: []
+  actions:
+  - rid: 625735922916786448
+  - rid: 625735922916786449
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786448
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 6419675311559632947, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786449
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &789153444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789153438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Pumpkin
+  promptOffset: {x: 0, y: 0.45, z: 0}
+--- !u!114 &789153445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789153438}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &789458131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5792,6 +7295,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 848244448}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 848244454}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 848244453}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 848244452}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 848244451}
   m_SourcePrefab: {fileID: 100100000, guid: 8bfe3cf8867eaf04f978dabb411d471a, type: 3}
 --- !u!4 &848244446 stripped
 Transform:
@@ -5824,6 +7339,113 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3254919, y: 0.35967124, z: 0.32549202}
   m_Center: {x: 0, y: 0.17983562, z: 0.025999993}
+--- !u!114 &848244451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848244447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Carve
+  conditions: []
+  actions:
+  - rid: 625735922916786446
+  - rid: 625735922916786447
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786446
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786447
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &848244452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848244447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Kick
+  conditions: []
+  actions:
+  - rid: 625735922916786444
+  - rid: 625735922916786445
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786444
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 6419675311559632947, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786445
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &848244453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848244447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Pumpkin
+  promptOffset: {x: 0, y: 0.45, z: 0}
+--- !u!114 &848244454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848244447}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &871534521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6578,6 +8200,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 173255693}
   - {fileID: 912078700}
   - {fileID: 963453350}
   - {fileID: 832164078}
@@ -6664,6 +8287,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 935618003}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935618010}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935618009}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935618008}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935618007}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935618006}
   m_SourcePrefab: {fileID: 100100000, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
 --- !u!4 &935618001 stripped
 Transform:
@@ -6696,6 +8334,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.48643827, y: 0.6075875, z: 0.24999999}
   m_Center: {x: 0, y: 0.30379376, z: 0.000000007450581}
+--- !u!114 &935618006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935618002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786410
+  - rid: 625735922916786411
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786410
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786411
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &935618007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935618002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786407
+  actions:
+  - rid: 625735922916786408
+  - rid: 625735922916786409
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786407
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786408
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786409
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &935618008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935618002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786405
+  - rid: 625735922916786406
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786405
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Dee Composing
+
+          1888 - 1937
+
+          Still working on it.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786406
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &935618009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935618002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &935618010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935618002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &944439069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6920,6 +8715,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
       insertIndex: -1
       addedObject: {fileID: 951461412}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 951461419}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 951461418}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 951461417}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 951461416}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 951461415}
   m_SourcePrefab: {fileID: 100100000, guid: 6561f1a8c81d7a445b72f34423fc5c40, type: 3}
 --- !u!4 &951461410 stripped
 Transform:
@@ -6952,6 +8762,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45000005, y: 0.575, z: 0.25}
   m_Center: {x: 0, y: 0.2875, z: 0}
+--- !u!114 &951461415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951461411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786354
+  - rid: 625735922916786355
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786354
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786355
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &951461416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951461411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786351
+  actions:
+  - rid: 625735922916786352
+  - rid: 625735922916786353
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786351
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786352
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786353
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &951461417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951461411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786349
+  - rid: 625735922916786350
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786349
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Stan Dupp
+
+          1950 - 1987
+
+          Stunt double. Took the fall.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786350
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &951461418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951461411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &951461419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951461411}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &954844739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7536,6 +9503,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1020167774}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1020167781}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1020167780}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1020167779}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1020167778}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1020167777}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
 --- !u!4 &1020167772 stripped
 Transform:
@@ -7568,6 +9550,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4499998, y: 0.52930343, z: 0.25}
   m_Center: {x: 0, y: 0.26465172, z: 0}
+--- !u!114 &1020167777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020167773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786361
+  - rid: 625735922916786362
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786361
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786362
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1020167778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020167773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786358
+  actions:
+  - rid: 625735922916786359
+  - rid: 625735922916786360
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786358
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786359
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786360
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1020167779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020167773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786356
+  - rid: 625735922916786357
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786356
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Ken Tinued
+
+          1900 - 1999
+
+          To be continued...'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786357
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1020167780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020167773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1020167781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020167773}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1024927265
 GameObject:
   m_ObjectHideFlags: 0
@@ -11243,6 +13382,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1231597582}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231597589}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231597588}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231597587}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231597586}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231597585}
   m_SourcePrefab: {fileID: 100100000, guid: ba55418e892d17a4fae1fad211b05e68, type: 3}
 --- !u!4 &1231597580 stripped
 Transform:
@@ -11275,6 +13429,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.48643827, y: 0.6075875, z: 0.24999999}
   m_Center: {x: 0, y: 0.30379376, z: 0.000000007450581}
+--- !u!114 &1231597585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231597581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786417
+  - rid: 625735922916786418
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786417
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786418
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1231597586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231597581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786414
+  actions:
+  - rid: 625735922916786415
+  - rid: 625735922916786416
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786414
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786415
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786416
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1231597587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231597581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786412
+  - rid: 625735922916786413
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786412
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Craig Gully
+
+          1951 - 1990
+
+          Catering. The fish was off.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786413
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1231597588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231597581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1231597589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231597581}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1236233627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11338,6 +13649,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1236233630}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236233637}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236233636}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236233635}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236233634}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236233633}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0e3b0f355e5f54ab6c07d4c7ccde5c, type: 3}
 --- !u!4 &1236233628 stripped
 Transform:
@@ -11370,6 +13696,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4499998, y: 0.52930343, z: 0.24999999}
   m_Center: {x: 0, y: 0.26465172, z: 0.000000007450581}
+--- !u!114 &1236233633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236233629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786438
+  - rid: 625735922916786439
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786438
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786439
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1236233634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236233629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786435
+  actions:
+  - rid: 625735922916786436
+  - rid: 625735922916786437
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786435
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786436
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786437
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1236233635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236233629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786433
+  - rid: 625735922916786434
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786433
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Rhoda Boot
+
+          1939 - 1984
+
+          Tripped on a cable.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786434
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1236233636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236233629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1236233637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236233629}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1252755672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12825,6 +15308,8 @@ MonoBehaviour:
   moodThreshold: 0.7
   moodGraceTime: 2
   moodDecayRate: 0.05
+  zombieRange: 0.8
+  zombieMoodRate: 0.03
   relaxRate: 0.2
 --- !u!4 &1610010417
 Transform:
@@ -13354,6 +15839,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1705779646}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1705779653}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1705779652}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1705779651}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1705779650}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8734ac7e3df169547baed1797492a898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1705779649}
   m_SourcePrefab: {fileID: 100100000, guid: 8734ac7e3df169547baed1797492a898, type: 3}
 --- !u!4 &1705779644 stripped
 Transform:
@@ -13386,6 +15886,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4499998, y: 0.938326, z: 0.32999992}
   m_Center: {x: 0, y: 0.469163, z: 0.03999996}
+--- !u!114 &1705779649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705779645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786375
+  - rid: 625735922916786376
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786375
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786376
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1705779650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705779645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786372
+  actions:
+  - rid: 625735922916786373
+  - rid: 625735922916786374
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786372
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786373
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786374
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1705779651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705779645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786370
+  - rid: 625735922916786371
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786370
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Al B. Back
+
+          1930 - 1980
+
+          Sequel pending.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786371
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1705779652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705779645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1705779653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705779645}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1713696658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13504,6 +16161,15 @@ MonoBehaviour:
   holdPerCharacter: 0.03
   voice: {fileID: 0}
   charactersPerBlip: 3
+  playerInput: {fileID: 736563555}
+  skipInput:
+    _type: 3
+    axis: Horizontal
+    buttonPositive: Right
+    buttonNegative: Left
+    keyPositive: 275
+    keyNegative: 276
+    inputAction: Interact
 --- !u!1001 &1731452911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13908,6 +16574,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1741706297}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741706304}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741706303}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741706302}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741706301}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741706300}
   m_SourcePrefab: {fileID: 100100000, guid: b99e04b2a8fe0a948be5a44e915c9bff, type: 3}
 --- !u!4 &1741706295 stripped
 Transform:
@@ -13940,6 +16621,163 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8500004, y: 0.5703522, z: 0.3}
   m_Center: {x: 0, y: 0.2851761, z: -0.000000014901161}
+--- !u!114 &1741706300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741706296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Pray
+  conditions: []
+  actions:
+  - rid: 625735922916786389
+  - rid: 625735922916786390
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786389
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786390
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1741706301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741706296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Dig
+  conditions:
+  - rid: 625735922916786386
+  actions:
+  - rid: 625735922916786387
+  - rid: 625735922916786388
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786386
+      type: {class: Condition_HasItem, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        item: {fileID: 11400000, guid: 113ef53e0fe62594791cac8e09aa3c09, type: 2}
+        count: 1
+    - rid: 625735922916786387
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786388
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1741706302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741706296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Read
+  conditions: []
+  actions:
+  - rid: 625735922916786384
+  - rid: 625735922916786385
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786384
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: 'Grip McGee
+
+          1944 - 1988
+
+          Held the light. Then he didn''t.'
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 1.15}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786385
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1741706303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741706296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Grave
+  promptOffset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1741706304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741706296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1758616284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14953,6 +17791,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe02748a515e6ca4f8bb151e3a8ec672, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861894507}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe02748a515e6ca4f8bb151e3a8ec672, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861894512}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe02748a515e6ca4f8bb151e3a8ec672, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861894511}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe02748a515e6ca4f8bb151e3a8ec672, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861894510}
   m_SourcePrefab: {fileID: 100100000, guid: fe02748a515e6ca4f8bb151e3a8ec672, type: 3}
 --- !u!4 &1861894505 stripped
 Transform:
@@ -14985,6 +17832,97 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.57380766, y: 0.325, z: 0.83782405}
   m_Center: {x: 0, y: 0.1625, z: 0}
+--- !u!114 &1861894510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861894506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Knock
+  conditions: []
+  actions:
+  - rid: 625735922916786458
+  - rid: 625735922916786459
+  - rid: 625735922916786460
+  - rid: 625735922916786461
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786458
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: 4297623066254443295, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786459
+      type: {class: GameAction_Wait, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        duration: 0.6
+    - rid: 625735922916786460
+      type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        text: You hear a faint knock back...
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        offset: {x: 0, y: 0.8}
+        color: {r: 1, g: 1, b: 1, a: 1}
+        duration: 4
+    - rid: 625735922916786461
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &1861894511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861894506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Coffin
+  promptOffset: {x: 0, y: 0.25, z: 0}
+--- !u!114 &1861894512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861894506}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1892151845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16375,10 +19313,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Verb
   _displayName: Lean on
   conditions: []
-  actions: []
+  actions:
+  - rid: 625735922916786452
+  - rid: 625735922916786453
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 625735922916786452
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -1220654005197467431, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786453
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
 --- !u!114 &2104686944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16396,6 +19353,7 @@ MonoBehaviour:
   actions:
   - rid: 625735922916786276
   - rid: 625735922916786277
+  - rid: 625735922916786456
   - rid: 625735922916786319
   references:
     version: 2
@@ -16423,6 +19381,12 @@ MonoBehaviour:
         wait: 0
         interactable: {fileID: 1383253940}
         hypertag: {fileID: 0}
+    - rid: 625735922916786456
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: 0.14285715
 --- !u!114 &2104686945
 MonoBehaviour:
   m_ObjectHideFlags: 0

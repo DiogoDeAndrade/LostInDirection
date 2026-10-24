@@ -92,6 +92,8 @@ left side, so the actor's face, the grave and the spawn point are in frame.
 - `Zombie` (prefab root, with a kinematic Rigidbody, a `NavMeshAgent` (radius 0.18, height 0.8, speed 1.4 against
   the actor's 2, no auto braking) and the `Zombie` hypertag): stands until follow mode is switched on, then
   re-paths to `MainPlayer` every 0.25 s. The two zombie extras on the set are plain models, not `Zombie`s.
+  `Zombie.all` lists the enabled ones (the DirectorDriver uses it). With no stopping distance it walks into the
+  actor: touching, they're about 0.33 apart.
 - NavMesh: `NavMeshSurface` on `Set` (children, physics colliders), baked to `Assets/Scenes/ZombieMovie/NavMesh-Set.asset`.
   The default agent type (Humanoid, the only one) was resized for the Kenney scale: radius 0.18, height 0.8,
   climb 0.2, slope 45. The shovel has a `NavMeshModifier` ignoring it, since it's picked up. Rebake after moving
@@ -136,10 +138,13 @@ left side, so the actor's face, the grave and the spawn point are in frame.
   `Object/Instantiate at Hypertag` (a prefab at the first object with a hypertag, optionally with its rotation),
   `Cutscene/Start` (optional camera) and `Cutscene/End`, `Flow/Wait` (created with "wait" on, otherwise it does
   nothing), `Animation/Play` (an `ObjectTarget`, the actor by default; a one-shot through `CharacterAnimation`, or
-  straight on a `PlayableHandler`), `FX/Play Particle System` (the first one under an `ObjectTarget`; waiting lasts
-  until its particles die), `Zombie/Follow` (on/off, the zombie found through an `ObjectTarget`, by hypertag by
-  default), and the condition `Inventory/Has Item`. UnityCommon's own `RPG/Add Item` and `RPG/Destroy Entity` work
-  on RPG entities, which this game doesn't use.
+  straight on a `PlayableHandler`), `FX/Play Particle System` (every system under an `ObjectTarget`; waiting lasts
+  until all their particles die) and `FX/Stop Particle System` (every system under the interactable by default,
+  optionally clearing them), `Object/Set Light` (on, off or toggle every `Light` under the interactable by default),
+  `UI/Show Text` (floating text over an object, see Red herrings), `Director/Change Mood` (-0.07 by default),
+  `Zombie/Follow` (on/off, the zombie found through an `ObjectTarget`, by hypertag by default), and the conditions
+  `Inventory/Has Item` and `Object/Light Is On` (any `Light` under the interactable enabled; negated, "is off").
+  UnityCommon's own `RPG/Add Item` and `RPG/Destroy Entity` work on RPG entities, which this game doesn't use.
 - "Wait" on an action (UnityCommon's `GameAction.wait`, the checkbox on the right of each action) makes the list
   wait for it to finish; without it the action runs alongside the next ones.
 - Items live in `Assets/Data/Items` (`Shovel`). The player has a `UC.Inventory` (UI: see Inventory below).
@@ -156,13 +161,46 @@ left side, so the actor's face, the grave and the spawn point are in frame.
   (the selected one in yellow, prefixed with `»`) and a hint for the active control scheme (`(Y) next (X) do it` on
   gamepad, `[Q] next [E] do it` otherwise).
 - Outlines need `UC.ScreenSpaceOutlineFeature` on the URP renderer: both `PC_Renderer` and `Mobile_Renderer` have it.
-- Set up: the shovel (`shovel-dirt`) has "Pick up" (Add Item Shovel, Destroy the interactable) and "Lean on" (no
-  actions, a wrong choice for the director); the grave ring has "Dig" on its `Mound` child (Has Item Shovel; the
-  cutscene sequence in Scenes above), so after digging the grave has no verbs left.
+- Set up: the shovel (`shovel-dirt`) has "Pick up" (Add Item Shovel, Destroy the interactable) and "Lean on" (a
+  red herring, see below); the grave ring has "Dig" on its `Mound` child (Has Item Shovel; the cutscene sequence in
+  Scenes above), so after digging the grave has no verbs left.
 - The project enters Play mode without reloading the domain or the scene (Enter Play Mode Options). Statics
   survive between plays, and a component added from an editor script keeps its in-memory field values: a
   `UC.Inventory` added that way had a null `initialItems` (UnityCommon doesn't null-check it) until the field was
   set through a `SerializedObject`.
+
+### Red herrings
+
+Props the script doesn't need offer verbs too, so the right one is harder to find (added 2026-10-24, the user's
+list). Each ends with `Director/Change Mood` -0.07, half a face: the eight faces are 1/7 of mood apart, so two wrong
+choices cost one face (measured in Play mode: 1, 0.93, 0.86, 0.79, 0.72, face 2).
+
+- Candles (on `Assets/Prefabs/Candles.prefab`, so every candle has them; Interactable "Candles"): "Put out" while
+  the light is on (Light Is On; the actor's `interact-left`, Set Light off, Stop Particle System) and "Light" while
+  it's off (negated; `interact-left`, Set Light on, Play Particle System on the interactable). In Play mode the
+  light and the three flames go out and come back, and the verbs swap.
+- Gravestones (the 14 in `Set/Graves`, Interactable "Grave"): "Read" (an epitaph, a punny name, dates and a line,
+  floating over the stone), "Dig" (needs the shovel; `interact-right`) and "Pray" (`emote-yes`). The user asked for
+  something on "the dirt" too: each mound sits in front of its stone, and standing on an object counts as facing
+  it, so a mound would always win targeting over its stone. The dirt's verbs (Dig, Pray) went on the gravestone
+  instead, one target per grave. No gravestone is within 2 units of the real grave (`grave-border`, 3.2, -2.3).
+- Pumpkins (the 3 in `Set/Props`, Interactable "Pumpkin"): "Kick" (`attack-kick-right`) and "Carve"
+  (`interact-right`).
+- The shovel's "Lean on" (`interact-left`).
+- The coffin (`Set/Props/coffin`, Interactable "Coffin"): "Knock" (`interact-right`, Wait 0.6, then "You hear a
+  faint knock back..." 0.8 above it).
+- The right actions go the other way, a whole face each (+1/7, 0.143, just before the Set Player Target that moves
+  the script on): the shovel's "Pick up" and the grave's "Dig". Dig's lands about 1 s after the cutscene ends (the
+  HUD, with the portrait, is faded out during it). Measured: 0.5 to 0.643 to 0.786.
+- Floating text: `HUD/CombatText` (the HUD's first child, so drawn under the prompt) holds UnityCommon's
+  `CombatTextManager` with `Assets/Prefabs/UI_FloatingText.prefab` (TMP, Barlow Condensed 34, wrapped in 700x220,
+  pivot at its bottom centre so it grows up from its anchor). A text stays, then fades out drifting up 12 px/s,
+  keeping its place over the object as the camera moves. Epitaphs are anchored 1.15 above their stone, above the
+  prompt, white for 4 s.
+- A Screen Space - Camera canvas on the main camera was tried first, because `CombatTextManager` didn't work on an
+  overlay canvas: post-processing greyed it, and it sat under the prompt. Fixed in UnityCommon on 2026-10-24:
+  `WorldToLocal` gave its camera to `ScreenPointToLocalPointInRectangle`, which must get none for an overlay canvas
+  (the camera still projects the world point).
 
 ### Inventory
 
@@ -202,6 +240,7 @@ fire baskets and the lamps.
 - `Assets/Prefabs/Candles.prefab` (the user's: Kenney `candle-multiple` and a point light): a small flame particle
   system on each of the three wicks (local space, about 12 particles each) and `LightFlicker` (warm, 0.8 s cycle).
   The wick tops in the mesh are at (-0.064, 0.120, 0.078), (-0.067, 0.170, -0.068), (0.049, 0.200, 0.019).
+  It's also an Interactable ("Put out" / "Light", see Red herrings).
 - `Assets/Prefabs/FireBasket.prefab` (the user's, with a purple point light): a purple fire emitted above the rim
   (world space, up to 60 particles, noise) and `LightFlicker` (purple, 0.6 s cycle, larger wander).
 - Flames use `Assets/Materials/FlameParticles.mat`: URP's `ParticlesUnlit` copied and made additive, with an HDR
@@ -261,7 +300,11 @@ fire baskets and the lamps.
     the angle always deciding, at 30 degrees, an actor who had the grave selected 40 degrees off its closest point
     counted as looking away, and frustration climbed.)
   - Mood: frustration above `moodThreshold` (0.7) for longer than `moodGraceTime` (2 s) drains it at
-    `moodDecayRate` (0.05/s). `ChangeMood(delta)` is there for right and wrong actions (not used yet).
+    `moodDecayRate` (0.05/s). `ChangeMood(delta)` (the `Director/Change Mood` action) is for right and wrong
+    actions (see Red herrings).
+  - Zombies: a following zombie closer than `zombieRange` (0.8, on the ground plane) drains the mood at
+    `zombieMoodRate` (0.03/s, a face in about 5 s), target or not; the inspector shows `zombieDistance` (-1 when
+    none follows). Measured: the zombie caught the standing actor 1 s after the dig, then 0.786 to 0.575 in 7 s.
   - No target: -`relaxRate` (0.2/s). During cutscenes nothing changes. Starts at frustration 0.3, mood 1.
   - The inspector shows the live state, frustration, mood, distance and progress.
 - Zombie scene targets: StartupActions targets the shovel; "Pick up" ends with the grave; "Dig" ends with
@@ -282,7 +325,12 @@ fire baskets and the lamps.
 - `DirectorSpeech` (`HUD/DirectorSpeech`, with `Balloon`: an off-white panel to the right of the portrait, growing
   up, with a tail pointing at him; 620 wide, text in Barlow Condensed, 30): types each line out at
   `charactersPerSecond` (30), with an optional `voice` SoundDef blip every `charactersPerBlip` (3) characters (none
-  assigned yet), then holds it `holdTime` (1 s) + `holdPerCharacter` (0.03 s) per character. While it runs,
+  assigned yet), then holds it `holdTime` (1 s) + `holdPerCharacter` (0.03 s) per character. `skipInput` (the
+  Player map's `Interact`, gamepad west / E, through the actor's `PlayerInput`) goes straight to the next line,
+  typing or holding, and ends the speech on the last one. A press on the frame a line comes up doesn't count (the
+  press that skipped the previous line, or an Interact that started the speech), and `Say` runs after the actor's
+  Update, so the press that ends the speech was seen by the still-locked actor and interacts with nothing. Measured:
+  the briefing skipped in 4 presses, about 2 s. While it runs,
   `DirectorSpeech.isTalking` is true, which holds the gameplay (below). The director's `talking` (set while a line
   types) adds nods, looking around and right-arm gestures to his body language.
 - Zombie scene: `MovieScript`'s startup actions are the briefing (4 lines: come in through the gate as a
@@ -385,7 +433,7 @@ README's `## Todo` list.
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
 | `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Editor/` (`VerbEditor`, `StartupActionsEditor`); `Gameplay.cs` (gameplay hold) |
-| `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem` |
+| `Assets/Prefabs` | `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text |
 | `Assets/TextMesh Pro` | TMP essential resources |

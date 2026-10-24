@@ -2469,6 +2469,7 @@ MonoBehaviour:
     m_ColorSpace: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 5
+  randomStart: 1
   frequency: 4
   amplitude: {x: 0.01, y: 0.005, z: 0.01}
 --- !u!1 &5967097276134115298
@@ -7142,6 +7143,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5849109266330078255}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3468958617810359942}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 710855305707991801}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5648439175715692332}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 714103204532785194}
   m_SourcePrefab: {fileID: 100100000, guid: 83d7253c413bb8545bcc3df40a57e498, type: 3}
 --- !u!4 &1286700421563573374 stripped
 Transform:
@@ -7174,3 +7187,171 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.25519204, y: 0.20016575, z: 0.26674008}
   m_Center: {x: -0.002739787, y: 0.100082874, z: 0.0028504133}
+--- !u!114 &3468958617810359942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914196537048841924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38cd178aa518f74b831005c25154d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.ScreenSpaceOutline
+  color: {r: 1, g: 0.85, b: 0.3, a: 1}
+  width: 3
+  occlusion: 0
+  targetRenderers: []
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &710855305707991801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914196537048841924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602593fe339ed9e45bdc8ea416a0d926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  displayName: Candles
+  promptOffset: {x: 0, y: 0.35, z: 0}
+--- !u!114 &5648439175715692332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914196537048841924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Put out
+  conditions:
+  - rid: 625735922916786332
+  actions:
+  - rid: 625735922916786333
+  - rid: 625735922916786334
+  - rid: 625735922916786335
+  - rid: 625735922916786336
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786332
+      type: {class: Condition_LightOn, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+    - rid: 625735922916786333
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -1220654005197467431, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786334
+      type: {class: GameAction_SetLight, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        state: 1
+    - rid: 625735922916786335
+      type: {class: GameAction_StopParticles, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clear: 0
+    - rid: 625735922916786336
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07
+--- !u!114 &714103204532785194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914196537048841924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c092af4f367b47a52538056762f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Verb
+  _displayName: Light
+  conditions:
+  - rid: 625735922916786337
+  actions:
+  - rid: 625735922916786338
+  - rid: 625735922916786339
+  - rid: 625735922916786340
+  - rid: 625735922916786341
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786337
+      type: {class: Condition_LightOn, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 1
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+    - rid: 625735922916786338
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -1220654005197467431, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+    - rid: 625735922916786339
+      type: {class: GameAction_SetLight, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        state: 0
+    - rid: 625735922916786340
+      type: {class: GameAction_PlayParticles, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+    - rid: 625735922916786341
+      type: {class: GameAction_ChangeMood, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        amount: -0.07

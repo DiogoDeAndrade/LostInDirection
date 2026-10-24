@@ -10,6 +10,7 @@ using UnityEngine.AI;
 // - Near the target it follows the aim: down while the actor aims at the target (it's what he'd interact with, or,
 //   aiming at nothing, he faces it), up while he faces away, and faster while he's aiming at another object.
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
+// - A following zombie within zombieRange of the actor makes the mood drop too, target or not.
 // Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
 // changes. One per movie scene.
 public class DirectorDriver : MonoBehaviour
@@ -56,6 +57,12 @@ public class DirectorDriver : MonoBehaviour
     [SerializeField, Min(0), Tooltip("Mood lost per second after that")]
     private float   moodDecayRate = 0.05f;
 
+    [Header("Zombies")]
+    [SerializeField, Min(0), Tooltip("A following zombie closer than this to the actor (on the ground plane) makes the mood drop")]
+    private float   zombieRange = 0.8f;
+    [SerializeField, Min(0), Tooltip("Mood lost per second while one is")]
+    private float   zombieMoodRate = 0.03f;
+
     [Header("No target")]
     [SerializeField, Min(0), Tooltip("Frustration lost per second while there's no target")]
     private float   relaxRate = 0.2f;
@@ -83,6 +90,9 @@ public class DirectorDriver : MonoBehaviour
     // How fast the actor is getting closer (negative: farther), in units per second
     [ShowNativeProperty]
     public float progress => progressSpeed;
+    // Distance to the closest following zombie (-1 when none is following)
+    [ShowNativeProperty]
+    public float zombieDistance { get; private set; } = -1.0f;
 
     public bool hasTarget => (targetInteractable != null) || (targetTransform != null);
 
@@ -155,6 +165,8 @@ public class DirectorDriver : MonoBehaviour
             UpdateMood(dt);
         }
 
+        if ((!Gameplay.isHeld) && (actor != null)) UpdateZombies(dt);
+
         var director = Director.instance;
         if (director != null)
         {
@@ -211,6 +223,24 @@ public class DirectorDriver : MonoBehaviour
         {
             timeAboveThreshold = 0.0f;
         }
+    }
+
+    void UpdateZombies(float dt)
+    {
+        Vector3 actorPos = actor.transform.position;
+        float closest = -1.0f;
+        foreach (var zombie in Zombie.all)
+        {
+            if (!zombie.isFollowing) continue;
+
+            Vector3 toZombie = zombie.transform.position - actorPos;
+            toZombie.y = 0.0f;
+            float d = toZombie.magnitude;
+            if ((closest < 0.0f) || (d < closest)) closest = d;
+        }
+        zombieDistance = closest;
+
+        if ((closest >= 0.0f) && (closest < zombieRange)) mood = Mathf.Clamp01(mood - zombieMoodRate * dt);
     }
 
     void ChangeFrustration(float delta)

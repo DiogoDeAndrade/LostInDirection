@@ -22,7 +22,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Player movement with the 45 degree camera
 - [x] Interaction: get close to an object and face it (right stick aims while standing still), cycle its options, perform one
 - [x] Verbs with conditions and actions (add item, destroy object, spawn prefab, cutscenes, wait, animation,
-      particles, zombie follow)
+      particles, lights, floating text, director's mood, zombie follow)
 - [x] Cutscenes: letterbox bars, controls locked, UI faded out, cutscene camera
 - [x] Atmosphere: candles and fire baskets with flames and flickering lights
 - [x] Inventory, with the shovel's icon
@@ -30,9 +30,13 @@ directions, and he doesn't understand any of it and feels the translation is not
       crypt, "Cut!" and restart when touching a zombie
 - [ ] Scene targets: where to stand, where to face, which interaction is right
 - [x] Director hot/cold meter: position and orientation cues (current target set by the script)
-- [ ] Director life system: wrong interactions make him angrier
+- [x] Director life system: wrong interactions make him angrier (red herrings on the candles, graves, pumpkins,
+      the coffin and the shovel)
+- [x] Right interactions calm the director down (picking up the shovel, digging the grave)
+- [x] The director gets angrier while a zombie is right next to the actor
 - [x] Director in the bottom-left corner (3D, in his own scene): body language for hot/cold, face for mood
-- [x] Director gibberish in speech balloons (the briefing); no control and no frustration change while he talks
+- [x] Director gibberish in speech balloons (the briefing); no control and no frustration change while he talks;
+      Interact skips to the next balloon
 - [x] Slate claps in front of the director's camera before the take starts
 - [ ] Director voice (babble blips while he talks)
 - [ ] Scene complete and fired / game over

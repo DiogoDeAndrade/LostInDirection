@@ -4,8 +4,8 @@ using UC;
 using UC.Interaction;
 using UnityEngine;
 
-// Plays a particle system (the first one on the object or its children). With "wait", the next action starts when
-// all its particles are gone.
+// Plays every particle system on an object and its children (a candle's three flames, the dig dirt, ...). With
+// "wait", the next action starts when all their particles are gone.
 [Serializable]
 [GameActionName("FX/Play Particle System")]
 public class GameAction_PlayParticles : GameAction
@@ -16,15 +16,24 @@ public class GameAction_PlayParticles : GameAction
     public override IEnumerator Execute(ActionContext context)
     {
         var obj = target.GetGameObject(context);
-        var particles = (obj != null) ? (obj.GetComponentInChildren<ParticleSystem>()) : (null);
-        if (particles == null)
+        var systems = (obj != null) ? (obj.GetComponentsInChildren<ParticleSystem>()) : (null);
+        if ((systems == null) || (systems.Length == 0))
         {
             Debug.LogWarning($"Play Particle System: no particle system ({target})");
             yield break;
         }
 
-        particles.Play(true);
+        foreach (var system in systems) system.Play(true);
 
-        while ((particles != null) && (particles.IsAlive(true))) yield return null;
+        bool alive = true;
+        while (alive)
+        {
+            alive = false;
+            foreach (var system in systems)
+            {
+                if ((system != null) && (system.IsAlive(true))) alive = true;
+            }
+            if (alive) yield return null;
+        }
     }
 }
