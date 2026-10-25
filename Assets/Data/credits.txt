@@ -1,0 +1,23 @@
+<size=200%><color=#FFFFFF>LOST IN DIRECTION
+
+<size=140%><color=#FFFF00>A Game By Diogo de Andrade
+Made for the October 2026 Game Creator's Club at Lusofona University
+Theme: "Lost In Translation"
+
+<size=160%><color=#FFA000>Art
+Blocky Characters by KenneyNL, CC0
+Graveyard Kit by KenneyNL, CC0
+Mini Characters by KenneyNL, CC0
+Low-Poly Movie Camera by zanerlak, CC-BY 4.0
+Black film slate or clapper by tech.service.allwe, CC-BY 4.0
+Font Barlow Condensed by Jeremy Tribby, SIL Open Font License
+Everything else done by Diogo de Andrade, CC0
+
+<size=160%><color=#FFA000>Code
+Uses UnityCommon library, MIT license
+NaughtyAttributes by Denis Rizov, MIT license
+AI assistance was used in this game (Claude Code)
+All game source code by Diogo de Andrade, MIT license
+
+<size=160%>Full game source available at
+<color=#61D9EC>https://github.com/DiogoDeAndrade/LostInTranslation

@@ -1,6 +1,7 @@
 # Project
 
-**Lost In Translation**: Diogo de Andrade's entry for the October'2026 Game Creators Club
+**Lost in Direction** (the game's name, from the user, 2026-10-25; the repository and Unity project are still
+called LostInTranslation): Diogo de Andrade's entry for the October'2026 Game Creators Club
 (https://game-creators-club.itch.io/) at Lusofona University. Theme: **"Lost In Translation"**.
 
 ## Game
@@ -390,9 +391,9 @@ Added 2026-10-25, the user's design.
 - Scene complete (the `Movie/Scene Complete` action; the crypt's trigger): mood 1 (delighted) and frustration 0,
   `printLine` (`{CUT! PRINT IT!}`), the pause, then the next of `movieScenes`, keeping the takes. After the last
   (or a scene that isn't in the list) he also says `wrapLine` (`{THAT'S A WRAP!}`), and it's the main menu.
-- The main menu is `mainMenuScene`, empty for now: going there resets the takes and loads the movie's first scene
-  (or the current one with no list). `isTakeOver` clears once the new scene is loaded. The skip button works on all
-  these lines.
+- The main menu is `mainMenuScene` (`MainMenu`): going there resets the takes. With it empty, the movie's first
+  scene loads instead (or the current one with no list). `isTakeOver` clears once the new scene is loaded. The skip
+  button works on all these lines.
 - Fader: UnityCommon's `QuickPrefabs/FaderCanvas` prefab at the scene root as `Fader` (sorting order 100, over the
   cutscene bars at 10): it starts black and fades in over 0.5 s on every load.
 - `TakesDisplay` (`Assets/Scripts/UI`, on `HUD/Takes`, top right, a right-aligned `HorizontalLayoutGroup`): one
@@ -407,6 +408,49 @@ Added 2026-10-25, the user's design.
   Scene complete, with 2 takes left: the actor ran from the grave to the crypt along the NavMesh in 3.5 s (the
   zombie behind); the zone fired with the actor's capsule at its corner; "CUT! PRINT IT!" with the delighted face,
   "THAT'S A WRAP!", the restart with 3 takes, 5 s from the zone to the new scene.
+
+### Main menu
+
+Added 2026-10-25: the user asked for a gamepad menu like their other games' (UnityCommon's `MenuGamepad Variant`
+and `CreditsGamepad Variant` quick prefabs, as in Deathfloor and WrongWay) over something like the Director scene.
+
+- `Assets/Scenes/MainMenu.unity`, first in the build list, with its own copy of the director's set under `Set`
+  (the user's call, 2026-10-25: the menu gets its own angle; loading the Director scene additively was tried first).
+  The Director scene's objects (the Director prefab instance, `CameraProp`, the three spot lights, the backdrop
+  `Quad`, the `Slate` and `SlateShown`; not its `DirectorCamera`) were moved over with their prefab links and
+  references, still on the Director layer at y -100, without the outlines (the user doesn't want them here).
+  Changes to the Director scene don't reach the menu.
+- `Main Camera` (Director layer only, fov 30, at (1.42, -97.75, -7.46) looking down +z; its own `Global Volume`
+  with the movies' `SampleSceneProfile`): the director left of centre, cropped above the feet (there's no real
+  floor, only the painted one, so his feet would float), the painted set filling the screen (the backdrop quad is
+  20 x 11.25, 16:9), the slate out of view to the left. `SlateShown` is at (0.73, -98.6, -0.91), so the clap covers
+  his face.
+- The movie camera prop stands at x 2.43, between the director and the menu. Having it aim at the selected option
+  was tried and dropped (the user's call, 2026-10-25): the model is one mesh, so the whole tripod turned and tilted;
+  it would have to be split into the camera and its stand first.
+- `MenuInput`: a `PlayerInput` on `InputSystem_Actions` (Player map). UnityCommon's menus read
+  `MoveHorizontal` / `MoveVertical` (1D axes: d-pad, left stick, WASD, arrows), confirm with `UIConfirm` (gamepad
+  A or X, Enter, Space, E) and go back with `UIBack` (gamepad B, Escape, Backspace). All four were added to the Player
+  map for this, like Deathfloor's.
+- `MenuCanvas` (overlay, 1920x1080): `Menu`, the `MenuGamepad Variant` instance: title "LOST IN DIRECTION" (Barlow
+  150) and the tagline "One actor. One director. Zero understanding." (the user's) at the top; `MenuItself` (its `UIGroup`)
+  at the bottom right with Play, Credits, Quit (the prefab's Options button
+  and panel are switched off until there's sound to set). Buttons are white, right-aligned, yellow over a dark bar
+  when selected, and wrap around. Then `CreditsDim` and
+  `Credits`, the `CreditsGamepad Variant` instance: its `BigTextScroll` reads `Assets/Data/credits.txt` (the README's
+  credits in the Deathfloor format, `<size>` / `<color>` headings), one `Assets/Prefabs/UI_CreditsLine.prefab` per
+  line, 70 px/s from the bottom of the screen; UIBack (or reaching the end) returns to the menu.
+- Text over the set uses `Assets/Fonts/BarlowCondensed-Black SDF Outline.mat` (black outline and a soft shadow).
+- `MainMenu` (`Assets/Scripts/UI`): Play fades the menu out, plays the slate's clap (`Slate.instance.Play()`) and
+  fades out to `firstScene` (`ZombieMovie`). It hides the title and dims the set (`CreditsDim`, 0.6) while the
+  credits roll (the menu's group is off without Play pressed), and makes the director gesture now and then
+  (`talking` for 1 to 2.5 s every 4 to 8 s). Credits and Quit are UIButton events (Show Credits, Quit Application).
+- `Assets/Resources/Globals.asset` (`Globals`, `Assets/Scripts`, a `UC.GlobalsBase`): UnityCommon's menus look it up
+  for their UI sounds (none set yet) and log an error every move without one.
+- `PlayerSettings.productName` is "Lost in Direction".
+- Measured in Play mode, started from the menu: navigation wraps; Credits dims the set and hides the title, Back
+  restores them; Play fades the menu, the slate claps in front of the director, and ZombieMovie is up 1.6 s later
+  with 3 takes; fired, the game comes back to the menu with the takes reset.
 
 ### Outlines in the Director scene
 
@@ -459,7 +503,7 @@ README's `## Todo` list.
   `GameAction`s. Not used: the user wanted verbs as plain strings on one component, so the game has its own
   `Interactable` (no namespace); `UC.ScreenSpaceOutline` is used for the highlight.
 
-## Current state (2026-10-24)
+## Current state (2026-10-25)
 
 - Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and `com.unity.pipeline` (Unity
   CLI control of the Editor). Compiles cleanly.
@@ -467,14 +511,15 @@ README's `## Todo` list.
   and right-stick aiming; interaction (targeting, outline, prompt, verb cycling); verbs as components with
   conditions and actions, the shovel pickup; the dig cutscene (bars, cutscene camera, animation, dirt, the zombie
   coming out) and the zombie chasing the actor on the NavMesh; the director (portrait, hot/cold and mood, briefing,
-  slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won. All tested in
-  Play mode. Next (README Todo): main menu and credits, the director's voice and sounds, the itch.io page.
-- Only movie scene: `Assets/Scenes/ZombieMovie.unity` (the template's `SampleScene`, renamed; first in the build
-  list, with `Director` after it). It keeps the template's Global Volume.
+  slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won; the main menu
+  and credits. All tested in Play mode. Next (README Todo): the director's voice and sounds, the itch.io page.
+- Scenes: `MainMenu` (first in the build list, with its own copy of the director's set), `ZombieMovie` (the only
+  movie scene: the template's `SampleScene`, renamed; it keeps the template's Global Volume) and `Director` (loaded
+  additively by the movies).
 - Art so far: three Kenney 3D packs (see Layout), added by the user; third-party assets go under
   `Assets/Externals/<Source>/<Pack>/`, each with a README credit line.
 - Template tutorial content (`Assets/TutorialInfo/`, `Assets/Readme.asset`) removed by the user.
-- Player Settings `companyName` is still `DefaultCompany`.
+- Player Settings `productName` is "Lost in Direction"; `companyName` is still `DefaultCompany`.
 
 ## Layout
 
@@ -484,15 +529,16 @@ README's `## Todo` list.
 | `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
-| `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete) |
-| `Assets/Prefabs` | `GameManager`, `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon` |
+| `Assets/Scenes` | `MainMenu`, `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`, `MainMenu`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
+| `Assets/Prefabs` | `GameManager`, `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine` |
+| `Assets/Resources` | `Globals` (UnityCommon's globals asset) |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`), `UI/` (`Slate`, the takes icon) |
-| `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text |
+| `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text; `BarlowCondensed-Black SDF Outline` (material preset: outline and shadow, for text over the set) |
 | `Assets/TextMesh Pro` | TMP essential resources |
-| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`) |
+| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`); `credits.txt` (the menu's credits) |
 | `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`) |
-| `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (template Input System actions) |
+| `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (the template's Input System actions, plus the game's: `Interact`, `NextOption`, `Aim`, and the menus' `MoveHorizontal`, `MoveVertical`, `UIConfirm`, `UIBack`) |
 | `docs/` | This context |
 | `README.md`, `LICENSE` | Player-facing description and credits; MIT license |
 

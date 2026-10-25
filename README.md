@@ -1,4 +1,4 @@
-# LOST IN TRANSLATION
+# LOST IN DIRECTION
 
 Developed for the October'2026 [Game Creator's Club] at Lusofona University.
 This month, the theme is "Lost In Translation".
@@ -42,9 +42,10 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Takes (lives): three for the whole movie, shown as slates in the top-right corner; losing the last one gets
       a "YOU'RE FIRED!"
 - [x] Scene complete: "CUT! PRINT IT!" and on to the movie's next scene; "THAT'S A WRAP!" after the last one
-- [ ] Main menu/credits screen (being fired or finishing the movie should go back to it; for now the movie starts
-      again with all the takes)
+- [x] Main menu over the director's set (Play claps the slate), with scrolling credits; being fired or finishing the
+      movie comes back to it
 - [ ] Sounds and music
+- [ ] Options in the menu (volume), once there's sound
 - [ ] Itch.io page
 
 ## Art

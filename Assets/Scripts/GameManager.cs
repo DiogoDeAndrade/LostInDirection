@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 //   no takes left he says "You're fired!" too, and it's back to the main menu.
 // - Scene complete: the take is good. He's delighted and says "Cut! Print it!", and it fades out to the movie's next
 //   scene, keeping the takes. After the last one he says "That's a wrap!" too, and it's back to the main menu.
-// There's no main menu yet: going back to it starts the movie again (its first scene) with all the takes.
+// Going back to the main menu resets the takes; with no menu scene set, the movie starts again (its first scene).
 public class GameManager : MonoBehaviour
 {
     [Header("Movie")]
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (!_instance) _instance = FindFirstObjectByType<GameManager>();
+            if (!_instance) _instance = FindAnyObjectByType<GameManager>();
             return _instance;
         }
     }

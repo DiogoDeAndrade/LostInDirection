@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   movieScenes:
   - ZombieMovie
-  mainMenuScene: 
+  mainMenuScene: MainMenu
   maxTakes: 3
   cutLine: '{CUT!}'
   firedLine: '{YOU''RE FIRED!}'

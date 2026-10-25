@@ -85,6 +85,18 @@ change, and GUIDs/fileIDs are easy to break.
   player with a virtual pad instead: `InputSystem.AddDevice<Gamepad>("TestPad")`, then
   `InputSystem.QueueStateEvent(pad, new GamepadState { leftStick = ... })`; remove it with
   `InputSystem.RemoveDevice` before leaving Play mode.
+- Editor scripts that edit a scene must first look whether it's already open (`SceneManager.GetSceneByPath`):
+  then work on it in place, leave it open, and don't touch it if it's dirty. Unity refuses to close the last open
+  scene, and the exception skipped the save (2026-10-25). A scene dirtied only by the layout system (the undo
+  history's last entry is "Driving RectTransform", right after a recompile) holds no user edits.
+- To bring objects from another scene, open it additively, `SceneManager.MoveGameObjectToScene` them, and close it
+  without saving (`CloseScene(scene, true)`): prefab links, overrides and references between them come along.
+  `Unsupported.CopyGameObjectsToPasteboard` / `PasteGameObjectsFromPasteboard` pastes next to the current
+  selection, which was in the source scene, so nothing reached the target.
+- To play from another scene (the menu) without changing what's open in the Editor, set
+  `EditorSceneManager.playModeStartScene` to that scene's `SceneAsset` before starting Play mode, and back to null
+  after. A coroutine that has to survive scene loads needs a host that does: a new `DontDestroyOnLoad` object
+  with any built-in MonoBehaviour (e.g. a `LayoutElement`) to call `StartCoroutine` on.
 - Timed sequences (cutscenes): CLI round trips take about a second each, too coarse to sample them. Start a
   coroutine from an eval on a scene MonoBehaviour (e.g. the `Player`) that presses the pad buttons, logs state at
   set times into a file and calls `ScreenCapture.CaptureScreenshot` (Game view, UI included); then read the file.
