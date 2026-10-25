@@ -37,6 +37,13 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Director gibberish in speech balloons (the briefing); no control and no frustration change while he talks;
       Interact skips to the next balloon
 - [x] Slate claps in front of the director's camera before the take starts
+- [x] Labyrinth scene: a big, dark maze with open rooms to get through with the director's hot/cold (and his directions, in
+      gibberish), the key to the locked exit door, coins to collect, spike traps to wait for (a red flash and two
+      faces when they get you), barrels to inspect, a top-down camera and the actor's light
+- [x] Temple scene: grab the bow (right stick aims, either trigger shoots), hold out by the girl's cage against
+      three waves of orcs (with blood), find the key to her cage (hidden in one of the orc alcoves), free her (a
+      kiss for the hero), she casts a spell that dissolves the artifact's force
+      field, take it
 - [ ] Director voice (babble blips while he talks)
 - [x] "Cut!" when the director's mood runs out: everything stops, fade out, the take starts again
 - [x] Takes (lives): three for the whole movie, shown as slates in the top-right corner; losing the last one gets
@@ -44,8 +51,9 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Scene complete: "CUT! PRINT IT!" and on to the movie's next scene; "THAT'S A WRAP!" after the last one
 - [x] Main menu over the director's set (Play claps the slate), with scrolling credits; being fired or finishing the
       movie comes back to it
-- [ ] Sounds and music
-- [ ] Options in the menu (volume), once there's sound
+- [x] Music: a song for each scene, the movie's starting on the slate's clap
+- [ ] Sound effects
+- [x] Options in the menu: music volume and brightness (gamma)
 - [ ] Itch.io page
 
 ## Art
@@ -53,6 +61,8 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [Blocky Characters](https://kenney.nl/assets/blocky-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Graveyard Kit](https://kenney.nl/assets/graveyard-kit) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Mini Characters](https://kenney.nl/assets/mini-characters) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Mini Dungeon](https://kenney.nl/assets/mini-dungeon) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Mini Forest](https://kenney.nl/assets/mini-forest) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Low-Poly Movie Camera](https://sketchfab.com/3d-models/low-poly-movie-camera-39240299af7344f687c25b2e76493ddd) by [zanerlak](https://sketchfab.com/zanerlak), licensed through the [CC-BY 4.0] license.
 - [Black film slate or clapper](https://sketchfab.com/3d-models/black-film-slate-or-clapper-1638e9374913402daf115e62cfd080a4) by [tech.service.allwe](https://sketchfab.com/tech.service.allwe), licensed through the [CC-BY 4.0] license.
 - Font [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed) by Jeremy Tribby, [SIL Open Font License].
@@ -60,6 +70,7 @@ directions, and he doesn't understand any of it and feels the translation is not
 
 ## Sound
 
+- Music made with [Suno](https://suno.com).
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 
 ## Code

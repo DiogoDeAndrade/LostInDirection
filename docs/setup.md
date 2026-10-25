@@ -80,8 +80,9 @@ change, and GUIDs/fileIDs are easy to break.
   mode or has a different scene open, don't take it over, ask. (On 2026-10-24 a test stopped a Play session the
   user had started in the Director scene.)
 - Testing Play mode from the CLI: the Editor isn't the foreground app, so Play mode doesn't tick. Set
-  `Application.runInBackground = true` in an eval once in Play mode (session only; `PlayerSettings.runInBackground`
-  stays off). Synthetic keyboard events don't reach the input actions while the Editor is unfocused, so drive the
+  `Application.runInBackground = true` in an eval once in Play mode. It can end up in `PlayerSettings.runInBackground`
+  (it did, 2026-10-25), so check `ProjectSettings.asset` before committing and set it back off (the game's own
+  setting is off). Synthetic keyboard events don't reach the input actions while the Editor is unfocused, so drive the
   player with a virtual pad instead: `InputSystem.AddDevice<Gamepad>("TestPad")`, then
   `InputSystem.QueueStateEvent(pad, new GamepadState { leftStick = ... })`; remove it with
   `InputSystem.RemoveDevice` before leaving Play mode.
@@ -96,7 +97,9 @@ change, and GUIDs/fileIDs are easy to break.
 - To play from another scene (the menu) without changing what's open in the Editor, set
   `EditorSceneManager.playModeStartScene` to that scene's `SceneAsset` before starting Play mode, and back to null
   after. A coroutine that has to survive scene loads needs a host that does: a new `DontDestroyOnLoad` object
-  with any built-in MonoBehaviour (e.g. a `LayoutElement`) to call `StartCoroutine` on.
+  with any built-in MonoBehaviour (e.g. a `LayoutElement`) to call `StartCoroutine` on. Such a test script has to
+  check `Application.isPlaying` first: run in edit mode, it creates the host in the open scene and then fails on
+  `DontDestroyOnLoad`, and the empty object gets saved with the scene (it happened once in the Temple).
 - Timed sequences (cutscenes): CLI round trips take about a second each, too coarse to sample them. Start a
   coroutine from an eval on a scene MonoBehaviour (e.g. the `Player`) that presses the pad buttons, logs state at
   set times into a file and calls `ScreenCapture.CaptureScreenshot` (Game view, UI included); then read the file.

@@ -31,6 +31,10 @@ public class MovementDirectionalXZ : MonoBehaviour
     private float turnSpeed = 720.0f;
 
     public bool isMoving { get; private set; }
+    // The aim input turns the object while it moves too (twin-stick: walk one way, face another), e.g. with a bow
+    public bool aimWhileMoving { get; set; }
+    // The aim input is held (past the dead zone)
+    public bool isAiming => GetAimInput().magnitude >= inputEpsilonZero;
     public Vector3 moveDirection { get; private set; }
 
     private Transform cameraTransform;
@@ -104,8 +108,8 @@ public class MovementDirectionalXZ : MonoBehaviour
                 break;
         }
 
-        // Standing still: the aim input turns the object on the spot
-        if (moveDirection.sqrMagnitude == 0.0f)
+        // Standing still (or always, with aimWhileMoving): the aim input turns the object
+        if ((moveDirection.sqrMagnitude == 0.0f) || (aimWhileMoving))
         {
             Vector2 aim = GetAimInput();
             if (aim.magnitude >= inputEpsilonZero) facing = right * aim.x + forward * aim.y;

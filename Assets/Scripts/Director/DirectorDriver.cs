@@ -12,11 +12,13 @@ using UnityEngine.AI;
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
 // - A following zombie within zombieRange of the actor makes the mood drop too, target or not.
 // - When the mood runs out, the GameManager cuts the take.
+// Instead of a target there can be a place to stay near (SetStayNear: guarding the girl's cage): within its radius
+// frustration goes down, beyond it up, whichever way the actor faces.
 // Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
 // changes. One per movie scene.
 public class DirectorDriver : MonoBehaviour
 {
-    public enum State { NoTarget = 0, Far = 1, Near = 2, Paused = 3 };
+    public enum State { NoTarget = 0, Far = 1, Near = 2, Paused = 3, StayNear = 4 };
 
     [Header("Start")]
     [SerializeField, Range(0.0f, 1.0f)]
@@ -64,6 +66,12 @@ public class DirectorDriver : MonoBehaviour
     [SerializeField, Min(0), Tooltip("Mood lost per second while one is")]
     private float   zombieMoodRate = 0.03f;
 
+    [Header("Stay near")]
+    [SerializeField, Min(0), Tooltip("Frustration lost per second while the actor stays within the radius")]
+    private float   stayInsideRate = 0.3f;
+    [SerializeField, Min(0), Tooltip("Frustration gained per second while he's beyond it")]
+    private float   stayOutsideRate = 0.35f;
+
     [Header("No target")]
     [SerializeField, Min(0), Tooltip("Frustration lost per second while there's no target")]
     private float   relaxRate = 0.2f;
@@ -71,6 +79,8 @@ public class DirectorDriver : MonoBehaviour
     public static DirectorDriver instance { get; private set; }
 
     Player          actor;
+    Transform       stayPlace;
+    float           stayRadius;
     Interactable    targetInteractable;
     Transform       targetTransform;
     NavMeshPath     path;
@@ -122,11 +132,20 @@ public class DirectorDriver : MonoBehaviour
     // The interactable to go to and aim at, or (when that's null) a place; both null clears the target
     public void SetTarget(Interactable interactable, Transform place)
     {
+        stayPlace = null;
         targetInteractable = interactable;
         targetTransform = (interactable != null) ? (interactable.transform) : (place);
         lastDistance = -1.0f;
         measureElapsed = 0.0f;
         progressSpeed = 0.0f;
+    }
+
+    // A place to stay within radius of (on the ground plane), instead of a target; it clears the target
+    public void SetStayNear(Transform place, float radius)
+    {
+        SetTarget(null, null);
+        stayPlace = place;
+        stayRadius = radius;
     }
 
     // For right and wrong actions
@@ -164,6 +183,15 @@ public class DirectorDriver : MonoBehaviour
         if (Gameplay.isHeld)
         {
             state = State.Paused;
+        }
+        else if ((stayPlace != null) && (actor != null))
+        {
+            state = State.StayNear;
+            Vector3 toPlace = stayPlace.position - actor.transform.position;
+            toPlace.y = 0.0f;
+            distance = toPlace.magnitude;
+            ChangeFrustration((distance <= stayRadius) ? (-stayInsideRate * dt) : (stayOutsideRate * dt));
+            UpdateMood(dt);
         }
         else if ((!hasTarget) || (actor == null))
         {

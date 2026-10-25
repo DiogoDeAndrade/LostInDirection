@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   movieScenes:
   - ZombieMovie
+  - Labyrinth
+  - Temple
   mainMenuScene: MainMenu
   maxTakes: 3
   cutLine: '{CUT!}'

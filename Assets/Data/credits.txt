@@ -8,10 +8,15 @@ Theme: "Lost In Translation"
 Blocky Characters by KenneyNL, CC0
 Graveyard Kit by KenneyNL, CC0
 Mini Characters by KenneyNL, CC0
+Mini Dungeon by KenneyNL, CC0
+Mini Forest by KenneyNL, CC0
 Low-Poly Movie Camera by zanerlak, CC-BY 4.0
 Black film slate or clapper by tech.service.allwe, CC-BY 4.0
 Font Barlow Condensed by Jeremy Tribby, SIL Open Font License
 Everything else done by Diogo de Andrade, CC0
+
+<size=160%><color=#FFA000>Music
+Made with Suno
 
 <size=160%><color=#FFA000>Code
 Uses UnityCommon library, MIT license

@@ -7254,6 +7254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832575519}
   - component: {fileID: 832575518}
+  - component: {fileID: 832575520}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -7293,6 +7294,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832575520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: effa5e274ceec5545bd27a8543640dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UC.LiftGammaGainCtrl
+  volume: {fileID: 832575518}
+  liftMode: 0
+  liftKey: Lift
+  gammaMode: 1
+  gammaKey: Gamma
+  gainMode: 0
+  gainKey: Gain
+  updateAllFrames: 1
 --- !u!4 &845115129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3834355766338391275, guid: 81d7e3aefe4e8724788328eca70d52fb, type: 3}
@@ -13092,6 +13113,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 2, z: 9}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1195272496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5303182920023367183, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596018885105493615, guid: 46e7d6972575d6147a53933e05040517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46e7d6972575d6147a53933e05040517, type: 3}
 --- !u!1 &1198104549
 GameObject:
   m_ObjectHideFlags: 0
@@ -15497,6 +15575,7 @@ MonoBehaviour:
   actions:
   - rid: 625735922916786323
   - rid: 625735922916786326
+  - rid: 625735922916786779
   - rid: 625735922916786318
   references:
     version: 2
@@ -15526,6 +15605,14 @@ MonoBehaviour:
         initialized: 1
         wait: 1
         maxWaitForSlate: 3
+    - rid: 625735922916786779
+      type: {class: GameAction_PlayMusic, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        clip: {fileID: 8300000, guid: 5c6f5243c0c75c84297f37efdd606af1, type: 3}
+        volume: 1
+        crossfadeTime: 1
 --- !u!114 &1610010416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15556,6 +15643,8 @@ MonoBehaviour:
   moodDecayRate: 0.05
   zombieRange: 0.8
   zombieMoodRate: 0.03
+  stayInsideRate: 0.3
+  stayOutsideRate: 0.35
   relaxRate: 0.2
 --- !u!4 &1610010417
 Transform:
@@ -20044,6 +20133,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1195272496}
   - {fileID: 2134941873}
   - {fileID: 330585546}
   - {fileID: 410087041}

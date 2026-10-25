@@ -86,7 +86,8 @@ left side, so the actor's face, the grave and the spawn point are in frame.
 - All three packs' characters are Generic rigs with the same clip set inside each FBX (`idle`, `walk`, `sprint`,
   `sit`, `pick-up`, `interact-left/right`, `emote-yes/no`, `die`, `holding-*`, ...). `idle`, `walk` and `sprint` were
   set to loop in the import settings of every Mini Characters and Graveyard Kit character (Kenney ships them as
-  non-looping).
+  non-looping); the Mini Dungeon (`character-orc`, `character-human`) and Mini Forest (`character-archer`) ones too
+  (2026-10-25: the orcs slid along frozen until then).
 - Animation uses `PlayableHandler` (see [conventions.md](conventions.md)); the FBXs have no `Animator`, so one is
   added to each animated model.
 - `CharacterAnimation` (`Assets/Scripts/Characters`) on the actor and the zombie prefab: idle/walk from the
@@ -148,7 +149,11 @@ left side, so the actor's face, the grave and the spawn point are in frame.
   `UI/Show Text` (floating text over an object, see Red herrings), `Director/Change Mood` (-0.07 by default),
   `Zombie/Follow` (on/off, the zombie found through an `ObjectTarget`, by hypertag by default), and the conditions
   `Inventory/Has Item`, `Object/Light Is On` (any `Light` under the interactable enabled; negated, "is off") and
-  `Director/Target Is`. The movie's own actions (Director/..., Movie/Scene Complete) are described below.
+  `Director/Target Is`; `Animation/Play Clip` (samples a clip over its length on an object with no Animator: a prop's
+  own clips, like the gate opening), `Object/Set Active`, `Object/Move To` (eases an object to another's position and
+  rotation), `Character/Walk To` (a NavMeshAgent character to an object, then facing it; created waiting),
+  `Character/Face`, `Player/Bow Mode`, `Orcs/Start Spawning`, `FX/Lower Force Field`, `Director/Stay Near`,
+  `Sound/Play Music`, `Camera/Follow` and `Character/Watch`. The movie's own actions (Director/..., Movie/Scene Complete) are described below.
   UnityCommon's own `RPG/Add Item` and `RPG/Destroy Entity` work on RPG entities, which this game doesn't use.
 - "Wait" on an action (UnityCommon's `GameAction.wait`, the checkbox on the right of each action) makes the list
   wait for it to finish; without it the action runs alongside the next ones.
@@ -312,6 +317,10 @@ fire baskets and the lamps.
   - Mood: frustration above `moodThreshold` (0.7) for longer than `moodGraceTime` (2 s) drains it at
     `moodDecayRate` (0.05/s). `ChangeMood(delta)` (the `Director/Change Mood` action) is for right and wrong
     actions (see Red herrings).
+  - Stay near (`SetStayNear(place, radius)`, the `Director/Stay Near` action; instead of a target, which clears it,
+    as Set Player Target clears it): within the radius on the ground plane -`stayInsideRate` (0.3/s), beyond it
+    +`stayOutsideRate` (0.35/s), whichever way he faces; the mood rules as above. Measured: 0.29 to 0.99 in 2 s
+    at 9.6 from the place.
   - Zombies: a following zombie closer than `zombieRange` (0.8, on the ground plane) drains the mood at
     `zombieMoodRate` (0.03/s, a face in about 5 s), target or not; the inspector shows `zombieDistance` (-1 when
     none follows). Measured: the zombie caught the standing actor 1 s after the dig, then 0.786 to 0.575 in 7 s.
@@ -380,7 +389,7 @@ Added 2026-10-25, the user's design.
   survives scene loads, and `movieScenes`, the movie's scenes in order (NaughtyAttributes `[Scene]`; the prefab
   has `ZombieMovie`). The first GameManager's settings are the ones used, so they belong on the prefab.
 - Both endings set `isTakeOver` (holding the gameplay until the next scene is loaded) and the director's
-  frustration to 0, and end with `FadeAndLoad`.
+  frustration to 0, fade the music out (`musicFadeTime`, 0.6 s), and end with `FadeAndLoad`.
 - `DirectorDriver`: when the mood is 0 and gameplay isn't held (a cutscene a wrong action started finishes first),
   it calls `GameManager.Cut()` (a warning, once, if there's no GameManager).
 - The cut (a coroutine on the GameManager, so it outlives the scene): the actor and zombies stop; frustration 0,
@@ -409,6 +418,242 @@ Added 2026-10-25, the user's design.
   zombie behind); the zone fired with the actor's capsule at its corner; "CUT! PRINT IT!" with the delighted face,
   "THAT'S A WRAP!", the restart with 3 takes, 5 s from the zone to the new scene.
 
+### Labyrinth
+
+Added 2026-10-25, the user's brief: a maze the actor has to get through with the director's help (he gives
+directions at the start), barrels to inspect, traps that make him stop now and then, a more top-down camera so it's
+harder to get one's bearings. Then (same day): a bigger maze, a key that opens the locked door at the end, coins
+everywhere to reward exploring, stairs down from the shut entrance (as if he came from above), a red flash and two
+faces per trap hit, and all of it darker, lit by the actor's light with its shadows. Then open rooms among the
+corridors, so it's less monotonous. Built with Kenney's Mini
+Dungeon (added by the user; 1-unit blocks: `wall` 1 x 1.1 x 1, `floor`, `stairs` (high on its -z side), `trap` with a
+`spikes` part and show / hide clips, `gate` with a `door` part and open / close clips, `key`, `coin`; no bow in it).
+
+- `Assets/Scenes/Labyrinth.unity`, after ZombieMovie in `movieScenes` and in the build list. It started as a copy of
+  ZombieMovie, so it has the same player, HUD, director, takes, fader and GameManager. Its `Set` is generated by an
+  editor script that isn't kept in the project (it rebuilds the open scene in place), so changes are made in the
+  scene now.
+- The maze: 11 x 11 cells, 23 x 23 blocks centred on the origin, a recursive backtracker plus 2 walls knocked out for
+  loops, then five open rooms: every wall inside a rectangle of cells comes down (3 x 3, 3 x 2, 2 x 3, 2 x 2, 2 x 2
+  cells, a cell apart, not over the stairs' cell), which adds loops of their own. The first cell is an alcove open
+  only to the north, holding `EntranceStairs` down from the shut `EntranceGate` (a `wall-opening` in the outer wall);
+  the actor starts at their foot, facing north. Of 300 seeds the builder kept 2169: at least 8 dead ends, the key in
+  the dead end farthest from the start (at least 50 blocks from both the start and the exit), and the way through
+  (start, key, exit) closest to 160 blocks (104 + 58; 88 + 48 units along the NavMesh). The ways it plans (the
+  briefing's turns, where traps go) are the shortest with the fewest turns, so they don't zigzag across the rooms.
+  Walls have 1 x 1.1 x 1 box colliders; the floor is tiles (15% `floor-detail`) over one box.
+- The rooms (`Set/Rooms`): `column` pillars where the walls between their cells met (box colliders; one carries a
+  candle), two `banner`s on the walls around, facing in, and a set piece in a corner cell no corridor opens onto:
+  a `chest` ("Open": `interact-right`, Play Clip its `open`, "Empty. The props department strikes again.", -0.07
+  mood), a `table` with two `chair`s, `rocks`, or two barrels. The 3 x 3 hall has a FireBasket in the middle (range
+  4.5, intensity 1.5): a purple landmark. No traps in the rooms, and more coins.
+- The key (`Set/Props/Key`): the Mini Dungeon key in `Assets/Materials/GoldGlow.mat` (the kit's colormap, emitting
+  its own colours) with a small warm light; a trigger capsule on Ignore Raycast. "Pick up": `pick-up`, Add Item
+  `Assets/Data/Items/Key` (icon `Assets/Sprites/Items/Key.png`, rendered from the model), +1 face (a right action),
+  destroy it, Set Player Target the door. The icon is fitted to the key's own outline (its vertices as the icon
+  camera sees them), not its bounding box, so it fills the inventory slot like the shovel.
+- The exit door: `ExitGate` (the gate in the top right `wall-opening`), with `Blocker` (a solid box) and `Lock` (the
+  Interactable "Door", a trigger), both on Ignore Raycast. "Open" with the key: `interact-right`, Play Clip (the
+  gate's `open`), Set Active off on `Blocker` and `Lock`, +1 face, Set Player Target `LabyrinthExit`. "Open" without
+  it: "Locked. The key must be somewhere in here..." (no mood cost). Beyond: one corridor block, `ExitStairs` up, and
+  `Set/Exit` (hypertag `Assets/Data/LabyrinthExit`, a trigger on Ignore Raycast; `ActionTrigger`: Target Is
+  LabyrinthExit, then Scene Complete and `emote-yes`).
+- The director's targets follow the beats: the key (StartupActions, after the briefing and slate), the door (picking
+  up the key), the exit (opening the door). His hot/cold measures along the NavMesh: the `Set`'s `NavMeshSurface`
+  (physics colliders, its layer mask without Ignore Raycast, so neither triggers nor the door's blocker are in it and
+  the way through the door counts) baked to `Assets/Scenes/Labyrinth/NavMesh-Set.asset`.
+- Briefing: the intro, "the door at the far end is locked, and the key is somewhere in here", the way to the key as
+  turns from the start, eight to a balloon, at most three ("..., and so on, and there it is!"), "Then the door.
+  Mind the spikes, and forget the barrels!", "{Action!}". The gibberish is consistent (right is always "bibune", left
+  "muwa"), so the directions can in principle be decoded.
+- Coins (`Set/Coins`, 100): the Mini Dungeon coin at 0.8 scale in GoldGlow (no shadows), on 60% of the room blocks,
+  55% of the other blocks off the way through and 20% on it. `Coin` (`Assets/Scripts/Props`) spins and bobs, and pops (swells, shrinks away) when the
+  actor comes within `pickupRadius` (0.35) on the ground plane; no collider, no count, no mood: a reward for exploring
+  (which the director's hot/cold doesn't like).
+- Barrels in 12 of the other dead ends: Interactable "Barrel", "Inspect" (`interact-right`, one of 12 lines about the
+  barrel, -0.07 mood).
+- `SpikeTrap` (`Assets/Scripts/Props`) on 13 traps: 9 on straight stretches spread along the way through, 4 off it.
+  It samples the model's show / hide clips; down `downTime` (1.6 s), up `upTime` (1.0 s), from a random `phase`.
+  Standing on it (within `halfSize` 0.39 of its centre) while the spikes are up hurts once per cycle:
+  `hitMoodCost` (2/7, two faces), `ScreenFlash.Flash()` (the HUD's `HitFlash`: red, up to 40% in 0.05 s and gone in
+  0.6 s), "Ouch!" in red, and the actor is put `pushDistance` (0.65) off its centre along the corridor, on the side
+  he's on. Not while gameplay is held. Rushing through costs the take: a bot that never waits lost it at the fourth
+  hit, before the key.
+- Dark: the directional light and the film lights are off, the ambient is near black (0.008, 0.008, 0.03), and the
+  34 wall-top candles and the pillar ones (the Candles prefab, at least 3.6 apart; they can be put out) reach only 3
+  units. The scene is
+  carried by `Player/Torch`: a warm point light 2.4 above the actor (range 6, intensity 2.6, soft shadows at full
+  strength, high resolution), so the walls throw shadows and the corridors beyond stay dark. At 1.6 up it blew out
+  his head.
+- Camera: `OrbitCameraController` angleX 72 (ZombieMovie 45), distance 5; `CameraLimits` 19 x 10 x 21 around
+  (0, 5, -1).
+- Measured in Play mode, a bot following the NavMesh with the trap damage switched off: the key at 43 s (the target
+  becomes the door), the door at 68 s (the blocker and lock go off, the target becomes the exit), the take over at
+  69 s; 21 of the 100 coins on the way; 8 trap hits (red flashes). A bot that steers straight at the next NavMesh
+  corner can wedge itself on a wall corner after a trap pushes it (it stood there until the director cut the take);
+  it needs to sidestep when it stops moving, as a player would.
+
+### Temple
+
+Added 2026-10-25, the user's brief: grab a bow, which brings a new option, shooting arrows (an aiming state switched
+on and off by an action: the right stick aims, the left trigger shoots); orcs come in from time to time and have to
+be shot; with them dealt with, free a girl locked in a cage; she comes out, kisses the hero (there's no kiss clip: a
+reach and a "Mwah!"), walks to the middle of the room and takes down the force field around an artifact; taking it
+ends the scene. Built with Kenney's Mini Dungeon (walls, columns, gates, the orc), Mini Forest (added by the user:
+`weapon-bow`, `weapon-arrow`, `building-structure` for the cage frame, `platform`, `target`, plants, rocks) and Mini
+Characters (`character-female-c`, the girl).
+
+- `Assets/Scenes/Temple.unity`, after Labyrinth in `movieScenes` and in the build list (the last scene, so finishing
+  it is "That's a wrap!" and the menu). A copy of ZombieMovie (player, HUD, director, takes, fader, GameManager) with
+  a hall instead of the graveyard, built by an editor script that isn't kept in the project.
+- The hall: 13 x 13 inside Mini Dungeon walls at +-7 (blocks of 1, centred on the origin); the shut `EntranceGate` at
+  the south with `EntranceStairs` down from it, the actor at their foot; four doors (`wall-opening`s with gates
+  sampled open) at the west and east sides and two at the north, each with a vestibule behind it, where the orcs
+  appear; six columns down both sides (two with candles), banners, plants, rocks, a fire basket in each corner.
+- The bow (`Set/Props/Bow`, a trigger box on Ignore Raycast round the `weapon-bow` lying on a `table` by the stairs,
+  next to an archery `target`): "Pick up": `pick-up`, Add Item `Assets/Data/Items/Bow` (icon
+  `Assets/Sprites/Items/Bow.png`), +1 face, destroy it, Player/Bow Mode on, Set Player Target the cage as a place
+  (hypertag `Assets/Data/TempleCage`, on `Set/Props/Cage`: a place, not its Interactable, so "Free her" doesn't open
+  up early), the director's "Good! Now, to the girl's cage!".
+- The fight starts at the cage (the user's call): `Cage/GuardZone`, a 6 x 6 trigger on Ignore Raycast with an
+  `ActionTrigger` (Target Is the cage): Director/Stay Near the cage (radius 3), "Here they come! Stay by the girl,
+  and shoot them all!", Orcs/Start Spawning. While the orcs are on, the director wants him by the cage: inside 3
+  units his frustration falls, outside it climbs, whichever way he faces (and with it, held high, the mood), which
+  also puts him near the two north doors.
+- `Archer` (`Assets/Scripts/Player`, on the actor): armed, `MovementDirectionalXZ.aimWhileMoving` is on (the right
+  stick turns him while he walks, twin-stick), `HeldBow` (the bow, 0.8 scale) is held out in front of him
+  (`holdPosition` (0, 0.16, 0.24) and `holdRotation` from his root; it was in his left hand at first) while he aims
+  (`MovementDirectionalXZ.isAiming`, the right stick past its dead zone) and for `showAfterShot` (0.5 s) after a
+  shot, and hidden otherwise (and in cutscenes), and `Shoot` (the Player map's new action: either trigger, Space, left mouse button) looses an
+  `Assets/Prefabs/Arrow.prefab` along his facing from 0.35 up and ahead, at most every `cooldown` (0.45 s), with
+  `holding-both-shoot`. `Arrow` (`Assets/Scripts/Props`) flies at 14 u/s for at most 14, sweeping a 0.08 sphere
+  (triggers and the shooter ignored): the first live orc dies; anything else stops it, stuck for a second. Its first
+  sweep starts inside the shooter, level with it, and an orc the sweep starts inside still counts: an orc in melee
+  range has its collider round the arrow's spawn point (0.35 ahead), and casts skip what they start in, so
+  point-blank shots used to go through (found once there were more orcs, 2026-10-25). It
+  leaves a short trail (a `TrailRenderer` on the prefab: 0.25 s, 0.05 wide narrowing to nothing, warm white fading
+  out, `FlameParticles`, no shadows).
+- `Orc` (`Assets/Scripts/Characters`, `Assets/Prefabs/Orc.prefab`: built like the zombie, a kinematic body,
+  NavMeshAgent at 1.5 (the actor's 2), stopping 0.4, CharacterAnimation; the Mini Dungeon orc as its model, with an empty Animator
+  for its PlayableHandler: without one the handler "plays" (its debug shows the clip running) and nothing moves,
+  which is how the orc and the girl first came out): goes after
+  `MainPlayer`; within `attackRange` (0.55) it swings (`attack-melee-right`) and, if he's still in reach when it
+  lands (0.3 s), costs a face (`hitMoodCost`), flashes the screen red and floats "Ouch!"; then `attackCooldown`
+  (1.3 s). One arrow kills it (`Hit`, with the arrow's direction): it turns to face the shot, flashes `hitColor`
+  (red, fading over `flashTime` 0.4 s, through a MaterialPropertyBlock), is knocked back `knockback` (0.35) along the
+  arrow's line in 0.2 s, falls with `die` straight on its PlayableHandler (its CharacterAnimation off, so it stays
+  down), lies there `corpseTime` (1.5 s) and sinks away; `killMoodReward` (+0.07). It stops while gameplay is held. `Orc.all` lists them.
+- Blood (the user asked for it, 2026-10-25): on the hit the orc spawns `Assets/Prefabs/BloodSplash.prefab` at
+  `bloodHeight` (0.45), facing along the arrow: 52 drops in two bursts out of a 32 degree cone (1.2 to 3.6 u/s,
+  heavy gravity, stretched by their speed, gone where they land: world collisions) and a puff of mist, in
+  `Assets/Materials/BloodParticles.mat` (URP Particles Unlit, plain alpha, a round drop, `Textures/BloodDrop.png`);
+  it destroys itself. Then `bloodSplats` (2 to 4) floor splats of `splatSize` (0.3 to 0.6) 0.6 to 1.6 past the hit
+  along the arrow's line, the further ones a little later (past where the body falls: nearer, it covered them),
+  and, once it's down, a pool of `poolSize` (1) spreading from under its chest while it lies there (it shows once
+  the body sinks).
+- `BloodDecal` (`Assets/Scripts/Props`, `Assets/Prefabs/BloodDecal.prefab`): a flat quad with one of the four
+  splats of `Assets/Materials/Textures/BloodSplat.png` (a 2x2 atlas, generated; the tile through `_BaseMap_ST` in a
+  property block), turned at random, laid on the floor under the point (a raycast that skips orcs and the actor, a
+  few millimetres up, each a little higher than the last so they don't flicker), growing to its size (splats at
+  once, pools over 2.5 s), staying `lifetime` (40 s), fading over 2 s; past `maxDecals` (80) the oldest fade early.
+  `Assets/Materials/BloodDecal.mat` is URP Lit, transparent with plain alpha (a copy of the force field's, which is
+  premultiplied and would keep highlights where the splat is clear), dark red, wet (smoothness 0.75), with a faint
+  red emission: lit only by the temple's blue light it read as black. URP's own decals aren't used (no decal
+  renderer feature; the temple's floor is flat).
+- `OrcSpawner` (`Set/Orcs`, an ActionRunner; inspector `OrcSpawnerEditor`, with both action lists): once begun,
+  its `waves` in turn, each with its own `count`, `maxAlive` (at once), `interval` (between orcs) and `speed` (times
+  the prefab's 1.5); the first orc after `firstDelay` (1 s), each at one of the four vestibule spawn points (not the
+  one nearest the actor). In the temple: 10 orcs, 7 at once, every 1.5 s, at 1.1x speed; then 12, 8 at once,
+  every 1.2 s, at 1.2x; then 15, 10 at once, every second, at 1.25x (1.875, the actor's 2). When a wave is all
+  dead it runs `onWaveCleared` (the director's "More of them! Keep shooting!") and the next comes `wavePause` (3 s)
+  later; after the last it runs `onCleared`: "Bravo! Now find the key to her cage!" and Set Player Target the key.
+  It was one stream of 12 at first (8, 3 and 3.5 s before that); the user asked for one more wave, 5 per wave,
+  then, still too easy, for more orcs (8 a wave, 6 at once, every 1.8 s), then for a third wave harder than the
+  second (8, 8, then 12, 8 at once, every 1.2 s, 1.2x), which is why waves have their own numbers, then for each
+  wave to be about the next one's (all 2026-10-25).
+- The key (the user's, 2026-10-25: the cage needs one, hidden in one of the orc alcoves): `Set/Props/Key`, the
+  labyrinth's key copied over (the Mini Dungeon `key` in GoldGlow, its glow light, outline, trigger capsule;
+  `Assets/Data/Items/Key`). `RandomSpot` (`Assets/Scripts/Props`) puts it at one of `Set/Props/KeySpots` when the
+  scene starts, a different alcove every take: each 0.25 behind its spawn point, against the back wall. The
+  alcoves are shallow (the back wall 0.45 behind the spawn point, the walkable floor half a unit across); spots
+  beside the doorways were tried first, and were outside the walls. "Pick up" (Target Is the key): `pick-up`, Add
+  Item, +1 face, destroy it, "The key! Now go and free her!", Set Player Target the cage; before the director wants
+  it, "Not now. The director wants something else.".
+- The cage (`Set/Props/Cage`): the `building-structure` frame with 12 `weapon-spear`s round it (1.4 scale; the three
+  in front are `FrontSpears`), a solid `Blocker` and the `Lock` (the Interactable "Cage", a trigger), both on Ignore
+  Raycast, so the NavMesh runs under the cage and the girl can walk out once it's open. The girl (`Set/Girl`, built
+  like the orc, the female model, agent at 1.4) stands inside.
+- The cage's verbs, all "Free her": while the director wants the key, `interact-right` and "Locked. The key must be
+  somewhere in here..."; before (the fight, the bow), "The orcs first!"; both cost two faces (the user's call,
+  2026-10-25: trying the cage without the key is a wrong move). With the cage his target and the key in the
+  inventory (Inventory/Has Item), the cutscene.
+- "Free her" (Target Is the cage, has the key): a cutscene through `CutsceneCamera`, which starts
+  close on the cage front: the actor's `interact-right`; Set Active off on `FrontSpears`, `Blocker` and `Lock`; +1
+  face; Character/Walk To (the girl to the actor, 0.45 short); Character/Face (him to her); her `interact-left`
+  with a pink "Mwah!"; his `emote-yes`; Character/Watch (he keeps facing her to the end of the cutscene, 240
+  degrees a second: the user asked for him to look at her, 2026-10-25); Camera/Follow (the cutscene camera follows her, from (-1.8, 1.8, -3) off her,
+  south-west and a little above, so she walks round the field towards it, smoothing 0.4 s: more and she gains on it,
+  close and cropped); Walk To (her to `AltarFront`); Face (her to the altar); Camera/Follow again, the casting shot
+  (from (-2.7, 1.25, 1.9) off her, looking 0.9 ahead of her: a 3/4 view from the west, her face, the spell and most of
+  the shield, smoothing 0.7 s) and a 0.4 s wait; the spell: FX/Play Particle System and Object/Set Light on
+  `Set/Girl/Spell`, her `interact-right`, `interact-left` (both waited) and `interact-right` again as FX/Lower Force
+  Field runs; then Stop Particle System and the light off, her `emote-yes`, and a 2.5 s hold on the shot while the
+  sparks fall; End Cutscene; Set Player Target the artifact. The camera used to ease back to `OverviewShot` (high over
+  the south end, like the gameplay view; still in the scene, unused) while she walked; the user asked for it to keep
+  following her, and for more time after the shield drops (it was 0.3 s), 2026-10-25.
+- `ShotFollow` (`Assets/Scripts/Cutscene`, on `CutsceneCamera`): while it has a subject, the camera smooth-damps to
+  the subject plus an offset (world space) and looks at a smooth-damped point (the subject plus a look offset), so
+  the first shot starts from what the camera was looking at and each new one is a smooth move. Switching the camera
+  off stops it. `Camera/Follow` (`GameAction_CameraFollow`, no wait) sets it (adding one if missing) or stops it.
+- `Watcher` (`Assets/Scripts/Characters`): keeps a character turned towards a target, at a set speed, through its
+  Rigidbody when it has one (the actor's movement only turns him with input or velocity, so it doesn't fight it);
+  started in a cutscene, it ends with it. `Character/Watch` (`GameAction_Watch`, no wait) sets it (adding one if
+  missing) or stops it.
+- The girl's spell (the user asked for "a magic spell", 2026-10-25): `Set/Girl/Spell`, in front of her hands (0.38
+  up, 0.2 ahead), looping and off until cast, all in `FlameParticles` (additive) in world space: the stream (a narrow
+  cone ahead of her, 120 sparks/s at 1.8 to 2.6 u/s, pink to cyan, with noise, living just long enough to reach
+  the field from `AltarFront`, 0.8 m), `Glow` (sparks round her hands) and `Aura` (a ring at her feet, 0.32 across,
+  sparks rising), and `Light` (pink point light, range 2.4, no shadows, off).
+- The altar (`Set/Props/Altar`, a Mini Forest `platform`, the Interactable "Artifact"): the Mini Dungeon
+  `shield-round` in GoldGlow, floating and turning (`Spinner`), with a warm light; round it `ForceField`
+  (`Assets/Scripts/Props`): a sphere of radius 1 in `Assets/Materials/ForceField.mat` (URP Lit, transparent, cyan,
+  emissive) with its collider (in the NavMesh, so the orcs go round) and a cyan light; it breathes, and Lower() fades
+  it out as it swells, then switches it off. As it starts going down it plays `dissolve` (the user asked for sparks
+  off its surface that drop down, an after effect, 2026-10-25): `Set/Props/Altar/FieldDissolve` (not under the field,
+  which is switched off), at the field's centre: a burst of 450 and 300/s for 1.2 s off the upper half of the field's
+  surface (a hemisphere shell, radius 1.1, the floor hides the rest), cyan to pale blue, 1.6 to 2.6 s each, falling
+  with a little gravity held back by a speed limit, so they drift down like ash, a little noise, settling on the
+  floor (world collisions). "Take" (Target Is the artifact): `pick-up`, the shield and its light
+  off, +1 face, Scene Complete.
+- Floating text has its own overlay canvas in this scene (`FloatingText`, sorting 5, over the HUD and under the
+  cutscene bars): in the HUD it faded out with it in cutscenes, so the "Mwah!" didn't show. UnityCommon's
+  `CombatTextManager` now places texts through whichever camera draws the screen when its own is switched off (the
+  cutscene camera), in UnityCommon since 2026-10-25.
+- Light: the directional light as moonlight (0.45, bluish, from above), ambient (0.11, 0.1, 0.14), two warm fills from
+  above (range 14, intensity 2.2, soft shadows), the corner fire baskets (range 7, intensity 2.5), candles. The first
+  build (ambient 0.05, no moon, fills at 0.7) was too dark to fight in.
+- Camera: `OrbitCameraController` angleX 55, distance 7; `CameraLimits` 8 x 12 x 9 around (0, 5.5, -3).
+- Measured in Play mode with a bot that aims perfectly, before the guard zone and the bigger wave: the bow at 1 s, the
+  8 orcs dead 21 s after (none reached it), the cage, the cutscene (8.5 s: the kiss with the "Mwah!", the pull-back, the field down), the shield, "THAT'S
+  A WRAP!", the menu.
+- Measured again with the waves, the spell and the music (2026-10-25): no music during the briefing, The Call to
+  Adventure from the slate on; at the cage 15.6 s in, the first wave of 5, "More of them!" 8 s later, the second
+  wave dead 16 s after (no hits taken); the cutscene 8.3 s, the spell on with its light, about 800 dissolve sparks
+  as the field went (350 still falling a second later); "THAT'S A WRAP!" and the menu. The first sizes (sparks 0.03
+  to 0.07) read as faint glitter from the overview camera, so they went up.
+- With the follow camera and more orcs (2026-10-25): the waves of 8 dead 25.7 s after reaching the cage; the cutscene
+  9.7 s, ending 3 s after the field went. One run, before the point-blank fix, the orcs got to the bot (it stands
+  still by the cage) and the take was cut; afterwards orcs placed 0.6, 0.45 and 0.33 in front of the actor died on
+  the first shot. A bot that never misses and never moves isn't a player, so the difficulty wants a hands-on try.
+- With the third wave and the blood (2026-10-25): 8, 8 and 12 orcs, 28 in 42 s from the first to the last dead (the
+  third wave 17.5 s), the director's line before each new wave, 64 blood decals on the floor at the end (older ones
+  fading); a single kill up close: the spray, the splats past the body, the pool once it sank.
+- With the key and the steeper waves (2026-10-25): 10, 12 and 15 orcs, 37 dead 44.5 s after reaching the cage;
+  "Free her" without the key said "Locked..." and started nothing; the key (in the north-east alcove that take)
+  2.8 s away, the cage 2 s after, the cutscene 10.1 s, the actor's facing at most 0.3 degrees off the girl while she
+  walked and cast; "THAT'S A WRAP!". Each of the four spots tested on its own: the actor walking in from the hall
+  has the key as his target within a second.
+
 ### Main menu
 
 Added 2026-10-25: the user asked for a gamepad menu like their other games' (UnityCommon's `MenuGamepad Variant`
@@ -434,9 +679,11 @@ and `CreditsGamepad Variant` quick prefabs, as in Deathfloor and WrongWay) over 
   map for this, like Deathfloor's.
 - `MenuCanvas` (overlay, 1920x1080): `Menu`, the `MenuGamepad Variant` instance: title "LOST IN DIRECTION" (Barlow
   150) and the tagline "One actor. One director. Zero understanding." (the user's) at the top; `MenuItself` (its `UIGroup`)
-  at the bottom right with Play, Credits, Quit (the prefab's Options button
-  and panel are switched off until there's sound to set). Buttons are white, right-aligned, yellow over a dark bar
-  when selected, and wrap around. Then `CreditsDim` and
+  at the bottom right with Play, Options, Credits, Quit. Buttons are white, right-aligned, yellow over a dark bar
+  when selected, and wrap around. `Options` (the prefab's panel, its `UIGroup` on `MenuInput`, `UIConfirm`, off
+  until chosen) takes the buttons' place: `MusicVolume` (labelled "Music", a `UIFloatSelector` setting the Music
+  volume, 0 to 1 in 0.1s, saved by the SoundManager), `GammaControl` ("Brightness", the `Gamma` preference, -0.7 to
+  0.7 in 0.025s) and `Back`. The prefab had the labels at the fill bar's X scale (0.54), so they were squashed. Then `CreditsDim` and
   `Credits`, the `CreditsGamepad Variant` instance: its `BigTextScroll` reads `Assets/Data/credits.txt` (the README's
   credits in the Deathfloor format, `<size>` / `<color>` headings), one `Assets/Prefabs/UI_CreditsLine.prefab` per
   line, 70 px/s from the bottom of the screen; UIBack (or reaching the end) returns to the menu.
@@ -444,13 +691,39 @@ and `CreditsGamepad Variant` quick prefabs, as in Deathfloor and WrongWay) over 
 - `MainMenu` (`Assets/Scripts/UI`): Play fades the menu out, plays the slate's clap (`Slate.instance.Play()`) and
   fades out to `firstScene` (`ZombieMovie`). It hides the title and dims the set (`CreditsDim`, 0.6) while the
   credits roll (the menu's group is off without Play pressed), and makes the director gesture now and then
-  (`talking` for 1 to 2.5 s every 4 to 8 s). Credits and Quit are UIButton events (Show Credits, Quit Application).
+  (`talking` for 1 to 2.5 s every 4 to 8 s). Options, Credits and Quit are UIButton events (Switch Panel, Show
+  Credits, Quit Application). The credits count as on while their own group (`creditsGroup`) shows, so the options
+  don't dim the set. Back (`backControl`, UIBack) presses the options' `Back` while they're up (UnityCommon's
+  `UIGroup` has no back of its own). It plays `music` (Waltz of the Café) from the start.
 - `Assets/Resources/Globals.asset` (`Globals`, `Assets/Scripts`, a `UC.GlobalsBase`): UnityCommon's menus look it up
   for their UI sounds (none set yet) and log an error every move without one.
 - `PlayerSettings.productName` is "Lost in Direction".
 - Measured in Play mode, started from the menu: navigation wraps; Credits dims the set and hides the title, Back
   restores them; Play fades the menu, the slate claps in front of the director, and ZombieMovie is up 1.6 s later
-  with 3 takes; fired, the game comes back to the menu with the takes reset.
+  with 3 takes; fired, the game comes back to the menu with the takes reset. Options (2026-10-25): the panel comes
+  up with Music selected and the buttons off; left and right change the music volume (and its saved preference)
+  and the brightness; its Back or the gamepad's B returns to the menu.
+
+### Music and options
+
+Added 2026-10-25: the user's four songs in `Assets/Audio/Music` (MP3, Decompress On Load), one per scene, each
+movie's starting only once "action" is called.
+
+- The user's `Assets/Prefabs/SoundManager.prefab` (UnityCommon's `SoundManager`, `dontDestroyOnLoad`, routed through
+  their `Assets/Settings/MainMixer.mixer`: Master, FX, FX2, Ambient, Voice, Music, Movies, with exposed volumes) is
+  at the root of every scene; the first one keeps itself. Volumes are saved as `{SoundType}Volume` preferences.
+- `Sound/Play Music` (`GameAction_PlayMusic`): plays a clip as the music, cross-fading from the current one
+  (`crossfadeTime`, 1 s); no wait. In each movie's `MovieScript` it comes right after Director/Slate, which waits
+  for the clap: ZombieMovie The Creeping Motif, Labyrinth Searching the Lost Maze, Temple The Call to Adventure.
+  The menu (`MainMenu.music`) plays Waltz of the Café.
+- The cut and scene complete fade the music out (0.6 s). That has to finish before the next scene's music starts:
+  UnityCommon's fade-out (`PlayMusic` with no clip) clears its music source when it ends, so music started during
+  it would be lost; the screen fade (0.75 s) is longer.
+- Gamma: a `LiftGammaGainCtrl` (UnityCommon) on every scene's `Global Volume` reads the `Gamma` preference into the
+  profile's Lift Gamma Gain every frame (`PlayerPrefRead`, as Deathfloor's), so the menu's Brightness shows at once
+  and carries into the movie. The preference is a string ("1.0;1.0;1.0;w") written and parsed in the system's
+  culture (UnityCommon's `UINumberSelector` and `PlayerPrefsHelpers`): fine with a dot for decimals, broken where
+  the decimal separator is a comma.
 
 ### Outlines in the Director scene
 
@@ -512,11 +785,12 @@ README's `## Todo` list.
   conditions and actions, the shovel pickup; the dig cutscene (bars, cutscene camera, animation, dirt, the zombie
   coming out) and the zombie chasing the actor on the NavMesh; the director (portrait, hot/cold and mood, briefing,
   slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won; the main menu
-  and credits. All tested in Play mode. Next (README Todo): the director's voice and sounds, the itch.io page.
-- Scenes: `MainMenu` (first in the build list, with its own copy of the director's set), `ZombieMovie` (the only
-  movie scene: the template's `SampleScene`, renamed; it keeps the template's Global Volume) and `Director` (loaded
-  additively by the movies).
-- Art so far: three Kenney 3D packs (see Layout), added by the user; third-party assets go under
+  and credits; the labyrinth and the temple; music and the options (music volume, brightness). All tested in Play
+  mode. Next (README Todo): the director's voice and sound effects, the itch.io page.
+- Scenes: `MainMenu` (first in the build list, with its own copy of the director's set), the movie's `ZombieMovie`
+  (the template's `SampleScene`, renamed; it keeps the template's Global Volume), `Labyrinth` and `Temple`, and
+  `Director` (loaded additively by the movies).
+- Art so far: five Kenney 3D packs (see Layout), added by the user; third-party assets go under
   `Assets/Externals/<Source>/<Pack>/`, each with a README credit line.
 - Template tutorial content (`Assets/TutorialInfo/`, `Assets/Readme.asset`) removed by the user.
 - Player Settings `productName` is "Lost in Direction"; `companyName` is still `DefaultCompany`.
@@ -526,19 +800,20 @@ README's `## Todo` list.
 | Path | What it is |
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
-| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters` (credited in the README) |
+| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters`, `MiniDungeon`, `MiniForest` (credited in the README) |
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
-| `Assets/Scenes` | `MainMenu`, `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`, `MainMenu`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
-| `Assets/Prefabs` | `GameManager`, `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine` |
+| `Assets/Scenes` | `MainMenu`, `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Labyrinth` (the second; `Labyrinth/` its NavMesh), `Temple` (the third; `Temple/` its NavMesh), `Director` (loaded additively by the movies) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`, `Archer`), `Characters/` (`CharacterAnimation`, `Zombie`, `Orc`, `OrcSpawner`, `Watcher`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`, `ShotFollow`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Props/` (`SpikeTrap`, `Coin`, `Arrow`, `ForceField`, `Spinner`, `BloodDecal`, `RandomSpot`), `UI/` (`TakesDisplay`, `MainMenu`, `ScreenFlash`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`, `OrcSpawnerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
+| `Assets/Prefabs` | `GameManager`, `SoundManager` (the user's), `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine`, `Arrow`, `Orc`, `BloodSplash`, `BloodDecal` |
+| `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café) |
 | `Assets/Resources` | `Globals` (UnityCommon's globals asset) |
-| `Assets/Sprites` | `Items/` (item icons: `Shovel`), `UI/` (`Slate`, the takes icon) |
+| `Assets/Sprites` | `Items/` (item icons: `Shovel`, `Key`, `Bow`), `UI/` (`Slate`, the takes icon) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text; `BarlowCondensed-Black SDF Outline` (material preset: outline and shadow, for text over the set) |
 | `Assets/TextMesh Pro` | TMP essential resources |
-| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`); `Items/` (`Shovel`); `credits.txt` (the menu's credits) |
-| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`) |
-| `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `InputSystem_Actions.inputactions` (the template's Input System actions, plus the game's: `Interact`, `NextOption`, `Aim`, and the menus' `MoveHorizontal`, `MoveVertical`, `UIConfirm`, `UIBack`) |
+| `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`, `LabyrinthExit`, `TempleCage`); `Items/` (`Shovel`, `Key`, `Bow`); `credits.txt` (the menu's credits) |
+| `Assets/Materials` | `SetGround`, `StudioFloor` (URP Lit, flat colours); `DirtParticles` (URP Particles Simple Lit); `FlameParticles` (additive URP Particles Unlit); `Director`; `GoldGlow` (the Mini Dungeon colormap, emissive: coins, the key, the artifact); `ForceField` (transparent, cyan, emissive); `BloodDecal` (URP Lit, transparent, the splats atlas), `BloodParticles` (URP Particles Unlit, alpha); `NoFriction.physicMaterial` (player capsule); `Textures/` (`director_base`, `director_faces`, `DirectorView.renderTexture`, `colormap_lightpost`, `BloodSplat` (four splats, 2x2), `BloodDrop`) |
+| `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `MainMixer.mixer` (the user's audio mixer), `InputSystem_Actions.inputactions` (the template's Input System actions, plus the game's: `Interact`, `NextOption`, `Aim`, the menus' `MoveHorizontal`, `MoveVertical`, `UIConfirm`, `UIBack`, and `Shoot` for the bow) |
 | `docs/` | This context |
 | `README.md`, `LICENSE` | Player-facing description and credits; MIT license |
 

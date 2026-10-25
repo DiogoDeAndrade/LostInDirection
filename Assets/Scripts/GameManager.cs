@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 // Lives across scenes (DontDestroyOnLoad). Every movie scene has one, so any of them can be played on its own; the
 // copies that come with later scenes are dropped. It holds the takes, the actor's few tries to get through the movie,
-// and ends takes (isTakeOver holds the gameplay meanwhile; the director's frustration goes to zero, so it's his face
-// that shows):
+// and ends takes (isTakeOver holds the gameplay meanwhile; the music stops; the director's frustration goes to zero,
+// so it's his face that shows):
 // - Cut: the director's mood ran out. He says "Cut!", a take is lost, and the scene fades out and starts again. With
 //   no takes left he says "You're fired!" too, and it's back to the main menu.
 // - Scene complete: the take is good. He's delighted and says "Cut! Print it!", and it fades out to the movie's next
@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     private float       pauseAfterLine = 1.0f;
     [SerializeField, Min(0.01f)]
     private float       fadeOutTime = 0.75f;
+    [SerializeField, Min(0.01f), Tooltip("Seconds the music takes to stop when a take ends (less than the fade out, so it's gone before the next scene's starts)")]
+    private float       musicFadeTime = 0.6f;
 
     static GameManager _instance;
 
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
     IEnumerator CutCR()
     {
         takeOver = true;
+        StopMusic();
 
         if (DirectorDriver.instance != null) DirectorDriver.instance.SetFrustration(0.0f);
         yield return Say(cutLine);
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviour
     IEnumerator CompleteSceneCR()
     {
         takeOver = true;
+        StopMusic();
 
         var driver = DirectorDriver.instance;
         if (driver != null)
@@ -146,6 +150,12 @@ public class GameManager : MonoBehaviour
         if (!string.IsNullOrEmpty(mainMenuScene)) return mainMenuScene;
         if ((movieScenes != null) && (movieScenes.Length > 0) && (!string.IsNullOrEmpty(movieScenes[0]))) return movieScenes[0];
         return SceneManager.GetActiveScene().name;
+    }
+
+    // The music stops when the take ends, as on a set; the next take's (or scene's) starts on its "Action!"
+    void StopMusic()
+    {
+        SoundManager.PlayMusic(null, 1.0f, 1.0f, musicFadeTime);
     }
 
     IEnumerator FadeAndLoad(string sceneName)
