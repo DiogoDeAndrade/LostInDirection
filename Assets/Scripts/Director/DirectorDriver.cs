@@ -97,6 +97,9 @@ public class DirectorDriver : MonoBehaviour
     public float zombieDistance { get; private set; } = -1.0f;
 
     public bool hasTarget => (targetInteractable != null) || (targetTransform != null);
+    // The current target: the interactable to go to and aim at (null for a place), and its transform or the place
+    public Interactable target => targetInteractable;
+    public Transform targetPlace => targetTransform;
 
     void Awake()
     {
@@ -132,10 +135,15 @@ public class DirectorDriver : MonoBehaviour
         mood = Mathf.Clamp01(mood + delta);
     }
 
-    // Straight away, not at a rate (the cut: no body language, so it's the face that shows)
+    // Straight away, not at a rate (the end of a take: no body language, so it's the face that shows)
     public void SetFrustration(float value)
     {
         frustration = Mathf.Clamp01(value);
+    }
+
+    public void SetMood(float value)
+    {
+        mood = Mathf.Clamp01(value);
     }
 
     void Update()

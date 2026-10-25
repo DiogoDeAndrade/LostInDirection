@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fc02ad71cad9c419fef3657f552604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  movieScenes:
+  - ZombieMovie
+  mainMenuScene: 
   maxTakes: 3
   cutLine: '{CUT!}'
   firedLine: '{YOU''RE FIRED!}'
+  printLine: '{CUT! PRINT IT!}'
+  wrapLine: '{THAT''S A WRAP!}'
   pauseAfterLine: 1
   fadeOutTime: 0.75
-  mainMenuScene: 

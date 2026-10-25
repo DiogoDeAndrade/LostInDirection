@@ -5382,6 +5382,8 @@ GameObject:
   m_Component:
   - component: {fileID: 626932547}
   - component: {fileID: 626932548}
+  - component: {fileID: 626932550}
+  - component: {fileID: 626932549}
   m_Layer: 0
   m_Name: CryptEntrance
   m_TagString: Untagged
@@ -5417,6 +5419,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
   hypertag: {fileID: 11400000, guid: e648d9b8c5a73ed449922ab3c2f81ed4, type: 2}
+--- !u!114 &626932549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626932546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4beabbb308bc5428c9499655d76d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActionTrigger
+  once: 1
+  conditions:
+  - rid: 625735922916786464
+  actions:
+  - rid: 625735922916786465
+  - rid: 625735922916786466
+  references:
+    version: 2
+    RefIds:
+    - rid: 625735922916786464
+      type: {class: Condition_DirectorTarget, ns: , asm: Assembly-CSharp}
+      data:
+        negate: 0
+        interactable: {fileID: 0}
+        hypertag: {fileID: 11400000, guid: e648d9b8c5a73ed449922ab3c2f81ed4, type: 2}
+    - rid: 625735922916786465
+      type: {class: GameAction_SceneComplete, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+    - rid: 625735922916786466
+      type: {class: GameAction_PlayAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        target:
+          mode: 1
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        clip: {fileID: -2473369329123925276, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
+        transitionTime: 0.1
+--- !u!65 &626932550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626932546}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9, y: 1, z: 0.6}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &643623751
 PrefabInstance:
   m_ObjectHideFlags: 0

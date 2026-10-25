@@ -62,7 +62,8 @@ The zombie scene's script ("the script of the movie", from the user, 2026-10-24)
 5. Touching any zombie gets a "Cut!" from the director, and the take restarts.
 6. Doing anything other than this makes the director angry.
 
-Built so far: steps 2 and 3, and the zombie following. The grave is the `grave-border` ring next to the shovel,
+Built so far: steps 2 to 4 (reaching the crypt completes the scene, see Takes below) and step 6. Step 5 became
+"Cut!" when the mood runs out, a zombie next to the actor draining it. The grave is the `grave-border` ring next to the shovel,
 with a `Mound` child (the Kenney `grave` model) that is removed by digging, leaving the open ring, a `DigDirt`
 particle burst, and a `ZombieSpawn` child (hypertag `Assets/Data/ZombieSpawn`, placed by the user) where
 `Assets/Prefabs/Zombie.prefab` appears, with the spawn point's rotation.
@@ -145,7 +146,8 @@ left side, so the actor's face, the grave and the spawn point are in frame.
   optionally clearing them), `Object/Set Light` (on, off or toggle every `Light` under the interactable by default),
   `UI/Show Text` (floating text over an object, see Red herrings), `Director/Change Mood` (-0.07 by default),
   `Zombie/Follow` (on/off, the zombie found through an `ObjectTarget`, by hypertag by default), and the conditions
-  `Inventory/Has Item` and `Object/Light Is On` (any `Light` under the interactable enabled; negated, "is off").
+  `Inventory/Has Item`, `Object/Light Is On` (any `Light` under the interactable enabled; negated, "is off") and
+  `Director/Target Is`. The movie's own actions (Director/..., Movie/Scene Complete) are described below.
   UnityCommon's own `RPG/Add Item` and `RPG/Destroy Entity` work on RPG entities, which this game doesn't use.
 - "Wait" on an action (UnityCommon's `GameAction.wait`, the checkbox on the right of each action) makes the list
   wait for it to finish; without it the action runs alongside the next ones.
@@ -287,6 +289,11 @@ fire baskets and the lamps.
   Interactable (go to it and aim at it) or a place (the first object with a hypertag); neither set clears it.
 - `StartupActions` (`Assets/Scripts/Interaction`, an `ActionRunner` with the same action list and inspector as a
   Verb) runs actions when the scene starts, for the first beat. The actor is the context's trigger object.
+- `ActionTrigger` (`Assets/Scripts/Interaction`, with a trigger collider; inspector `ActionTriggerEditor` like the
+  Verb's): runs its actions, on the actor, once the actor is in the zone and its conditions hold. Checked in
+  `OnTriggerStay`, so conditions can come true while he's inside, and not while gameplay is held. `once` (on by
+  default); off, it can fire again after he leaves. `Director/Target Is` (an Interactable, or a place by hypertag)
+  is the condition for "the movie is at this beat".
 - `DirectorDriver` (`Assets/Scripts/Director`, `DirectorDriver.instance`, one per movie, on `MovieScript` with the
   StartupActions) owns frustration and mood and writes them into `Director.instance` every frame (the Director scene
   may load a moment later). Frustration only moves at rates per second, so it never jumps (and the Director eases
@@ -311,7 +318,9 @@ fire baskets and the lamps.
   - The inspector shows the live state, frustration, mood, distance and progress.
 - Zombie scene targets: StartupActions targets the shovel; "Pick up" ends with the grave; "Dig" ends with
   `CryptEntrance` (hypertag `Assets/Data/CryptEntrance`, a child of the crypt in front of its door; the crypt is
-  rotated 180 degrees, so that's its local +z).
+  rotated 180 degrees, so that's its local +z). `CryptEntrance` is also the finish: a trigger box (0.9 x 1 x 0.6,
+  centred 0.5 up; the crypt's collider front is 0.2 behind it) with an `ActionTrigger`: Target Is CryptEntrance,
+  then Scene Complete and the actor's `emote-yes`. Walking in before the dig does nothing.
 - Measured in Play mode with the default values: standing far away 0.34 to 0.46 in 1.5 s; walking to the shovel
   0.68 to 0 in about 2.3 s; near and facing it stays at 0; turning away 0 to 0.37 in 1.5 s; walking away up to 1,
   then the mood drops 0.05/s from 2 s after passing 0.7.
@@ -354,29 +363,36 @@ fire baskets and the lamps.
   `clapSound`), waits `clapTime` (0.55 s) + `holdAfterClap` (0.4 s), slides back (easing in) and resets to `Idle`.
 - `Director/Slate` action (created with "wait" on): waits up to 3 s for the Director scene, then plays the slate.
 - `Gameplay.isHeld` (`Assets/Scripts/Gameplay.cs`) is the one place that says gameplay is on hold: a cutscene, the
-  director talking, the slate playing, or the take cut (`GameManager.isCut`). `Player` locks the controls,
+  director talking, the slate playing, or the take ending (`GameManager.isTakeOver`: cut or complete). `Player` locks the controls,
   `DirectorDriver` pauses, and following zombies stop where they are (`NavMeshAgent.isStopped`, velocity zeroed).
 - Measured with the briefing sped up: the slate arrives 0.4 s after starting, claps 0.3 s later, is gone and reset
   about 1.1 s after that, and the actor can move straight away.
 - The slate is lit only by spill from the director's lights, so it reads dark in the portrait.
 
-### Takes (lives) and the cut
+### Takes (lives), the cut and scene complete
 
 Added 2026-10-25, the user's design.
 
 - `GameManager` (`Assets/Scripts/GameManager.cs`, `Assets/Prefabs/GameManager.prefab`, at the root of every movie
   scene): the first one keeps itself (`DontDestroyOnLoad`) and the copies that come with later scenes destroy
   themselves (the pattern of the user's other games, e.g. Golf). It holds `maxTakes` (3) and `takesLeft`, which
-  survives scene loads.
+  survives scene loads, and `movieScenes`, the movie's scenes in order (NaughtyAttributes `[Scene]`; the prefab
+  has `ZombieMovie`). The first GameManager's settings are the ones used, so they belong on the prefab.
+- Both endings set `isTakeOver` (holding the gameplay until the next scene is loaded) and the director's
+  frustration to 0, and end with `FadeAndLoad`.
 - `DirectorDriver`: when the mood is 0 and gameplay isn't held (a cutscene a wrong action started finishes first),
   it calls `GameManager.Cut()` (a warning, once, if there's no GameManager).
-- The cut (a coroutine on the GameManager, so it outlives the scene): `isCut` holds the gameplay (actor and
-  zombies stop); `DirectorDriver.SetFrustration(0)`, so the body calms down and the furious face is what shows; the
-  director says `cutLine` (`{CUT!}`, braces so it isn't translated); a take is lost; `pauseAfterLine` (1 s). With no
-  takes left he says `firedLine` (`{YOU'RE FIRED!}`) and waits again. Then `FullscreenFader.FadeOut` (0.75 s,
-  black) and the active scene loads again (the Director scene with it, through its `AdditiveSceneLoader`); being
-  fired resets the takes and goes to `mainMenuScene`, which is empty for now (no menu yet), so the scene starts
-  again. `isCut` clears once the new scene is loaded. The skip button works on those lines too.
+- The cut (a coroutine on the GameManager, so it outlives the scene): the actor and zombies stop; frustration 0,
+  so the body calms down and the furious face is what shows; the director says `cutLine` (`{CUT!}`, braces so it
+  isn't translated); a take is lost; `pauseAfterLine` (1 s). With no takes left he says `firedLine`
+  (`{YOU'RE FIRED!}`) and waits again. Then `FullscreenFader.FadeOut` (0.75 s, black) and the active scene loads
+  again (the Director scene with it, through its `AdditiveSceneLoader`); being fired goes to the main menu.
+- Scene complete (the `Movie/Scene Complete` action; the crypt's trigger): mood 1 (delighted) and frustration 0,
+  `printLine` (`{CUT! PRINT IT!}`), the pause, then the next of `movieScenes`, keeping the takes. After the last
+  (or a scene that isn't in the list) he also says `wrapLine` (`{THAT'S A WRAP!}`), and it's the main menu.
+- The main menu is `mainMenuScene`, empty for now: going there resets the takes and loads the movie's first scene
+  (or the current one with no list). `isTakeOver` clears once the new scene is loaded. The skip button works on all
+  these lines.
 - Fader: UnityCommon's `QuickPrefabs/FaderCanvas` prefab at the scene root as `Fader` (sorting order 100, over the
   cutscene bars at 10): it starts black and fades in over 0.5 s on every load.
 - `TakesDisplay` (`Assets/Scripts/UI`, on `HUD/Takes`, top right, a right-aligned `HorizontalLayoutGroup`): one
@@ -388,6 +404,9 @@ Added 2026-10-25, the user's design.
 - Measured in Play mode: a cut with the zombie chasing, the stick held: neither the zombie nor the actor moved in
   the next second; frustration 0 at once (the body eases to it in 0.5 s). Takes 3, 2, 1, then fired: "YOU'RE
   FIRED!", and back to 3 takes. The new scene's fader is black when it loads and down to 0.38 a third of a second later.
+  Scene complete, with 2 takes left: the actor ran from the grave to the crypt along the NavMesh in 3.5 s (the
+  zombie behind); the zone fired with the actor's capsule at its corner; "CUT! PRINT IT!" with the delighted face,
+  "THAT'S A WRAP!", the restart with 3 takes, 5 s from the zone to the new scene.
 
 ### Outlines in the Director scene
 
@@ -447,10 +466,11 @@ README's `## Todo` list.
 - Done: the zombie movie set; the player walking around it with idle/walk animations, the limited follow camera
   and right-stick aiming; interaction (targeting, outline, prompt, verb cycling); verbs as components with
   conditions and actions, the shovel pickup; the dig cutscene (bars, cutscene camera, animation, dirt, the zombie
-  coming out) and the zombie chasing the actor on the NavMesh. All tested in Play mode. Next, from the scene's
-  script: reaching the crypt, "Cut!" on touching a zombie.
-- Only scene: `Assets/Scenes/ZombieMovie.unity` (the template's `SampleScene`, renamed; also the only build-list
-  entry). It keeps the template's Global Volume.
+  coming out) and the zombie chasing the actor on the NavMesh; the director (portrait, hot/cold and mood, briefing,
+  slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won. All tested in
+  Play mode. Next (README Todo): main menu and credits, the director's voice and sounds, the itch.io page.
+- Only movie scene: `Assets/Scenes/ZombieMovie.unity` (the template's `SampleScene`, renamed; first in the build
+  list, with `Director` after it). It keeps the template's Global Volume.
 - Art so far: three Kenney 3D packs (see Layout), added by the user; third-party assets go under
   `Assets/Externals/<Source>/<Pack>/`, each with a README credit line.
 - Template tutorial content (`Assets/TutorialInfo/`, `Assets/Readme.asset`) removed by the user.
@@ -465,7 +485,7 @@ README's `## Todo` list.
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`), `Editor/` (`VerbEditor`, `StartupActionsEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`), `Characters/` (`CharacterAnimation`, `Zombie`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `UI/` (`TakesDisplay`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete) |
 | `Assets/Prefabs` | `GameManager`, `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon` |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`), `UI/` (`Slate`, the takes icon) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text |
