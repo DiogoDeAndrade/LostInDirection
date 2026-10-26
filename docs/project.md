@@ -1,7 +1,8 @@
 # Project
 
-**Lost in Direction** (the game's name, from the user, 2026-10-25; the repository and Unity project are still
-called LostInTranslation): Diogo de Andrade's entry for the October'2026 Game Creators Club
+**Lost in Direction** (the game's name, from the user, 2026-10-25; the GitHub repository is
+https://github.com/DiogoDeAndrade/LostInDirection since 2026-10-26, while the local folder and the Unity project are
+still called LostInTranslation): Diogo de Andrade's entry for the October'2026 Game Creators Club
 (https://game-creators-club.itch.io/) at Lusofona University. Theme: **"Lost In Translation"**.
 
 ## Game

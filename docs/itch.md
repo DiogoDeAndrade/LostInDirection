@@ -130,7 +130,7 @@ Code
 - UnityCommon (MIT) and NaughtyAttributes by Denis Rizov (MIT)
 - AI assistance was used in this game (Claude Code)
 
-The full source code is on GitHub: https://github.com/DiogoDeAndrade/LostInTranslation
+The full source code is on GitHub: https://github.com/DiogoDeAndrade/LostInDirection
 ```
 
 Notes for the upload:

@@ -49,4 +49,4 @@ AI assistance was used in this game (Claude Code)
 All game source code by Diogo de Andrade, MIT license
 
 <size=160%>Full game source available at
-<color=#61D9EC>https://github.com/DiogoDeAndrade/LostInTranslation
+<color=#61D9EC>https://github.com/DiogoDeAndrade/LostInDirection

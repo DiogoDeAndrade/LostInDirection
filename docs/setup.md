@@ -37,7 +37,7 @@ it when the user asks; UnityCommon files use CRLF line endings.
 
 ## New machine
 
-1. `git lfs install`, then `git clone --recurse-submodules https://github.com/DiogoDeAndrade/LostInTranslation.git`
+1. `git lfs install`, then `git clone --recurse-submodules https://github.com/DiogoDeAndrade/LostInDirection.git`
    (or `git submodule update --init --recursive` on an existing clone). Remote `origin`, branch `main`. Check `git -C Assets/Externals/UnityCommon branch --show-current` is `unity6.6`.
 2. Set the identity per repository, as in the other GCC repos:
    `git config user.name "Diogo de Andrade"` and `git config user.email "diogo.g.andrade@gmail.com"`, in this
