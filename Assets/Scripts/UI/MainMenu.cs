@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 // The title screen, over its own copy of the director's set, with its music. The menu is UnityCommon's gamepad menu
 // (Options, Credits and Quit are its own button events; Back leaves the options too, not only their Back button).
-// Play fades the menu out, claps the slate in front of the director, then fades out to the movie's first scene. While
+// Play fades the menu and its music out, claps the slate in front of the director, then fades out to the movie's first
+// scene (silent until its own music starts on its slate). While
 // the credits roll, the title is hidden and the set dimmed. Meanwhile the director is happy and now and then gestures
 // as if he were explaining something.
 public class MainMenu : MonoBehaviour
@@ -36,6 +37,8 @@ public class MainMenu : MonoBehaviour
     private SoundDef        backSound;
     [SerializeField]
     private AudioClip       music;
+    [SerializeField, Min(0.01f), Tooltip("Seconds the music takes to fade out once Play is pressed (the movie's starts on its slate)")]
+    private float           musicFadeTime = 1.0f;
     [SerializeField, Range(0.0f, 1.0f)]
     private float           creditsDimAlpha = 0.6f;
     [SerializeField, Scene]
@@ -102,6 +105,7 @@ public class MainMenu : MonoBehaviour
     {
         if (menuGroup != null) menuGroup.EnableUI(false);
         if (menuCanvasGroup != null) menuCanvasGroup.FadeOut(fadeTime);
+        SoundManager.PlayMusic(null, 1.0f, 1.0f, musicFadeTime);
         if (Director.instance != null) Director.instance.talking = false;
 
         if (Slate.instance != null) yield return Slate.instance.Play();

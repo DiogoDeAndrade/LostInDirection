@@ -1,7 +1,9 @@
+using UC;
 using UnityEngine;
 
 // A coin to collect: it spins and bobs where it is, and when the actor walks into it, it pops (swells and shrinks
-// away) and is gone. Nothing else; it's there so exploring feels rewarded.
+// away) and is gone, with its sound, a little higher for each coin picked up soon after the last (a streak). Nothing
+// else; it's there so exploring feels rewarded.
 public class Coin : MonoBehaviour
 {
     [SerializeField, Tooltip("Degrees per second")]
@@ -14,6 +16,25 @@ public class Coin : MonoBehaviour
     private float   pickupRadius = 0.35f;
     [SerializeField, Min(0.01f)]
     private float   popTime = 0.25f;
+    [SerializeField]
+    private SoundDef    pickupSound;
+    [SerializeField, Min(0.0f), Tooltip("Seconds within which the next coin carries on the streak")]
+    private float   streakTime = 1.5f;
+    [SerializeField, Min(0.0f), Tooltip("Pitch added per coin of a streak")]
+    private float   streakPitchStep = 0.06f;
+    [SerializeField, Min(1.0f)]
+    private float   streakPitchMax = 1.5f;
+
+    static float    lastPickupTime = float.MinValue;
+    static int      streak;
+
+    // Statics survive Play mode without a domain reload
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetStreak()
+    {
+        lastPickupTime = float.MinValue;
+        streak = 0;
+    }
 
     Transform   actor;
     Vector3     basePosition;
@@ -50,6 +71,14 @@ public class Coin : MonoBehaviour
         if (actor == null) return;
         Vector3 toActor = actor.position - basePosition;
         toActor.y = 0.0f;
-        if (toActor.sqrMagnitude < pickupRadius * pickupRadius) popElapsed = 0.0f;
+        if (toActor.sqrMagnitude < pickupRadius * pickupRadius) PickUp();
+    }
+
+    void PickUp()
+    {
+        popElapsed = 0.0f;
+        streak = (Time.time - lastPickupTime <= streakTime) ? (streak + 1) : (0);
+        lastPickupTime = Time.time;
+        if (pickupSound != null) pickupSound.Play(1.0f, Mathf.Min(1.0f + streak * streakPitchStep, streakPitchMax));
     }
 }

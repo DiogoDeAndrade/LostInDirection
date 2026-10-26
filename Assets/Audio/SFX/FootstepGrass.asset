@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5a5bec15423a4b8b6652c02b2666d, type: 3}
+  m_Name: FootstepGrass
+  m_EditorClassIdentifier: Assembly-CSharp::UC.SoundDef
+  mode: 1
+  clip: {fileID: 0}
+  clips:
+    originalElements:
+    - value: {fileID: 8300000, guid: 460ccb94785f4c647b6a50aa3c576fda, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 7cd25cea9983e474eb8f7840212c4f63, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: ebdd0c49ccbe36844a5a5e0da2a859bb, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: ee69d50dcdbc0784dabf81847cce0404, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: f52540db1911e6f41a3144c7cff0f0ea, type: 3}
+      weight: 1
+    withReplacement: 1
+  soundType: 1
+  loop: 0
+  soundFlags: 0
+  subtitleTrack: {fileID: 0}
+  speaker: {fileID: 0}
+  additionalSpeakers: []
+  volumeRange: {x: 0.35, y: 0.45}
+  pitchRange: {x: 0.9, y: 1.1}
+  distanceRange: {x: 0, y: 100}
+  defaultTag: {fileID: 0}
+  playProbability: 1
+  maxInstances: 0
+  hijackSound: 0

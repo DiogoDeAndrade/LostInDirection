@@ -11,6 +11,8 @@ using UnityEngine.AI;
 // line (bloodSplash) and splats the floor behind it (bloodSplats of bloodDecal), it flashes hitColor, is knocked back
 // along the line, falls (dieClip) and a pool spreads under it while it lies there corpseTime, then it sinks into the
 // floor and is gone; the director's mood goes up by killMoodReward. It stands still while gameplay is on hold.
+// Sounds, from where it is: spawnSound as it appears, attackSound as it swings, hitSound and deathSound when an arrow
+// gets it.
 [RequireComponent(typeof(NavMeshAgent))]
 public class Orc : MonoBehaviour
 {
@@ -52,6 +54,14 @@ public class Orc : MonoBehaviour
     private Vector2         splatSize = new Vector2(0.15f, 0.35f);
     [SerializeField, Min(0.0f), Tooltip("The pool under the body (0: none)")]
     private float           poolSize = 0.6f;
+    [SerializeField]
+    private SoundDef        spawnSound;
+    [SerializeField]
+    private SoundDef        attackSound;
+    [SerializeField, Tooltip("The arrow going in")]
+    private SoundDef        hitSound;
+    [SerializeField]
+    private SoundDef        deathSound;
 
     static List<Orc> _all = new List<Orc>();
 
@@ -71,6 +81,16 @@ public class Orc : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         characterAnimation = GetComponent<CharacterAnimation>();
+    }
+
+    void Start()
+    {
+        PlayHere(spawnSound);
+    }
+
+    void PlayHere(SoundDef sound)
+    {
+        if (sound != null) sound.Play(1.0f, 1.0f, -float.MaxValue, transform.position + Vector3.up * 0.5f);
     }
 
     void OnEnable() { _all.Add(this); }
@@ -116,6 +136,7 @@ public class Orc : MonoBehaviour
         attacking = true;
         Face(target.position);
         if ((characterAnimation != null) && (attackClip != null)) characterAnimation.PlayOneShot(attackClip, 0.05f);
+        PlayHere(attackSound);
         yield return new WaitForSeconds(attackWindup);
 
         Vector3 toTarget = target.position - transform.position;
@@ -123,6 +144,7 @@ public class Orc : MonoBehaviour
         if ((!isDead) && (!Gameplay.isHeld) && (toTarget.magnitude < attackRange + 0.2f))
         {
             if (DirectorDriver.instance != null) DirectorDriver.instance.ChangeMood(-hitMoodCost);
+            Globals.hurtSnd?.Play();
             ScreenFlash.Flash();
             CombatTextManager.SpawnText(target.gameObject, new Vector2(0.0f, 1.0f), "Ouch!", new CombatTextDef(new Color(1.0f, 0.35f, 0.25f), 1.0f) { followOwner = false });
         }
@@ -145,6 +167,8 @@ public class Orc : MonoBehaviour
         direction.y = 0.0f;
         if (direction.sqrMagnitude < 0.0001f) direction = -transform.forward;
         direction.Normalize();
+        PlayHere(hitSound);
+        PlayHere(deathSound);
 
         if (bloodSplash != null) Instantiate(bloodSplash, transform.position + Vector3.up * bloodHeight, Quaternion.LookRotation(direction));
         StartCoroutine(SplatsCR(transform.position, direction));

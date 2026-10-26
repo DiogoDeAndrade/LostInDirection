@@ -72,7 +72,24 @@ directions, and he doesn't understand any of it and feels the translation is not
 
 - [Interface Sounds](https://kenney.nl/assets/interface-sounds) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [Impact Sounds](https://kenney.nl/assets/impact-sounds) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [RPG Audio](https://kenney.nl/assets/rpg-audio) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Music Jingles](https://kenney.nl/assets/music-jingles) by [KenneyNL](https://kenney.nl/), [CC0] license.
 - [film_slate](https://freesound.org/people/themfish/sounds/45808/) by [themfish](https://freesound.org/people/themfish/), [CC-BY 4.0] license.
+- [Zombie_Thrown](https://freesound.org/people/MisterKidX/sounds/454840/) by [MisterKidX](https://freesound.org/people/MisterKidX/), [CC-BY 4.0] license.
+- [17-puff](https://freesound.org/people/tilano408/sounds/445642/) by [tilano408](https://freesound.org/people/tilano408/), [CC0] license.
+- [Night_crickets_Loopable](https://freesound.org/people/2887679652/sounds/167304/) by [2887679652](https://freesound.org/people/2887679652/), [CC0] license.
+- [Fire Burning](https://freesound.org/people/mlsulli/sounds/234856/) by [mlsulli](https://freesound.org/people/mlsulli/), [CC0] license.
+- [New Recording dig](https://freesound.org/people/operative311/sounds/703165/) by [operative311](https://freesound.org/people/operative311/), [CC0] license.
+- [Water drops in crypt - Arles](https://freesound.org/people/frederic.font/sounds/322268/) by [frederic.font](https://freesound.org/people/frederic.font/), [CC-BY 4.0] license.
+- [Me Hurt Sounds.boaay](https://freesound.org/people/BOAAY/sounds/519365/) by [BOAAY](https://freesound.org/people/BOAAY/), [CC0] license.
+- [Bow_release](https://freesound.org/people/PorkMuncher/sounds/263675/) by [PorkMuncher](https://freesound.org/people/PorkMuncher/), [CC0] license.
+- [Orc Grunt 3](https://freesound.org/people/qubodup/sounds/738439/) by [qubodup](https://freesound.org/people/qubodup/), [CC-BY 4.0] license.
+- [Dramatic9](https://freesound.org/people/digifishmusic/sounds/76065/) by [digifishmusic](https://freesound.org/people/digifishmusic/), [CC-BY 4.0] license.
+- [ambience 4](https://freesound.org/people/IanStarGem/sounds/478812/) by [IanStarGem](https://freesound.org/people/IanStarGem/), [CC0] license.
+- [Finger Kiss](https://freesound.org/people/bowlingballout/sounds/577780/) by [bowlingballout](https://freesound.org/people/bowlingballout/), [CC0] license.
+- [Magic Powerup Loop](https://freesound.org/people/simranzenov/sounds/859497/) by [simranzenov](https://freesound.org/people/simranzenov/), [CC0] license.
+- [Magic - Magnetic Force Field](https://freesound.org/people/Vrymaa/sounds/810896/) by [Vrymaa](https://freesound.org/people/Vrymaa/), [CC0] license.
+- [''the muppet's aren't in, party party fight'' remix of a bit of Freesound #93668](https://freesound.org/people/Timbre/sounds/198054/) by [Timbre](https://freesound.org/people/Timbre/), [CC-BY-NC 4.0] license.
 - Music made with [Suno](https://suno.com).
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 

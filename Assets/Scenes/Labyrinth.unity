@@ -594,6 +594,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &13737721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,6 +871,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &16985406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -974,6 +981,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &19350604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1143,6 +1154,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &20411641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1374,6 +1389,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &27976171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1465,6 +1484,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &28918918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1560,6 +1582,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786691
+  - rid: 625735964224127088
   - rid: 625735922916786692
   - rid: 625735922916786693
   references:
@@ -1595,6 +1618,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127088
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &28918922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,6 +2453,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1 &66428029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,6 +2898,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &81612278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3029,6 +3075,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &86562428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3752,6 +3802,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &112181043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4136,6 +4190,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &126350230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4322,6 +4380,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786682
+  - rid: 625735964224127085
   - rid: 625735922916786683
   - rid: 625735922916786684
   references:
@@ -4357,6 +4416,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127085
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &131243737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7699,6 +7773,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &264904824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7960,6 +8038,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267646053}
   m_CullTransparentMesh: 1
+--- !u!1 &270039601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270039603}
+  - component: {fileID: 270039602}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &270039602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270039601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9649ec7f7119a2c4695f733f2528cd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmbientLoop
+  sound: {fileID: 11400000, guid: e50705f8bbd1b5e4293d4571665c73ea, type: 2}
+  fadeInTime: 1.5
+--- !u!4 &270039603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270039601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &273828594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8067,6 +8191,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &275262832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8422,6 +8550,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &301876650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8529,6 +8661,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1 &305052198
 GameObject:
   m_ObjectHideFlags: 0
@@ -9122,6 +9258,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &319348279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9308,6 +9448,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786694
+  - rid: 625735964224127089
   - rid: 625735922916786695
   - rid: 625735922916786696
   references:
@@ -9343,6 +9484,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127089
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &320296266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9690,7 +9846,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585549}
   - component: {fileID: 330585548}
@@ -9701,14 +9856,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -10363,6 +10510,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &336157337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10470,6 +10621,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &336469596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10763,6 +10918,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &349532166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12512,6 +12671,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &442384482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13395,6 +13558,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &478176267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13956,6 +14123,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &503662670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14063,6 +14234,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &512074457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14476,6 +14651,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &531025353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14951,6 +15130,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &541056593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15625,6 +15808,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &569097102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16315,6 +16502,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &601589958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16695,6 +16886,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &605843256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16992,6 +17187,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &613196138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17156,6 +17355,61 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6614838135458563638, guid: 0a66da8970cbf8443a2db94e00f324e1, type: 3}
   m_PrefabInstance: {fileID: 616452262}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &618446951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 618446954}
+  - component: {fileID: 618446953}
+  - component: {fileID: 618446952}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &618446952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618446951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23509157509962c48b85eb075a1552cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioListenerFollow
+  targetTag: {fileID: 11400000, guid: 6ec89aa8f04e4204f824934a61ab8814, type: 2}
+  offset: {x: 0, y: 1, z: 0}
+--- !u!81 &618446953
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618446951}
+  m_Enabled: 1
+--- !u!4 &618446954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618446951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &619540469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17574,6 +17828,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786709
+  - rid: 625735964224127094
   - rid: 625735922916786710
   - rid: 625735922916786711
   references:
@@ -17609,6 +17864,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127094
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &637849658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18053,6 +18323,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1 &647868161
 GameObject:
   m_ObjectHideFlags: 0
@@ -18280,6 +18554,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &651681993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18387,6 +18665,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &657407781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18897,6 +19179,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &675666197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19118,6 +19404,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786715
+  - rid: 625735964224127096
   - rid: 625735922916786716
   - rid: 625735922916786717
   references:
@@ -19153,6 +19440,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127096
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 38b52782d2bdb3f4b9954fe2e2d14f2c, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &685362578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19440,6 +19742,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &704788748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19547,6 +19853,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &705478454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19807,6 +20117,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &715544113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20340,6 +20654,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &729336657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20844,6 +21162,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &735705881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20951,6 +21273,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &735836663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21034,6 +21360,7 @@ GameObject:
   - component: {fileID: 736563552}
   - component: {fileID: 736563559}
   - component: {fileID: 736563560}
+  - component: {fileID: 736563561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -21262,6 +21589,22 @@ MonoBehaviour:
   walkAnim: {fileID: -3419257869308726280, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
   transitionTime: 0.15
   walkThreshold: 0.1
+--- !u!114 &736563561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736563551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21798516eb818640b7aa3e55167444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  sound: {fileID: 11400000, guid: 41d565552693d0c428ca6e6e244b42e7, type: 2}
+  stride: 0.65
+  minSpeed: 0.3
+  stillTime: 0.2
 --- !u!1001 &737238318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21704,6 +22047,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &748886663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22055,6 +22402,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &755073496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22237,6 +22588,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &757523116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22680,6 +23034,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &773904578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23300,6 +23657,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786685
+  - rid: 625735964224127086
   - rid: 625735922916786686
   - rid: 625735922916786687
   references:
@@ -23335,6 +23693,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127086
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &784745266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23829,6 +24202,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &827152475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23936,6 +24312,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &832028937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24313,6 +24693,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &838856322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24482,6 +24866,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &842542589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25278,6 +25666,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786667
+  - rid: 625735964224127084
   - rid: 625735922916786668
   - rid: 625735922916786669
   - rid: 625735922916786670
@@ -25325,6 +25714,21 @@ MonoBehaviour:
         wait: 0
         interactable: {fileID: 1879983960}
         hypertag: {fileID: 0}
+    - rid: 625735964224127084
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: ebc2bb97b1c28f74f9bf02406d699025, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.15
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &876636194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25760,6 +26164,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786703
+  - rid: 625735964224127092
   - rid: 625735922916786704
   - rid: 625735922916786705
   references:
@@ -25795,6 +26200,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127092
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &881116945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26617,6 +27037,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &914040330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27775,6 +28198,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &978024576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28308,6 +28735,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &991626631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30382,6 +30813,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1066691763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30626,6 +31061,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1076252311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31560,6 +31998,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1114104529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33085,6 +33527,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1177297680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33254,6 +33700,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1180093980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33877,6 +34327,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1 &1207612053
 GameObject:
   m_ObjectHideFlags: 0
@@ -34050,6 +34504,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786712
+  - rid: 625735964224127095
   - rid: 625735922916786713
   - rid: 625735922916786714
   references:
@@ -34085,6 +34540,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127095
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1210084781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34418,6 +34888,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1228390670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34988,6 +35461,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1235708711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35157,6 +35634,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1242091787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35647,6 +36128,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1257652267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35754,6 +36239,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1259605758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37089,6 +37578,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1291582499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37287,6 +37780,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1295261107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37394,6 +37891,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1305179925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38729,6 +39230,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1334380915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39055,6 +39560,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1346227627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39635,6 +40144,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1368010820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40284,6 +40797,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786706
+  - rid: 625735964224127093
   - rid: 625735922916786707
   - rid: 625735922916786708
   references:
@@ -40319,6 +40833,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127093
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1381483896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42002,6 +42531,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1438086849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42179,6 +42712,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1441780223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42348,6 +42885,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1442764419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42546,6 +43087,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1453861765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43026,6 +43571,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1463558762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43286,6 +43835,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1467973269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45144,6 +45697,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1 &1543334330
 GameObject:
   m_ObjectHideFlags: 0
@@ -45620,6 +46177,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1555078203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45980,6 +46541,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1567546821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46162,6 +46727,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1576489465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46331,6 +46899,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1578472052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46438,6 +47010,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1580604493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46545,6 +47121,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1581695001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46805,6 +47385,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1585615930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47003,6 +47587,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1593856136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47391,6 +47979,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1602768270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47482,6 +48074,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1603826839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47894,6 +48489,8 @@ MonoBehaviour:
   moodThreshold: 0.7
   moodGraceTime: 2
   moodDecayRate: 0.05
+  moodUpSoundMin: 0.1
+  moodDownSoundMin: 0.05
   zombieRange: 0.8
   zombieMoodRate: 0.03
   stayInsideRate: 0.3
@@ -48067,6 +48664,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1620219572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48158,6 +48758,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &1620264464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50480,6 +51083,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1679196175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51369,8 +51976,17 @@ MonoBehaviour:
   charactersPerSecond: 60
   holdTime: 0.5
   holdPerCharacter: 0.03
-  voice: {fileID: 0}
-  charactersPerBlip: 3
+  voice: {fileID: 11400000, guid: ec6672deb37622e48976af549316b5f0, type: 2}
+  charactersPerBlip: 10
+  reactDelay: 0.3
+  reactInterval: 0.15
+  pleasedPitches:
+  - 1.15
+  - 1.3
+  - 1.5
+  annoyedPitches:
+  - 0.8
+  - 0.65
   playerInput: {fileID: 736563555}
   skipInput:
     _type: 3
@@ -52432,6 +53048,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1742650235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53250,6 +53870,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1769376911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53448,6 +54072,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1777918831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53904,6 +54532,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786688
+  - rid: 625735964224127087
   - rid: 625735922916786689
   - rid: 625735922916786690
   references:
@@ -53939,6 +54568,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127087
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1796812677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54536,6 +55180,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1830405352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54811,6 +55459,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1849689197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55672,6 +56324,7 @@ MonoBehaviour:
   - rid: 625735922916786679
   actions:
   - rid: 625735922916786680
+  - rid: 625735964224127083
   - rid: 625735922916786681
   references:
     version: 2
@@ -55706,6 +56359,21 @@ MonoBehaviour:
         offset: {x: 0, y: 1.3}
         color: {r: 1, g: 1, b: 1, a: 1}
         duration: 4
+    - rid: 625735964224127083
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 565852de329b6324e991857a20c6ed74, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1879983962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55723,6 +56391,8 @@ MonoBehaviour:
   - rid: 625735922916786672
   actions:
   - rid: 625735922916786673
+  - rid: 625735964224127081
+  - rid: 625735964224127082
   - rid: 625735922916786674
   - rid: 625735922916786675
   - rid: 625735922916786676
@@ -55792,6 +56462,36 @@ MonoBehaviour:
         wait: 0
         interactable: {fileID: 0}
         hypertag: {fileID: 11400000, guid: 274c649179745224b8fa4e43e2c3c119, type: 2}
+    - rid: 625735964224127081
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c17965f6f71636c45b43b1251edc57d8, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
+    - rid: 625735964224127082
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 6b7b8b34ba8e5fc4d9ddf3ceae81685e, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.3
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1879983963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56547,6 +57247,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1896335904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56654,6 +57358,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1900404590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56852,6 +57560,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1904206663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57488,6 +58200,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1912655150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57839,6 +58555,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1926354309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58343,6 +59063,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1951185512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58678,6 +59402,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1957808339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58785,6 +59513,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1958382625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59597,6 +60329,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1984742514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59919,6 +60655,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &1993251187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60307,6 +61047,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2000910798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60931,6 +61675,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2015424066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61162,6 +61910,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2019674380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61269,6 +62021,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2021508406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61438,6 +62194,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2022883609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62735,6 +63495,8 @@ GameObject:
   - component: {fileID: 2069856958}
   - component: {fileID: 2069856959}
   - component: {fileID: 2069856960}
+  - component: {fileID: 2069856962}
+  - component: {fileID: 2069856961}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -62851,6 +63613,115 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2069856961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069856957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d82639b3286df45a62c46454a596f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomLoopStart
+--- !u!82 &2069856962
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069856957}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8932602787851986577, guid: 8202a2198dce92742ba0a832f546627b, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: c0584642c964ba14ca08f931c81b89ec, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.15
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 6
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &2070264852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63694,6 +64565,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2101583988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64029,6 +64904,9 @@ MonoBehaviour:
   halfSize: 0.39
   hitMoodCost: 0.2857143
   pushDistance: 0.65
+  upSound: {fileID: 11400000, guid: a9b8ed6d42387614dbaf426e06f0017d, type: 2}
+  downSound: {fileID: 11400000, guid: 31d1b903145788e4e970f31dc1663f6d, type: 2}
+  hearingDistance: 6
 --- !u!1001 &2117581809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64136,6 +65014,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2117851372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64305,6 +65187,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2126400955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64412,6 +65298,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2127460126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64966,6 +65856,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786700
+  - rid: 625735964224127091
   - rid: 625735922916786701
   - rid: 625735922916786702
   references:
@@ -65001,6 +65892,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127091
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &2130880789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65221,6 +66127,10 @@ MonoBehaviour:
   bobSpeed: 2
   pickupRadius: 0.35
   popTime: 0.25
+  pickupSound: {fileID: 11400000, guid: bc83bb2388d926c4cb48e5f1bc4942bd, type: 2}
+  streakTime: 1.5
+  streakPitchStep: 0.06
+  streakPitchMax: 1.5
 --- !u!1001 &2138953140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65407,6 +66317,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786697
+  - rid: 625735964224127090
   - rid: 625735922916786698
   - rid: 625735922916786699
   references:
@@ -65442,6 +66353,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127090
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4205f80fd5d230a4395822626ac257ff, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &2139575211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66007,6 +66933,7 @@ SceneRoots:
   - {fileID: 1195272496}
   - {fileID: 2134941873}
   - {fileID: 330585546}
+  - {fileID: 618446954}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 736563558}
@@ -66018,3 +66945,4 @@ SceneRoots:
   - {fileID: 1610010417}
   - {fileID: 1349843992}
   - {fileID: 1459493816}
+  - {fileID: 270039603}

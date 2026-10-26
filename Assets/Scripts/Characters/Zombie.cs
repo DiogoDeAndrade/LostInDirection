@@ -1,10 +1,12 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
 using UnityEngine.AI;
 
 // A zombie. Stands still until follow mode is switched on (an action), then walks after the actor on the NavMesh,
-// stopping where it is while gameplay is on hold.
+// stopping where it is while gameplay is on hold. It grunts (groanSound, from where it is) when it appears, and now
+// and then while it follows.
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : MonoBehaviour
 {
@@ -14,6 +16,10 @@ public class Zombie : MonoBehaviour
     private bool        followOnStart = false;
     [SerializeField, Min(0.05f), Tooltip("Seconds between path updates while following")]
     private float       repathInterval = 0.25f;
+    [SerializeField]
+    private SoundDef    groanSound;
+    [SerializeField, MinMaxSlider(0.5f, 20.0f), Tooltip("Seconds between grunts while following")]
+    private Vector2     groanInterval = new Vector2(4.0f, 9.0f);
 
     static List<Zombie> _all = new List<Zombie>();
 
@@ -24,6 +30,7 @@ public class Zombie : MonoBehaviour
     Transform       target;
     bool            following;
     float           repathTimer;
+    float           groanTimer;
 
     public bool isFollowing => following;
 
@@ -45,6 +52,13 @@ public class Zombie : MonoBehaviour
     void Start()
     {
         SetFollow(followOnStart);
+        Groan();
+    }
+
+    void Groan()
+    {
+        if (groanSound != null) groanSound.Play(1.0f, 1.0f, -float.MaxValue, transform.position);
+        groanTimer = Random.Range(groanInterval.x, groanInterval.y);
     }
 
     public void SetFollow(bool follow)
@@ -70,6 +84,9 @@ public class Zombie : MonoBehaviour
             if (held) agent.velocity = Vector3.zero;
         }
         if (held) return;
+
+        groanTimer -= Time.deltaTime;
+        if (groanTimer <= 0.0f) Groan();
 
         if (target == null)
         {

@@ -50,6 +50,7 @@ MonoBehaviour:
   maxDistance: 14
   radius: 0.08
   stuckTime: 1
+  wallSound: {fileID: 11400000, guid: 6707e4ad68ae3904e93cdc103b65160d, type: 2}
 --- !u!96 &3156143099899350064
 TrailRenderer:
   serializedVersion: 4

@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 // The actor's bow. Armed (by the Player/Bow Mode action), the aim input (right stick) turns him even while he walks,
 // and the shoot input (either trigger) looses an arrow along his facing, at most every cooldown seconds, with the
 // shooting animation. The bow shows held out in front of him (holdPosition / holdRotation, from his root) while he
-// aims and for showAfterShot after each shot, and is hidden otherwise. Nothing while gameplay is on hold.
+// aims and for showAfterShot after each shot, and is hidden otherwise. Nothing while gameplay is on hold. Sounds:
+// drawSound as he starts aiming, shootSound with each arrow.
 [RequireComponent(typeof(MovementDirectionalXZ))]
 public class Archer : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class Archer : MonoBehaviour
     private float           cooldown = 0.45f;
     [SerializeField]
     private AnimationClip   shootClip;
+    [SerializeField]
+    private SoundDef        drawSound;
+    [SerializeField]
+    private SoundDef        shootSound;
 
     public bool armed { get; private set; }
 
@@ -39,6 +44,7 @@ public class Archer : MonoBehaviour
     CharacterAnimation      characterAnimation;
     float                   cooldownTimer;
     float                   sinceShot = float.MaxValue;
+    bool                    wasAiming;
 
     void Start()
     {
@@ -66,7 +72,10 @@ public class Archer : MonoBehaviour
         if (cooldownTimer > 0.0f) cooldownTimer -= Time.deltaTime;
         sinceShot += Time.deltaTime;
         bool held = Gameplay.isHeld;
-        ShowBow(armed && !held && (((movement != null) && (movement.isAiming)) || (sinceShot < showAfterShot)));
+        bool aiming = armed && !held && (movement != null) && (movement.isAiming);
+        if ((aiming) && (!wasAiming) && (drawSound != null)) drawSound.Play();
+        wasAiming = aiming;
+        ShowBow(armed && !held && ((aiming) || (sinceShot < showAfterShot)));
 
         if ((!armed) || (held) || (cooldownTimer > 0.0f) || (shootInput == null) || (!shootInput.IsDown())) return;
 
@@ -79,6 +88,7 @@ public class Archer : MonoBehaviour
         var rotation = Quaternion.LookRotation(forward, Vector3.up);
         var arrow = Instantiate(arrowPrefab, transform.position + rotation * muzzleOffset, rotation);
         arrow.Launch(gameObject);
+        if (shootSound != null) shootSound.Play();
         if ((characterAnimation != null) && (shootClip != null)) characterAnimation.PlayOneShot(shootClip, 0.05f);
     }
 

@@ -157,6 +157,10 @@ MonoBehaviour:
   bloodSplats: {x: 2, y: 4}
   splatSize: {x: 0.3, y: 0.6}
   poolSize: 1
+  spawnSound: {fileID: 11400000, guid: dcb7dc348023fc1409a837da81e202b3, type: 2}
+  attackSound: {fileID: 11400000, guid: 31d33eea03c38cb4593df07d242b41ca, type: 2}
+  hitSound: {fileID: 11400000, guid: 4077f9a09a1e17749b8f5ba6c81b40eb, type: 2}
+  deathSound: {fileID: 11400000, guid: 5a5ffc90285cf254b86a4616844d93a5, type: 2}
 --- !u!1001 &1876644722233977113
 PrefabInstance:
   m_ObjectHideFlags: 0

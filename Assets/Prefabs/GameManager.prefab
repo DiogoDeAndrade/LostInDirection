@@ -54,5 +54,11 @@ MonoBehaviour:
   firedLine: '{YOU''RE FIRED!}'
   printLine: '{CUT! PRINT IT!}'
   wrapLine: '{THAT''S A WRAP!}'
+  cutSound: {fileID: 11400000, guid: 40b90d1de7b172441ab58bc73ecee964, type: 2}
+  takeLostSound: {fileID: 11400000, guid: f35a833d5a025b54eb01212d3724c6fc, type: 2}
+  firedSound: {fileID: 11400000, guid: 378fa28c097bdbe449cd4357cfc66fa9, type: 2}
+  printSound: {fileID: 11400000, guid: 657cf7003b58fd7428fa164145a21747, type: 2}
+  wrapSound: {fileID: 11400000, guid: 56619fa03c64bd241bb2e1e4e0bec21a, type: 2}
   pauseAfterLine: 1
   fadeOutTime: 0.75
+  musicFadeTime: 0.6

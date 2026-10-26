@@ -1,9 +1,11 @@
+using UC;
 using UnityEngine;
 
 // An arrow in flight: straight along its forward at speed, sweeping a small sphere ahead each frame. The first orc it
 // meets dies; anything else solid stops it, and it stays stuck there for a moment. It's gone after maxDistance.
 // Triggers and the shooter's own colliders don't count. The first sweep starts inside the shooter (level with the
-// arrow), and an orc the sweep starts inside still counts, so one right up against him is hit too.
+// arrow), and an orc the sweep starts inside still counts, so one right up against him is hit too. Sticking in
+// something plays wallSound there.
 public class Arrow : MonoBehaviour
 {
     [SerializeField, Min(0.1f)]
@@ -14,6 +16,8 @@ public class Arrow : MonoBehaviour
     private float   radius = 0.08f;
     [SerializeField, Min(0.0f), Tooltip("Seconds it stays stuck in a wall")]
     private float   stuckTime = 1.0f;
+    [SerializeField]
+    private SoundDef    wallSound;
 
     GameObject  owner;
     float       travelled;
@@ -59,6 +63,7 @@ public class Arrow : MonoBehaviour
             {
                 transform.position += transform.forward * (nearest.Value.distance - backtrack);
                 stuck = true;
+                if (wallSound != null) wallSound.Play(1.0f, 1.0f, -float.MaxValue, transform.position);
                 Destroy(gameObject, stuckTime);
                 return;
             }

@@ -3,7 +3,8 @@ using UnityEngine;
 
 // A force field (a see-through glowing sphere with a solid collider, and a light): it pulses gently. Lower() fades it
 // out while it swells a little, with the dissolve particles (sparks off its surface that drift down after it's gone),
-// then switches it off, collider and all.
+// then switches it off, collider and all, with lowerSound as it starts going. An AudioSource on it (its hum) fades out
+// with it.
 public class ForceField : MonoBehaviour
 {
     [SerializeField, Min(0.0f)]
@@ -14,9 +15,13 @@ public class ForceField : MonoBehaviour
     private float   lowerTime = 1.2f;
     [SerializeField, Tooltip("Played as it goes down (not a child: it outlives the field)")]
     private ParticleSystem  dissolve;
+    [SerializeField]
+    private UC.SoundDef     lowerSound;
 
     Renderer[]  renderers;
     Light       fieldLight;
+    AudioSource hum;
+    float       humVolume;
     Color[]     baseColors;
     float       baseLight;
     Vector3     baseScale;
@@ -32,6 +37,8 @@ public class ForceField : MonoBehaviour
         for (int i = 0; i < renderers.Length; i++) baseColors[i] = renderers[i].material.color;
         fieldLight = GetComponentInChildren<Light>();
         if (fieldLight != null) baseLight = fieldLight.intensity;
+        hum = GetComponent<AudioSource>();
+        if (hum != null) humVolume = hum.volume;
         baseScale = transform.localScale;
     }
 
@@ -47,6 +54,7 @@ public class ForceField : MonoBehaviour
             renderers[i].material.color = c;
         }
         if (fieldLight != null) fieldLight.intensity = baseLight * pulse * fade;
+        if (hum != null) hum.volume = humVolume * fade;
     }
 
     public IEnumerator Lower()
@@ -54,6 +62,7 @@ public class ForceField : MonoBehaviour
         if ((lowering) || (isLowered)) yield break;
         lowering = true;
         if (dissolve != null) dissolve.Play(true);
+        if (lowerSound != null) lowerSound.Play(1.0f, 1.0f, -float.MaxValue, transform.position);
         for (float t = 0.0f; t < lowerTime; t += Time.deltaTime)
         {
             fade = 1.0f - t / lowerTime;

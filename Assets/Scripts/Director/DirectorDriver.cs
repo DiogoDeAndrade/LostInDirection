@@ -12,6 +12,8 @@ using UnityEngine.AI;
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
 // - A following zombie within zombieRange of the actor makes the mood drop too, target or not.
 // - When the mood runs out, the GameManager cuts the take.
+// - Right and wrong actions (ChangeMood) get a reaction in his voice (DirectorSpeech.React), from a set size up; the
+//   drifts above don't.
 // Instead of a target there can be a place to stay near (SetStayNear: guarding the girl's cage): within its radius
 // frustration goes down, beyond it up, whichever way the actor faces.
 // Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
@@ -59,6 +61,10 @@ public class DirectorDriver : MonoBehaviour
     private float   moodGraceTime = 2.0f;
     [SerializeField, Min(0), Tooltip("Mood lost per second after that")]
     private float   moodDecayRate = 0.05f;
+    [SerializeField, Min(0), Tooltip("A right action raising the mood at least this much gets a pleased reaction from him (a kill, 0.07, doesn't)")]
+    private float   moodUpSoundMin = 0.1f;
+    [SerializeField, Min(0), Tooltip("A wrong action or a hit lowering it at least this much gets an annoyed one")]
+    private float   moodDownSoundMin = 0.05f;
 
     [Header("Zombies")]
     [SerializeField, Min(0), Tooltip("A following zombie closer than this to the actor (on the ground plane) makes the mood drop")]
@@ -148,10 +154,13 @@ public class DirectorDriver : MonoBehaviour
         stayRadius = radius;
     }
 
-    // For right and wrong actions
+    // For right and wrong actions, with his reaction
     public void ChangeMood(float delta)
     {
         mood = Mathf.Clamp01(mood + delta);
+        if (DirectorSpeech.instance == null) return;
+        if (delta >= moodUpSoundMin) DirectorSpeech.instance.React(true);
+        else if (delta <= -moodDownSoundMin) DirectorSpeech.instance.React(false);
     }
 
     // Straight away, not at a rate (the end of a take: no body language, so it's the face that shows)

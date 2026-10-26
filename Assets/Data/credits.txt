@@ -18,7 +18,24 @@ Everything else done by Diogo de Andrade, CC0
 <size=160%><color=#FFA000>Sound
 Interface Sounds by KenneyNL, CC0
 Impact Sounds by KenneyNL, CC0
+RPG Audio by KenneyNL, CC0
+Music Jingles by KenneyNL, CC0
 film_slate by themfish, CC-BY 4.0
+Zombie_Thrown by MisterKidX, CC-BY 4.0
+17-puff by tilano408, CC0
+Night_crickets_Loopable by 2887679652, CC0
+Fire Burning by mlsulli, CC0
+New Recording dig by operative311, CC0
+Water drops in crypt - Arles by frederic.font, CC-BY 4.0
+Me Hurt Sounds by BOAAY, CC0
+Bow_release by PorkMuncher, CC0
+Orc Grunt 3 by qubodup, CC-BY 4.0
+Dramatic9 by digifishmusic, CC-BY 4.0
+ambience 4 by IanStarGem, CC0
+Finger Kiss by bowlingballout, CC0
+Magic Powerup Loop by simranzenov, CC0
+Magic - Magnetic Force Field by Vrymaa, CC0
+the muppet's aren't in, party party fight (remix) by Timbre, CC-BY-NC 4.0
 Music made with Suno
 
 <size=160%><color=#FFA000>Code

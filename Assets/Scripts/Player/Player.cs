@@ -110,8 +110,13 @@ public class Player : ActionRunner
             {
                 verbIndex = (verbIndex + 1) % verbs.Count;
                 selectedVerb = verbs[verbIndex];
+                if (verbs.Count > 1) Globals.verbCycleSnd?.Play();
             }
-            if (interactInput.IsDown()) target.Interact(gameObject, this, selectedVerb);
+            if (interactInput.IsDown())
+            {
+                Globals.interactSnd?.Play();
+                target.Interact(gameObject, this, selectedVerb);
+            }
         }
 
         if (prompt != null)

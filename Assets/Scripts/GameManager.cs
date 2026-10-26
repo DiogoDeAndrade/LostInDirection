@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 // Lives across scenes (DontDestroyOnLoad). Every movie scene has one, so any of them can be played on its own; the
 // copies that come with later scenes are dropped. It holds the takes, the actor's few tries to get through the movie,
 // and ends takes (isTakeOver holds the gameplay meanwhile; the music stops; the director's frustration goes to zero,
-// so it's his face that shows):
+// so it's his face that shows; each of his lines comes with its sound, and so does a lost take):
 // - Cut: the director's mood ran out. He says "Cut!", a take is lost, and the scene fades out and starts again. With
 //   no takes left he says "You're fired!" too, and it's back to the main menu.
 // - Scene complete: the take is good. He's delighted and says "Cut! Print it!", and it fades out to the movie's next
@@ -35,6 +35,18 @@ public class GameManager : MonoBehaviour
     private string      printLine = "{CUT! PRINT IT!}";
     [SerializeField, Tooltip("After the movie's last scene")]
     private string      wrapLine = "{THAT'S A WRAP!}";
+
+    [Header("Sounds (each with its line)")]
+    [SerializeField]
+    private SoundDef    cutSound;
+    [SerializeField, Tooltip("When the takes display drops a slate")]
+    private SoundDef    takeLostSound;
+    [SerializeField]
+    private SoundDef    firedSound;
+    [SerializeField]
+    private SoundDef    printSound;
+    [SerializeField]
+    private SoundDef    wrapSound;
 
     [Header("Timing")]
     [SerializeField, Min(0), Tooltip("Seconds after each line, before what comes next")]
@@ -102,15 +114,18 @@ public class GameManager : MonoBehaviour
         StopMusic();
 
         if (DirectorDriver.instance != null) DirectorDriver.instance.SetFrustration(0.0f);
+        cutSound?.Play();
         yield return Say(cutLine);
 
         // The takes display drops a slate
         takesLeft = Mathf.Max(0, takesLeft - 1);
+        takeLostSound?.Play();
         yield return new WaitForSeconds(pauseAfterLine);
 
         bool fired = (takesLeft == 0);
         if (fired)
         {
+            firedSound?.Play();
             yield return Say(firedLine);
             yield return new WaitForSeconds(pauseAfterLine);
         }
@@ -129,6 +144,7 @@ public class GameManager : MonoBehaviour
             driver.SetFrustration(0.0f);
             driver.SetMood(1.0f);
         }
+        printSound?.Play();
         yield return Say(printLine);
         yield return new WaitForSeconds(pauseAfterLine);
 
@@ -136,6 +152,7 @@ public class GameManager : MonoBehaviour
         bool last = (index < 0) || (index + 1 >= movieScenes.Length);
         if (last)
         {
+            wrapSound?.Play();
             yield return Say(wrapLine);
             yield return new WaitForSeconds(pauseAfterLine);
         }

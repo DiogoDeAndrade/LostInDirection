@@ -4,7 +4,7 @@ using UC;
 using UC.Interaction;
 using UnityEngine;
 
-// Puts an item in the actor's inventory (the Inventory on the actor or its parents)
+// Puts an item in the actor's inventory (the Inventory on the actor or its parents), with the pickup sound
 [Serializable]
 [GameActionName("Inventory/Add Item")]
 public class GameAction_AddToInventory : GameAction
@@ -31,5 +31,6 @@ public class GameAction_AddToInventory : GameAction
         }
 
         inventory.Add(item, quantity);
+        Globals.pickupSnd?.Play();
     }
 }

@@ -153,7 +153,7 @@ left side, so the actor's face, the grave and the spawn point are in frame.
   own clips, like the gate opening), `Object/Set Active`, `Object/Move To` (eases an object to another's position and
   rotation), `Character/Walk To` (a NavMeshAgent character to an object, then facing it; created waiting),
   `Character/Face`, `Player/Bow Mode`, `Orcs/Start Spawning`, `FX/Lower Force Field`, `Director/Stay Near`,
-  `Sound/Play Music`, `Camera/Follow` and `Character/Watch`. The movie's own actions (Director/..., Movie/Scene Complete) are described below.
+  `Sound/Play Music`, `Sound/Play`, `Camera/Follow` and `Character/Watch`. The movie's own actions (Director/..., Movie/Scene Complete) are described below.
   UnityCommon's own `RPG/Add Item` and `RPG/Destroy Entity` work on RPG entities, which this game doesn't use.
 - "Wait" on an action (UnityCommon's `GameAction.wait`, the checkbox on the right of each action) makes the list
   wait for it to finish; without it the action runs alongside the next ones.
@@ -750,6 +750,139 @@ variants), plain `AudioClip`s only where a SoundDef doesn't fit (positional loop
 - Measured in Play mode from the menu: each move one `select_001`, confirming `confirmation_001`, the volume's steps
   `tick_002` at varying pitch, Back out of the options and the credits `back_002`, Play `confirmation_001` then the
   clap 0.93 s later; UI through FX2, the clap through FX. The room tone and Play's whoosh (polish) are still to do.
+- The zombie movie (2026-10-26), with two more packs, `RPGAudio` (52: creaks, doors, knives, cloth, metal, books)
+  and `MusicJingles` (85 short stings in five styles: 8-bit, hits, pizzicato, sax, steel drums). The stings were
+  picked by their length and measured pitch, unheard: placeholders as much as the rest.
+- Game-wide sounds in the game's `Globals` (`Assets/Scripts/Globals.cs`, the same asset): `Interact` (the actor
+  performing a verb, `Player`: soft wood taps, `impactWood_light` at 0.3, the user's call), `VerbCycle` (cycling an
+  object's verbs, only with more than one), `Pickup` (each Inventory/Add Item).
+- The director reacts to the mood in his own voice (`DirectorSpeech.React`, from `DirectorDriver.ChangeMood`: the
+  right and wrong actions and the hits, from `moodUpSoundMin`, 0.1, so a kill's 0.07 is silent, and
+  `moodDownSoundMin`, 0.05, so a red herring's half face isn't; the frustration and zombie drifts aren't changes):
+  `reactDelay` (0.3 s) after it, so the action's own sound is heard first, three rising blips when pleased (pitch
+  1.15, 1.3, 1.5), two low ones when annoyed (0.8, 0.65), `reactInterval` (0.15 s) apart, longer than the blip at
+  its lowest, since the voice plays one at a time; none while he's talking. The first try was Interface sweeps
+  (`maximize` and `minimize`) through Globals, with the hit: the user took them for an interaction sound ("a laser
+  gun") that drowned the verbs, and couldn't tell the director had sounds.
+- His voice (`DirectorVoice`, on each movie scene's `DirectorSpeech`, the babble while a balloon types and the
+  reactions) is SkinFactory's `boss_blips.wav` (the user's own, `Assets/Audio/Foley`) with its SoundDef's settings
+  (one at a time, pitch 0.9 to 1.1), louder (0.25 to 0.35). The local SkinFactory checkout was behind; the file came
+  from its GitHub `main` (fetched, through Git LFS). The user then picked Timbre's "the muppet's aren't in, party
+  party fight" remix (Freesound, CC-BY-NC 4.0, credited) and tuned it (pitch 0.54 to 0.77), and set
+  `charactersPerBlip` to 10 (copied to the Labyrinth's and the Temple's `HUD/DirectorSpeech`: it's a scene object
+  in each movie scene, so its settings are three times over). With the SoundDef's one-at-a-time flag, a blip that
+  comes while the last is still playing is skipped.
+- The takes' stings on the `GameManager` prefab, each with its line: `cutSound` (`CutSting`, a record scratch),
+  `takeLostSound` (as the takes display drops a slate), `firedSound`, `printSound`, `wrapSound`.
+- `Footsteps` (`Assets/Scripts/Characters`, on the actor, the sound per scene: `FootstepGrass` here): a step every
+  `stride` (0.65) of ground actually travelled above `minSpeed`, the first half a stride in, none for jumps. It
+  counts as stopped only after `stillTime` (0.2 s) without moving: the actor moves by physics, so between physics
+  steps he seems to stand still, and the first version (reset on every such frame) never stepped.
+- `Sound/Play` (`GameAction_PlaySound`): a SoundDef, `delay` seconds in (to land on an animation's hit), `repeat`
+  times `interval` apart, from the object (its position when the action starts) when the SoundDef is 3D; with a
+  `duration`, each is cut after that long, fading out over `fadeOut` (for a long recording; the fade is the action's
+  own, and stops if the SoundManager's pooled source has moved on to another clip), and "wait" then waits for the cut. In the
+  verbs right after the animation, with "wait" on, so the director's reaction (Change Mood, after it) comes with
+  the hit, not when the swing starts: the wrong graves' Dig (0.25 s), the pumpkins' Kick (0.22) and Carve (two
+  slices), the shovel's Lean on (a creak) and Pick up (a metal clank, first), the coffin's Knock (three, 0.22 s
+  apart; the wait after it 0.7 s, then two quiet, low knocks back with the text), the candles' Light (a lighter's
+  click, before the flame: in their prefab). The right grave's Dig strikes four times, 0.7 s apart, through its
+  cutscene (no wait, the cutscene keeps its timing).
+- Measured in Play mode (ZombieMovie): 9 footsteps over 5.7 m, 0.32 s apart; one tick per verb cycle; each verb
+  its sound, the mood's sound with the hit; the cut's scratch, then the take lost. Still the user's (Kenney has
+  none): the director's babble, the zombie (coming out, groans, shuffle), the candles going out, the night
+  ambience and the fire baskets' crackle (a positional loop: a plain AudioClip on an AudioSource, the user's rule).
+- Second pass, the user's notes and picks (2026-10-26; Freesound files in `Assets/Externals/Other`):
+  - The menu's music fades out when Play is pressed (`MainMenu.musicFadeTime`, 1 s): it went on into the
+    briefing. The movie's starts on its slate, as before.
+  - The zombie grunts (`ZombieGroan`, Zombie_Thrown, 3D, 1.5 to 20) when it appears and every 4 to 9 s while it
+    follows (`Zombie.groanSound`, `groanInterval`); no climbing-out sound (the user's call).
+  - The candles' Put out: `CandleOut` (17-puff), 0.2 s in, before the flame goes (in their prefab).
+  - Digging: `Dig` is the user's pick, New Recording dig (9.5 s of scraping, a strike every 1.7 s or so), cut when
+    the digging's done (the user's call): the wrong graves' 0.1 s in and cut at 0.65 s (the actor's dig animation is
+    0.67 s; 0.12 s fade), the right grave's after the 3 s its dirt flies (0.4 s fade). It was Kenney's soft heavy
+    impacts, four strikes for the right grave.
+  - The night: `GraveyardAmbience` (Night_crickets_Loopable, streamed, 0.25, a looping Background SoundDef: the
+    mixer's Ambient) through an `AmbientLoop` (`Assets/Scripts/Audio`, on ZombieMovie's `Ambience`): faded in over
+    1.5 s, stopped when the scene goes (the SoundManager outlives scenes, and its loop would too).
+  - The fire baskets: an AudioSource on the `FireBasket` prefab (Fire Burning, mono, looping, 3D, linear from 0.8
+    to 7 so it fades out to nothing, 0.6, the mixer's Ambient group), started at a random point of the clip
+    (`RandomLoopStart`) so the baskets aren't in step. In the temple too (the same prefab).
+  - The audio listener is on its own object, `AudioListener`, in each movie scene (the Main Camera's is gone):
+    `AudioListenerFollow` keeps it 1 above the actor (hypertag `MainPlayer`), turned like the camera drawing the
+    screen, so 3D sounds are as loud as near the actor (the camera is 10 away) and left and right match the screen.
+    The menu keeps its camera's.
+  - Measured from the menu: the waltz fading after Play and gone when ZombieMovie loads, the briefing silent with
+    14 voice blips in its first 2 s, The Creeping Motif on the slate; one listener, 1 from the actor; the crickets
+    and five fire loops (6 to 7 away, each at its own point); Kick: the tap, the kick 0.22 s later, two low blips
+    0.3 s after; the shovel: the clank, the pluck, rising blips; Put out: the puff; the right grave: four strikes,
+    the zombie's grunt 1.3 from the listener, the pleased blips, a grunt 9 s later.
+
+- The labyrinth (2026-10-26), from the Kenney packs:
+  - The actor: `FootstepStone` (Impact `footstep_concrete`); the torch (`Player/Torch`) crackles quietly (the fire
+    clip on an AudioSource, 0.15, 3D, `RandomLoopStart`).
+  - `Hurt` (Impact `impactPunch_heavy`) in Globals (`hurtSnd`): the spike traps and the orcs play it with the red
+    flash. The actor's "oof" is still the user's to make.
+  - The coins (100, `Coin.pickupSound`): `Coin` (Interface `glass`), a little higher for each coin within
+    `streakTime` (1.5 s) of the last (`streakPitchStep` 0.06, up to 1.5; reset when Play mode starts, the statics
+    surviving it otherwise).
+  - The spike traps (13): `SpikesUp` (RPG Audio `drawKnife`) and `SpikesDown` (Impact `impactMetal_light`, low and
+    quiet), 3D from the trap, only within `hearingDistance` (6) of the listener: a 3D sound never quite fades out,
+    and the traps cycle all the time all over the maze.
+  - The barrels (12): `BarrelKnock` (Impact `impactPlank_medium`) 0.2 s into Inspect, waited; the hollow one's
+    `BarrelHollow`, the same pitched down to 0.65. The key: `KeyPickup` (RPG Audio `handleCoins2`). The exit door:
+    without the key `Locked` (RPG Audio `metalLatch`), with it `Unlock` (`metalClick`, low) and, 0.3 s after, the
+    gate opening (`GateOpen`, RPG Audio `doorOpen`, low) with the door.
+  - The ambience: a slot (`Ambience` with an `AmbientLoop` on `LabyrinthAmbience`, a looping SoundDef with no clip:
+    the user's pick; `AmbientLoop` skips a SoundDef without one).
+  - Measured in Play mode: 9 footsteps over 5.9 m; coins at pitch 1.00, 1.06, 1.12; only the traps within 6 heard
+    (two sounds in 3 s with the nearest 5.1 away); each verb its sound and the director's blips after; the hurt
+    with the spikes.
+  - Second pass, the user's notes and picks: the spikes going down play the knife whooshes backwards (the
+    SoundDef's `reverse`, below; ffmpeg-reversed copies came first and went), not the metal clink; the forward
+    clips end in about 0.1 s of silence, so backwards there's that much before the swell; `Hurt` is BOAAY's grunt (Me Hurt Sounds,
+    CC0, pitch 0.9 to 1.1), not the punch; the ambience is frederic.font's Water drops in crypt - Arles (CC-BY
+    4.0, 70 s, streamed, 0.6: it's quiet; the start and end are at the same level, so the loop point hardly shows).
+
+- The temple (2026-10-26), from the Kenney packs (placeholders where the user should pick better):
+  - New sound fields: `Archer` (`drawSound` as he starts aiming, `shootSound` with each arrow), `Arrow`
+    (`wallSound`, where it sticks), `Orc` (`spawnSound`, `attackSound`, `hitSound`, `deathSound`, from where it is),
+    `OrcSpawner` (`waveStartSound` with a wave's first orc, `waveClearedSound` when a wave's all dead), `ForceField`
+    (`lowerSound` as it starts going).
+  - The bow: `BowDraw` (RPG Audio `creak`, high), `BowShoot` (Interface `pluck_002`, low: a twang), `BowPickup`
+    (`handleSmallLeather`). Arrows: `ArrowWall` (Impact `impactMining`) and, in an orc, `ArrowHit` (Impact
+    `impactPunch_medium`), 3D. The orcs' swing: `OrcAttack` (RPG Audio `cloth`, low). The waves: Music Jingles' hit
+    stings (`jingles_HIT03`, `HIT13`), standing in for a war horn and a drum.
+  - The verbs: the key `KeyPickup`, the locked cage `Locked` (the labyrinth's), the cage opening (three
+    `impactPlank_medium` clatters, as the spears go), her spell starting (`SpellStart`, Interface `maximize_005`),
+    taking the artifact (`ArtifactTake`, Interface `confirmation_004`); the field going down `FieldShatter` (Impact
+    `impactGlass_heavy`). Footsteps: `FootstepStone` for the actor; the girl's `GirlStep` (the same, high and quiet,
+    a stride of 0.45).
+  - Slots for the user's sounds: `TempleAmbience` (a looping SoundDef with no clip, on the Temple's `Ambience`), the
+    orcs' snarl and death (`Orc.spawnSound`, `deathSound`), the kiss, the spell's loop, the force field's hum.
+  - Measured in Play mode (the bot, the whole temple): 88 shots and 37 arrows into orcs (one each), 34 into walls,
+    25 draws, three waves' stings in and out, the latch, the key, the cage's clatter, the spell, the shatter, the
+    artifact's chime, then the print and wrap stings; 78 footsteps for him, 17 for her.
+  - Second pass, the user's Freesound picks: `BowShoot` Bow_release; the orcs appear with the zombie's grunt in
+    their own `OrcSpawn` (pitch 0.7 to 0.85, so it can be replaced without touching the zombie's) and die with Orc
+    Grunt 3 (`OrcDeath`), both 3D; `WaveStart` Dramatic9; `TempleAmbience` ambience 4 (streamed); `Kiss` Finger Kiss,
+    with the "Mwah!".
+  - The spell's loop (Magic Powerup Loop) is an AudioSource on `Girl/Spell` with `ParticleLoopSound`
+    (`Assets/Scripts/Audio`): it fades in (`fadeInTime`, 0.6 s; the clip has no crescendo) while the spell's
+    particles emit and out (0.4 s) when they stop, so Play and Stop Particle System drive it. The MP3 ends in 37 ms
+    of encoder padding, a gap at every loop: the clip used is a WAV with the trailing silence trimmed (ffmpeg),
+    next to the MP3.
+  - The force field's hum (Magic - Magnetic Force Field, 34 s, mono) is an AudioSource on the field, its volume
+    following the field's fade (`ForceField`), stopping as the field switches off; the artifact's is the same clip
+    on the shield, at pitch 1.5 and 0.2, stopping when it's taken. Both 3D, linear (to 12 and 8), the mixer's Ambient.
+  - Measured: 72 releases, 37 appearances and 37 deaths, three Dramatic9s, the kiss; through the cast, the spell's
+    volume rising to 0.6 in about 0.6 s and falling after, the field's from 0.5 to nothing over its 1.2 s.
+- Playing backwards, in UnityCommon (the user's design, 2026-10-26): `SoundDef.reverse` makes `Play` hand the
+  SoundManager a negative pitch, and `SoundManager._PlaySound` (every `Play*`) plays a clip with a negative pitch
+  backwards: it starts it at its last sample (and a positive one at 0, so a pooled source doesn't carry a position
+  over). Unity can only do that with a clip that's Decompress On Load, so it warns otherwise. The SoundDef's preview
+  plays backwards too. `_PlayMusic` used to pass a pitch of 1 whatever it was given; it passes it on now. Measured:
+  backwards, the position counts down from the clip's end to 0 and stops; forward after it, from 0.
 
 ### Outlines in the Director scene
 
@@ -827,13 +960,14 @@ README's `## Todo` list.
 | Path | What it is |
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
-| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters`, `MiniDungeon`, `MiniForest`; audio (OGG): `InterfaceSounds`, `ImpactSounds` (all credited in the README) |
+| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters`, `MiniDungeon`, `MiniForest`; audio (OGG): `InterfaceSounds`, `ImpactSounds`, `RPGAudio`, `MusicJingles` (all credited in the README) |
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `MainMenu`, `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Labyrinth` (the second; `Labyrinth/` its NavMesh), `Temple` (the third; `Temple/` its NavMesh), `Director` (loaded additively by the movies) |
-| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`, `Archer`), `Characters/` (`CharacterAnimation`, `Zombie`, `Orc`, `OrcSpawner`, `Watcher`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`, `ShotFollow`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Props/` (`SpikeTrap`, `Coin`, `Arrow`, `ForceField`, `Spinner`, `BloodDecal`, `RandomSpot`), `UI/` (`TakesDisplay`, `MainMenu`, `ScreenFlash`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`, `OrcSpawnerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
+| `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`, `Archer`), `Characters/` (`CharacterAnimation`, `Zombie`, `Orc`, `OrcSpawner`, `Watcher`, `Footsteps`), `Audio/` (`AmbientLoop`, `AudioListenerFollow`, `RandomLoopStart`, `ParticleLoopSound`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`, `ShotFollow`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Props/` (`SpikeTrap`, `Coin`, `Arrow`, `ForceField`, `Spinner`, `BloodDecal`, `RandomSpot`), `UI/` (`TakesDisplay`, `MainMenu`, `ScreenFlash`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`, `OrcSpawnerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
 | `Assets/Prefabs` | `GameManager`, `SoundManager` (the user's), `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine`, `Arrow`, `Orc`, `BloodSplash`, `BloodDecal` |
-| `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café); `SFX/` (the SoundDefs, over the Kenney clips) |
+| `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café); `SFX/` (the SoundDefs); `Foley/` (the user's own sounds: `boss_blips`, from SkinFactory) |
+| `Assets/Externals/Other` | Sounds from elsewhere (Freesound: the slate's clap, the zombie, the candle's puff, the crickets, the fire; credited in the README) |
 | `Assets/Resources` | `Globals` (UnityCommon's globals asset) |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`, `Key`, `Bow`), `UI/` (`Slate`, the takes icon) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text; `BarlowCondensed-Black SDF Outline` (material preset: outline and shadow, for text over the set) |

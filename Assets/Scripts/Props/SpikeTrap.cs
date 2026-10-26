@@ -6,7 +6,8 @@ using UnityEngine;
 // along a corridor don't move in step. An actor standing on it while the spikes are up gets hurt once per cycle: the
 // director's mood drops by hitMoodCost (two faces), the screen flashes red, "Ouch!" floats over him, and he's pushed
 // off it along the corridor, out the side he's nearest to (back against his facing when he's dead centre). Nothing
-// hurts while gameplay is on hold.
+// hurts while gameplay is on hold. The spikes make a sound going up and coming down, from the trap, only within
+// hearingDistance of the listener (there are many traps, cycling all the time, and a 3D sound never quite fades out).
 public class SpikeTrap : MonoBehaviour
 {
     [SerializeField, Tooltip("The trap model (the clips are sampled on it); this object if empty")]
@@ -27,6 +28,14 @@ public class SpikeTrap : MonoBehaviour
     private float           hitMoodCost = 2.0f / 7.0f;
     [SerializeField, Min(0.0f), Tooltip("How far from the trap's centre the actor ends up")]
     private float           pushDistance = 0.65f;
+    [SerializeField]
+    private SoundDef        upSound;
+    [SerializeField]
+    private SoundDef        downSound;
+    [SerializeField, Min(0.0f), Tooltip("Heard only this close to the listener")]
+    private float           hearingDistance = 6.0f;
+
+    static AudioListener    listener;
 
     Player      actor;
     Rigidbody   actorBody;
@@ -52,13 +61,25 @@ public class SpikeTrap : MonoBehaviour
 
         bool wasUp = up;
         up = time >= downTime;
-        if (up != wasUp) hitThisCycle = false;
+        if (up != wasUp)
+        {
+            hitThisCycle = false;
+            PlayNear((up) ? (upSound) : (downSound));
+        }
 
         // The clips play at the start of each half: rising as the up time starts, sinking as the down time starts
         if (up) Pose(true, time - downTime);
         else Pose(false, time);
 
         if ((up) && (!hitThisCycle) && (actor != null) && (!Gameplay.isHeld) && (IsOnIt(actor.transform.position))) Hit();
+    }
+
+    void PlayNear(SoundDef sound)
+    {
+        if (sound == null) return;
+        if (listener == null) listener = FindAnyObjectByType<AudioListener>();
+        if ((listener != null) && ((listener.transform.position - transform.position).sqrMagnitude > hearingDistance * hearingDistance)) return;
+        sound.Play(1.0f, 1.0f, -float.MaxValue, transform.position);
     }
 
     void Pose(bool show, float t)
@@ -78,6 +99,7 @@ public class SpikeTrap : MonoBehaviour
         hitThisCycle = true;
 
         if (DirectorDriver.instance != null) DirectorDriver.instance.ChangeMood(-hitMoodCost);
+        Globals.hurtSnd?.Play();
         ScreenFlash.Flash();
         CombatTextManager.SpawnText(actor.gameObject, new Vector2(0.0f, 1.0f), "Ouch!", new CombatTextDef(new Color(1.0f, 0.35f, 0.25f), 1.0f) { followOwner = false });
 

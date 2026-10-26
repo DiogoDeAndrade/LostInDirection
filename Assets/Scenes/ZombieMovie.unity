@@ -283,6 +283,7 @@ MonoBehaviour:
   - rid: 625735922916786379
   actions:
   - rid: 625735922916786380
+  - rid: 625735964224127056
   - rid: 625735922916786381
   references:
     version: 2
@@ -310,6 +311,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127056
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &21845362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +566,7 @@ MonoBehaviour:
   - rid: 625735922916786365
   actions:
   - rid: 625735922916786366
+  - rid: 625735964224127054
   - rid: 625735922916786367
   references:
     version: 2
@@ -577,6 +594,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127054
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &31111002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,6 +1051,8 @@ Transform:
   - {fileID: 1116197598}
   - {fileID: 1697584775}
   - {fileID: 969094198}
+  - {fileID: 372860046}
+  - {fileID: 389600028}
   - {fileID: 988580428}
   - {fileID: 1290048980}
   - {fileID: 1273768048}
@@ -1632,6 +1666,7 @@ MonoBehaviour:
   - rid: 625735922916786421
   actions:
   - rid: 625735922916786422
+  - rid: 625735964224127062
   - rid: 625735922916786423
   references:
     version: 2
@@ -1659,6 +1694,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127062
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &227318421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1994,6 +2044,7 @@ MonoBehaviour:
   - rid: 625735922916786393
   actions:
   - rid: 625735922916786394
+  - rid: 625735964224127058
   - rid: 625735922916786395
   references:
     version: 2
@@ -2021,6 +2072,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127058
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &235043198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,6 +2428,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786442
+  - rid: 625735964224127066
   - rid: 625735922916786443
   references:
     version: 2
@@ -2383,6 +2450,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127066
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 8bc6bdf0c2502674abf5e064900ce8d8, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 2
+        interval: 0.3
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &277721249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,6 +2481,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786440
+  - rid: 625735964224127065
   - rid: 625735922916786441
   references:
     version: 2
@@ -2420,6 +2503,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127065
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 5b7502fa16b528642a1b387c52044247, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.22
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &277721250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2562,7 +2660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585549}
   - component: {fileID: 330585548}
@@ -2573,14 +2670,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -3020,6 +3109,101 @@ Transform:
   - {fileID: 1892151846}
   m_Father: {fileID: 1218692375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &372860045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 83501722}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.09
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.77762145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6287328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 77.913
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_Name
+      value: rocks (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 372860048}
+  m_SourcePrefab: {fileID: 100100000, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+--- !u!4 &372860046 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+  m_PrefabInstance: {fileID: 372860045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &372860047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+  m_PrefabInstance: {fileID: 372860045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &372860048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372860047}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0758796, y: 0.37745833, z: 0.96442056}
+  m_Center: {x: -0.1026566, y: 0.18872917, z: 0.051184535}
 --- !u!1001 &373805697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3184,6 +3368,7 @@ MonoBehaviour:
   - rid: 625735922916786344
   actions:
   - rid: 625735922916786345
+  - rid: 625735964224127051
   - rid: 625735922916786346
   references:
     version: 2
@@ -3211,6 +3396,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127051
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &373805705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,6 +3611,101 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1039980656900443254, guid: 2dff896a98d1ed54f9ed6e43ea142a70, type: 3}
   m_PrefabInstance: {fileID: 389097895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &389600027
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 83501722}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.77762145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6287328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 77.913
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_Name
+      value: rocks (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389600030}
+  m_SourcePrefab: {fileID: 100100000, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+--- !u!4 &389600028 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+  m_PrefabInstance: {fileID: 389600027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &389600029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fbdb069706febc64c9419fff7c5044fe, type: 3}
+  m_PrefabInstance: {fileID: 389600027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &389600030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389600029}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0758796, y: 0.37745833, z: 0.96442056}
+  m_Center: {x: -0.1026566, y: 0.18872917, z: 0.051184535}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4478,6 +4773,7 @@ MonoBehaviour:
   - rid: 625735922916786400
   actions:
   - rid: 625735922916786401
+  - rid: 625735964224127059
   - rid: 625735922916786402
   references:
     version: 2
@@ -4505,6 +4801,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127059
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &590687811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4745,6 +5056,7 @@ MonoBehaviour:
   - rid: 625735922916786428
   actions:
   - rid: 625735922916786429
+  - rid: 625735964224127063
   - rid: 625735922916786430
   references:
     version: 2
@@ -4772,6 +5084,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127063
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &607728935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4950,6 +5277,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6614838135458563638, guid: 0a66da8970cbf8443a2db94e00f324e1, type: 3}
   m_PrefabInstance: {fileID: 616452262}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &618446951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 618446953}
+  - component: {fileID: 618446952}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &618446952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618446951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9649ec7f7119a2c4695f733f2528cd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmbientLoop
+  sound: {fileID: 11400000, guid: 2649e8af622df08418fe3f7264b4133a, type: 2}
+  fadeInTime: 1.5
+--- !u!4 &618446953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618446951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &622143428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6076,7 +6449,6 @@ Transform:
   - {fileID: 1020167772}
   - {fileID: 946587925}
   - {fileID: 31110995}
-  - {fileID: 1792493928}
   - {fileID: 1705779644}
   - {fileID: 2021142028}
   - {fileID: 21845355}
@@ -6189,6 +6561,7 @@ MonoBehaviour:
   - rid: 625735922916786287
   - rid: 625735922916786288
   - rid: 625735922916786289
+  - rid: 625735964224127067
   - rid: 625735922916786290
   - rid: 625735922916786291
   - rid: 625735922916786292
@@ -6309,6 +6682,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: 0.14285715
+    - rid: 625735964224127067
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.7
+        duration: 3
+        fadeOut: 0.4
 --- !u!1 &736563551
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,6 +6714,7 @@ GameObject:
   - component: {fileID: 736563552}
   - component: {fileID: 736563559}
   - component: {fileID: 736563560}
+  - component: {fileID: 736563561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6553,6 +6942,22 @@ MonoBehaviour:
   walkAnim: {fileID: -3419257869308726280, guid: 57573aea24476de4ca2e6aa0c80cfbb8, type: 3}
   transitionTime: 0.15
   walkThreshold: 0.1
+--- !u!114 &736563561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736563551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21798516eb818640b7aa3e55167444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  sound: {fileID: 11400000, guid: 140976ec9f154d046825097458ba5ada, type: 2}
+  stride: 0.65
+  minSpeed: 0.3
+  stillTime: 0.2
 --- !u!1001 &741790804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6787,7 +7192,7 @@ Transform:
   m_GameObject: {fileID: 783985258}
   serializedVersion: 2
   m_LocalRotation: {x: 0.115878396, y: 0.81931376, z: -0.17830929, w: 0.53244996}
-  m_LocalPosition: {x: 1.6, y: 1.2, z: -2.1}
+  m_LocalPosition: {x: 2.41, y: 1.2, z: 1.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6916,6 +7321,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786450
+  - rid: 625735964224127075
   - rid: 625735922916786451
   references:
     version: 2
@@ -6937,6 +7343,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127075
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 8bc6bdf0c2502674abf5e064900ce8d8, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 2
+        interval: 0.3
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &789153443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6953,6 +7374,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786448
+  - rid: 625735964224127074
   - rid: 625735922916786449
   references:
     version: 2
@@ -6974,6 +7396,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127074
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 5b7502fa16b528642a1b387c52044247, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.22
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &789153444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7442,6 +7879,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786446
+  - rid: 625735964224127073
   - rid: 625735922916786447
   references:
     version: 2
@@ -7463,6 +7901,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127073
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 8bc6bdf0c2502674abf5e064900ce8d8, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 2
+        interval: 0.3
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &848244452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7479,6 +7932,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786444
+  - rid: 625735964224127072
   - rid: 625735922916786445
   references:
     version: 2
@@ -7500,6 +7954,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127072
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 5b7502fa16b528642a1b387c52044247, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.22
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &848244453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7685,7 +8154,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d167ce290faccbd4b8ba77ca4d466325, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2
+      value: 4.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d167ce290faccbd4b8ba77ca4d466325, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7693,7 +8162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d167ce290faccbd4b8ba77ca4d466325, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d167ce290faccbd4b8ba77ca4d466325, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8476,6 +8945,7 @@ MonoBehaviour:
   - rid: 625735922916786407
   actions:
   - rid: 625735922916786408
+  - rid: 625735964224127060
   - rid: 625735922916786409
   references:
     version: 2
@@ -8503,6 +8973,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127060
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &935618008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8740,6 +9225,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
   m_PrefabInstance: {fileID: 946587924}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &947417067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 947417070}
+  - component: {fileID: 947417069}
+  - component: {fileID: 947417068}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &947417068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947417067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23509157509962c48b85eb075a1552cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioListenerFollow
+  targetTag: {fileID: 11400000, guid: 6ec89aa8f04e4204f824934a61ab8814, type: 2}
+  offset: {x: 0, y: 1, z: 0}
+--- !u!81 &947417069
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947417067}
+  m_Enabled: 1
+--- !u!4 &947417070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947417067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &951461409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8904,6 +9444,7 @@ MonoBehaviour:
   - rid: 625735922916786351
   actions:
   - rid: 625735922916786352
+  - rid: 625735964224127052
   - rid: 625735922916786353
   references:
     version: 2
@@ -8931,6 +9472,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127052
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &951461417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9692,6 +10248,7 @@ MonoBehaviour:
   - rid: 625735922916786358
   actions:
   - rid: 625735922916786359
+  - rid: 625735964224127053
   - rid: 625735922916786360
   references:
     version: 2
@@ -9719,6 +10276,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127053
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &1020167779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13706,6 +14278,7 @@ MonoBehaviour:
   - rid: 625735922916786414
   actions:
   - rid: 625735922916786415
+  - rid: 625735964224127061
   - rid: 625735922916786416
   references:
     version: 2
@@ -13733,6 +14306,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127061
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &1231597587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13973,6 +14561,7 @@ MonoBehaviour:
   - rid: 625735922916786435
   actions:
   - rid: 625735922916786436
+  - rid: 625735964224127064
   - rid: 625735922916786437
   references:
     version: 2
@@ -14000,6 +14589,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127064
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &1236233635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15641,6 +16245,8 @@ MonoBehaviour:
   moodThreshold: 0.7
   moodGraceTime: 2
   moodDecayRate: 0.05
+  moodUpSoundMin: 0.1
+  moodDownSoundMin: 0.05
   zombieRange: 0.8
   zombieMoodRate: 0.03
   stayInsideRate: 0.3
@@ -16275,6 +16881,7 @@ MonoBehaviour:
   - rid: 625735922916786372
   actions:
   - rid: 625735922916786373
+  - rid: 625735964224127055
   - rid: 625735922916786374
   references:
     version: 2
@@ -16302,6 +16909,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127055
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &1705779651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16494,8 +17116,17 @@ MonoBehaviour:
   charactersPerSecond: 60
   holdTime: 0.5
   holdPerCharacter: 0.03
-  voice: {fileID: 0}
-  charactersPerBlip: 3
+  voice: {fileID: 11400000, guid: ec6672deb37622e48976af549316b5f0, type: 2}
+  charactersPerBlip: 10
+  reactDelay: 0.3
+  reactInterval: 0.15
+  pleasedPitches:
+  - 1.15
+  - 1.3
+  - 1.5
+  annoyedPitches:
+  - 0.8
+  - 0.65
   playerInput: {fileID: 736563555}
   skipInput:
     _type: 3
@@ -17010,6 +17641,7 @@ MonoBehaviour:
   - rid: 625735922916786386
   actions:
   - rid: 625735922916786387
+  - rid: 625735964224127057
   - rid: 625735922916786388
   references:
     version: 2
@@ -17037,6 +17669,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127057
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: c7ab941af71f4eb4b9b4579fb7321641, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.1
+        repeat: 1
+        interval: 0.25
+        duration: 0.55
+        fadeOut: 0.12
 --- !u!114 &1741706302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17511,72 +18158,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791552772}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1792493927
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 717806917}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_Name
-      value: grave
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
---- !u!4 &1792493928 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b89afe75b51e8cd43a922cc5ed6375fa, type: 3}
-  m_PrefabInstance: {fileID: 1792493927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1798592947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18183,7 +18764,9 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786458
+  - rid: 625735964224127070
   - rid: 625735922916786459
+  - rid: 625735964224127071
   - rid: 625735922916786460
   - rid: 625735922916786461
   references:
@@ -18205,7 +18788,7 @@ MonoBehaviour:
       data:
         initialized: 1
         wait: 1
-        duration: 0.6
+        duration: 0.7
     - rid: 625735922916786460
       type: {class: GameAction_ShowText, ns: , asm: Assembly-CSharp}
       data:
@@ -18225,6 +18808,36 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127070
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 4cf287997425ff341b28cfb2d14a330e, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.15
+        repeat: 3
+        interval: 0.22
+        duration: 0
+        fadeOut: 0.15
+    - rid: 625735964224127071
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        sound: {fileID: 11400000, guid: 0c4a3b42842f12d4fbef9fd3c27a1ff2, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0
+        repeat: 2
+        interval: 0.3
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &1861894511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19501,7 +20114,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a33e2638e5d21494c9af478c3d71cf0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1
+      value: 5.77
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a33e2638e5d21494c9af478c3d71cf0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19509,7 +20122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a33e2638e5d21494c9af478c3d71cf0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.2
+      value: -2.74
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a33e2638e5d21494c9af478c3d71cf0d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19650,6 +20263,7 @@ MonoBehaviour:
   conditions: []
   actions:
   - rid: 625735922916786452
+  - rid: 625735964224127069
   - rid: 625735922916786453
   references:
     version: 2
@@ -19671,6 +20285,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: -0.07
+    - rid: 625735964224127069
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 1
+        sound: {fileID: 11400000, guid: 05e16a5adfd766f4ea82665787f83d01, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0.2
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &2104686944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19686,6 +20315,7 @@ MonoBehaviour:
   _displayName: Pick up
   conditions: []
   actions:
+  - rid: 625735964224127068
   - rid: 625735922916786276
   - rid: 625735922916786277
   - rid: 625735922916786456
@@ -19722,6 +20352,21 @@ MonoBehaviour:
         initialized: 1
         wait: 0
         amount: 0.14285715
+    - rid: 625735964224127068
+      type: {class: GameAction_PlaySound, ns: , asm: Assembly-CSharp}
+      data:
+        initialized: 1
+        wait: 0
+        sound: {fileID: 11400000, guid: 08653df2031b0074098113683f9abca4, type: 2}
+        from:
+          mode: 0
+          obj: {fileID: 0}
+          hypertag: {fileID: 0}
+        delay: 0
+        repeat: 1
+        interval: 0.25
+        duration: 0
+        fadeOut: 0.15
 --- !u!114 &2104686945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20136,6 +20781,7 @@ SceneRoots:
   - {fileID: 1195272496}
   - {fileID: 2134941873}
   - {fileID: 330585546}
+  - {fileID: 947417070}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 736563558}
@@ -20147,3 +20793,4 @@ SceneRoots:
   - {fileID: 760606647}
   - {fileID: 1610010417}
   - {fileID: 1349843992}
+  - {fileID: 618446953}

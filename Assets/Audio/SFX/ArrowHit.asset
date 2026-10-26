@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5a5bec15423a4b8b6652c02b2666d, type: 3}
+  m_Name: ArrowHit
+  m_EditorClassIdentifier: Assembly-CSharp::UC.SoundDef
+  mode: 1
+  clip: {fileID: 0}
+  clips:
+    originalElements:
+    - value: {fileID: 8300000, guid: 46b26c9e9b8b7f946891c9e53e935f14, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 0975254589b8a0b49b6ca3aa7356f95a, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 509208d30e202f94c8aaf69a79c318ba, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 0ae9f03ad7a7e144a85040e5f3ed79d4, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 3bb0c972f46b5464e97958cd148d2c6b, type: 3}
+      weight: 1
+    withReplacement: 1
+  soundType: 1
+  loop: 0
+  soundFlags: 4
+  subtitleTrack: {fileID: 0}
+  speaker: {fileID: 0}
+  additionalSpeakers: []
+  volumeRange: {x: 0.8, y: 0.8}
+  pitchRange: {x: 0.9, y: 1.05}
+  reverse: 0
+  distanceRange: {x: 1, y: 12}
+  defaultTag: {fileID: 0}
+  playProbability: 1
+  maxInstances: 0
+  hijackSound: 0

@@ -125,6 +125,8 @@ MonoBehaviour:
   targetTag: {fileID: 11400000, guid: 6ec89aa8f04e4204f824934a61ab8814, type: 2}
   followOnStart: 0
   repathInterval: 0.25
+  groanSound: {fileID: 11400000, guid: 2686e7a004cf39c4890051a447a6a460, type: 2}
+  groanInterval: {x: 4, y: 9}
 --- !u!114 &6129568346450942368
 MonoBehaviour:
   m_ObjectHideFlags: 0

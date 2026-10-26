@@ -24,3 +24,7 @@ MonoBehaviour:
   _uiSelectSnd: {fileID: 11400000, guid: 2db4bac6393051144878a9381c26106f, type: 2}
   _uiChangeValueSnd: {fileID: 11400000, guid: e5f75411c9fb08b4aa81f7dba769f287, type: 2}
   _textTooltip: {fileID: 0}
+  _interactSnd: {fileID: 11400000, guid: 67207cfd87bbacf4db595529be25a4b2, type: 2}
+  _verbCycleSnd: {fileID: 11400000, guid: dfc849948377ca94f809c669cfede075, type: 2}
+  _pickupSnd: {fileID: 11400000, guid: a00a620fc027a584e83c32db144a3448, type: 2}
+  _hurtSnd: {fileID: 11400000, guid: 4cc74072904851447afb0ea0d74c3af8, type: 2}

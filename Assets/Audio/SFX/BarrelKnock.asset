@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5a5bec15423a4b8b6652c02b2666d, type: 3}
+  m_Name: BarrelKnock
+  m_EditorClassIdentifier: Assembly-CSharp::UC.SoundDef
+  mode: 1
+  clip: {fileID: 0}
+  clips:
+    originalElements:
+    - value: {fileID: 8300000, guid: bd91a42f65c18ed468096540ec8e4e8b, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: b3ac4428440b4554085f0d8b1bd19ad7, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: e2b89e86bb6903a4db5216be248819a8, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 43feef7f3144aef449ae0cb85a81de78, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: a6ef72d0f2090404595279559111a362, type: 3}
+      weight: 1
+    withReplacement: 1
+  soundType: 1
+  loop: 0
+  soundFlags: 0
+  subtitleTrack: {fileID: 0}
+  speaker: {fileID: 0}
+  additionalSpeakers: []
+  volumeRange: {x: 0.7, y: 0.7}
+  pitchRange: {x: 0.95, y: 1.05}
+  distanceRange: {x: 0, y: 100}
+  defaultTag: {fileID: 0}
+  playProbability: 1
+  maxInstances: 0
+  hijackSound: 0

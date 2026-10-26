@@ -1,4 +1,5 @@
 using System;
+using UC;
 using UC.Interaction;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +9,8 @@ using UnityEngine.AI;
 // times the prefab's; each at one of the spawn points (not the one nearest the actor when there's a choice). When a
 // wave is all dead the next one comes wavePause later, after onWaveCleared (the director's "More of them!"); when the
 // last is, it runs onCleared (the director's next line, the next target). The actions run with the actor as the
-// context's trigger object. It waits while gameplay is on hold.
+// context's trigger object. It waits while gameplay is on hold. Sounds: waveStartSound as a wave's first orc comes,
+// waveClearedSound when a wave is all dead.
 public class OrcSpawner : ActionRunner
 {
     [Serializable]
@@ -34,6 +36,10 @@ public class OrcSpawner : ActionRunner
     private float           firstDelay = 1.0f;
     [SerializeField, Min(0.0f), Tooltip("Seconds between a wave dying and the next one coming")]
     private float           wavePause = 3.0f;
+    [SerializeField]
+    private SoundDef        waveStartSound;
+    [SerializeField]
+    private SoundDef        waveClearedSound;
     [SerializeReference]
     private GameAction[]    onWaveCleared;
     [SerializeReference]
@@ -64,6 +70,7 @@ public class OrcSpawner : ActionRunner
         int living = CountAlive();
         if ((spawnedThisWave >= current.count) && (living == 0))
         {
+            if (waveClearedSound != null) waveClearedSound.Play();
             if (wave + 1 < waveCount)
             {
                 wave++;
@@ -85,6 +92,7 @@ public class OrcSpawner : ActionRunner
 
         var point = PickSpawnPoint();
         if (point == null) return;
+        if ((spawnedThisWave == 0) && (waveStartSound != null)) waveStartSound.Play();
         var orc = Instantiate(orcPrefab, point.position, point.rotation);
         var agent = orc.GetComponent<NavMeshAgent>();
         if (agent != null) agent.speed *= current.speed;
