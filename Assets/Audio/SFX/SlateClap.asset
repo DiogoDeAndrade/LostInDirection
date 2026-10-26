@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5a5bec15423a4b8b6652c02b2666d, type: 3}
+  m_Name: SlateClap
+  m_EditorClassIdentifier: Assembly-CSharp::UC.SoundDef
+  mode: 0
+  clip: {fileID: 8300000, guid: 8684a5e8f85683c458c2d5aab1c17e12, type: 3}
+  clips:
+    originalElements:
+    - value: {fileID: 8300000, guid: c13c5d4a890e8984ca3592972fa7e814, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: a5e93650b81f4624d99c5fd4dbd50fa3, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 7f766b5d9d00c5a46aa2f6deb8e5a69d, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 5fe3cd427797a6f4abf8cb25d595d1e7, type: 3}
+      weight: 1
+    - value: {fileID: 8300000, guid: 88c0297d27e38bc4d95d0159df256215, type: 3}
+      weight: 1
+    withReplacement: 1
+  soundType: 1
+  loop: 0
+  soundFlags: 0
+  subtitleTrack: {fileID: 0}
+  speaker: {fileID: 0}
+  additionalSpeakers: []
+  volumeRange: {x: 0.9, y: 1}
+  pitchRange: {x: 1.1, y: 1.25}
+  distanceRange: {x: 0, y: 100}
+  defaultTag: {fileID: 0}
+  playProbability: 1
+  maxInstances: 0
+  hijackSound: 0

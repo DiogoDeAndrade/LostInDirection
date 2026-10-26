@@ -70,6 +70,9 @@ directions, and he doesn't understand any of it and feels the translation is not
 
 ## Sound
 
+- [Interface Sounds](https://kenney.nl/assets/interface-sounds) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [Impact Sounds](https://kenney.nl/assets/impact-sounds) by [KenneyNL](https://kenney.nl/), [CC0] license.
+- [film_slate](https://freesound.org/people/themfish/sounds/45808/) by [themfish](https://freesound.org/people/themfish/), [CC-BY 4.0] license.
 - Music made with [Suno](https://suno.com).
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 

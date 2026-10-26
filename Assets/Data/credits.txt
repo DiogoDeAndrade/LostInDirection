@@ -15,8 +15,11 @@ Black film slate or clapper by tech.service.allwe, CC-BY 4.0
 Font Barlow Condensed by Jeremy Tribby, SIL Open Font License
 Everything else done by Diogo de Andrade, CC0
 
-<size=160%><color=#FFA000>Music
-Made with Suno
+<size=160%><color=#FFA000>Sound
+Interface Sounds by KenneyNL, CC0
+Impact Sounds by KenneyNL, CC0
+film_slate by themfish, CC-BY 4.0
+Music made with Suno
 
 <size=160%><color=#FFA000>Code
 Uses UnityCommon library, MIT license

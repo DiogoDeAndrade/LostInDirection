@@ -32,6 +32,8 @@ public class MainMenu : MonoBehaviour
     private PlayerInput     playerInput;
     [SerializeField, InputPlayer(nameof(playerInput)), InputButton]
     private UC.InputControl backControl;
+    [SerializeField, Tooltip("Backing out of the options or the credits")]
+    private SoundDef        backSound;
     [SerializeField]
     private AudioClip       music;
     [SerializeField, Range(0.0f, 1.0f)]
@@ -60,15 +62,23 @@ public class MainMenu : MonoBehaviour
         if (playButton != null) playButton.onInteract -= Play;
     }
 
-    // The credits are on while their group shows (not while the options are up)
+    // The credits are on while their group shows (not while the options are up). Back leaving the options or the credits
+    // plays backSound (UnityCommon's menus have sounds for moving and selecting, not for going back)
     void Update()
     {
-        if ((optionsGroup != null) && (optionsGroup.uiEnable) && (optionsBack != null) && (backControl != null) && (backControl.IsDown()))
+        bool credits = (!starting) && (creditsGroup != null) && (creditsGroup.alpha > 0.01f);
+        bool back = (backControl != null) && (backControl.IsDown());
+        if ((back) && (optionsGroup != null) && (optionsGroup.uiEnable) && (optionsBack != null))
         {
+            backSound?.Play();
             optionsBack.Interact();
         }
+        // The credits close themselves on Back (their BigTextScroll), once they're well in
+        else if ((back) && (credits) && (creditsGroup.alpha > 0.99f))
+        {
+            backSound?.Play();
+        }
 
-        bool credits = (!starting) && (creditsGroup != null) && (creditsGroup.alpha > 0.01f);
         float step = Time.deltaTime / fadeTime;
 
         if (creditsDim != null) creditsDim.alpha = Mathf.MoveTowards(creditsDim.alpha, (credits) ? (creditsDimAlpha) : (0.0f), step);

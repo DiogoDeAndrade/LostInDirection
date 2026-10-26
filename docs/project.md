@@ -725,6 +725,32 @@ movie's starting only once "action" is called.
   culture (UnityCommon's `UINumberSelector` and `PlayerPrefsHelpers`): fine with a dot for decimals, broken where
   the decimal separator is a comma.
 
+### Sound effects
+
+Started 2026-10-26, step by step, set by set (the user's plan): Kenney's packs first, then the user makes what's
+missing or needs adjusting. The full list is [sounds.md](sounds.md). The user's rules: downloaded sounds go in
+`Assets/Externals/Kenney.NL/<Pack>/`; `SoundDef`s wherever possible (easy to fine-tune: volume and pitch ranges,
+variants), plain `AudioClip`s only where a SoundDef doesn't fit (positional loops such as torches).
+
+- Packs so far (kenney.nl, CC0, the whole pack each, credited in the README and `credits.txt`):
+  `Assets/Externals/Kenney.NL/InterfaceSounds` (100 UI sounds) and `ImpactSounds` (130: impacts on wood, metal,
+  glass, ..., and footsteps on grass, concrete, wood, carpet, snow).
+- SoundDefs in `Assets/Audio/SFX`. The menu's: `UI_Move` (`select_001`, 0.5), `UI_Select` (`confirmation_001`,
+  0.6), `UI_ChangeValue` (`tick_002`, 0.6, pitch 0.95 to 1.05) and `UI_Back` (`back_002`, 0.6), all SecondaryFX (the
+  mixer's FX2); `SlateClap` (0.9 to 1, pitch 1.1 to 1.25, PrimaryFX: FX): the five `impactWood_light` at first, then
+  the user's pick, Freesound's "film_slate" by themfish (CC-BY 4.0, `Assets/Externals/Other`; it starts at once, so
+  the delay holds). Sounds from elsewhere go in `Assets/Externals/Other`.
+- `Assets/Resources/Globals.asset` has the three UI ones: UnityCommon's `UIGroup` plays move on navigating and select
+  on confirming, `UINumberSelector` change value on each step. Its `UIButton` also played change value on every press,
+  on top of the group's select; that line is gone (UnityCommon, 2026-10-26).
+- UnityCommon's menus have no back sound, so `MainMenu.backSound` (`UI_Back`) plays when Back (`UIBack`) leaves the
+  options or the credits.
+- `Slate.clapSound` (both slates: the Director scene's and the menu's copy) is `SlateClap`, `clapSoundDelay` (0.23 s)
+  after the trigger: the clip shuts the arm 0.92 s in and the state plays at 4x, so it lands on the clack.
+- Measured in Play mode from the menu: each move one `select_001`, confirming `confirmation_001`, the volume's steps
+  `tick_002` at varying pitch, Back out of the options and the credits `back_002`, Play `confirmation_001` then the
+  clap 0.93 s later; UI through FX2, the clap through FX. The room tone and Play's whoosh (polish) are still to do.
+
 ### Outlines in the Director scene
 
 - Black `UC.ScreenSpaceOutline` (4 px, the renderer feature's Max Width; visible only) on the Director prefab root,
@@ -786,7 +812,8 @@ README's `## Todo` list.
   coming out) and the zombie chasing the actor on the NavMesh; the director (portrait, hot/cold and mood, briefing,
   slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won; the main menu
   and credits; the labyrinth and the temple; music and the options (music volume, brightness). All tested in Play
-  mode. Next (README Todo): the director's voice and sound effects, the itch.io page.
+  mode. Next (README Todo): the director's voice and sound effects (the list: [sounds.md](sounds.md)), the itch.io
+  page.
 - Scenes: `MainMenu` (first in the build list, with its own copy of the director's set), the movie's `ZombieMovie`
   (the template's `SampleScene`, renamed; it keeps the template's Global Volume), `Labyrinth` and `Temple`, and
   `Director` (loaded additively by the movies).
@@ -800,13 +827,13 @@ README's `## Todo` list.
 | Path | What it is |
 |---|---|
 | `Assets/Externals/UnityCommon` | Git submodule, shared library (see [setup.md](setup.md)) |
-| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters`, `MiniDungeon`, `MiniForest` (credited in the README) |
+| `Assets/Externals/Kenney.NL` | Kenney CC0 packs, FBX format: `BlockyCharacters`, `GraveyardKit`, `MiniCharacters`, `MiniDungeon`, `MiniForest`; audio (OGG): `InterfaceSounds`, `ImpactSounds` (all credited in the README) |
 | `Assets/Externals/Zanerlak` | zanerlak's Low-Poly Movie Camera (`camera.fbx`, CC-BY 4.0, Sketchfab; credited in the README) |
 | `Assets/Externals/tech.service.allwe` | tech.service.allwe's slate model (`Slate.fbx`, its textures and materials; CC-BY 4.0, Sketchfab, credited in the README) and the user's `SlateCtrl.controller` |
 | `Assets/Scenes` | `MainMenu`, `ZombieMovie` (the first movie; `ZombieMovie/` holds its baked NavMesh), `Labyrinth` (the second; `Labyrinth/` its NavMesh), `Temple` (the third; `Temple/` its NavMesh), `Director` (loaded additively by the movies) |
 | `Assets/Scripts` | Game code: `Player/` (`Player`, `MovementDirectionalXZ`, `Archer`), `Characters/` (`CharacterAnimation`, `Zombie`, `Orc`, `OrcSpawner`, `Watcher`), `Interaction/` (`Interactable`, `Verb`, `StartupActions`, `ActionTrigger`, `InteractionPrompt`, `Actions/`, `Conditions/`), `Cutscene/` (`Cutscene`, `ShotFollow`), `Director/` (`Director`, `DirectorBody`, `DirectorFace`, `DirectorDriver`, `DirectorSpeech`, `Gibberish`, `Slate`), `Scenes/` (`AdditiveSceneLoader`), `Props/` (`SpikeTrap`, `Coin`, `Arrow`, `ForceField`, `Spinner`, `BloodDecal`, `RandomSpot`), `UI/` (`TakesDisplay`, `MainMenu`, `ScreenFlash`), `Editor/` (`VerbEditor`, `StartupActionsEditor`, `ActionTriggerEditor`, `OrcSpawnerEditor`); `Gameplay.cs` (gameplay hold), `GameManager.cs` (takes, the cut, scene complete), `Globals.cs` (UnityCommon globals) |
 | `Assets/Prefabs` | `GameManager`, `SoundManager` (the user's), `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine`, `Arrow`, `Orc`, `BloodSplash`, `BloodDecal` |
-| `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café) |
+| `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café); `SFX/` (the SoundDefs, over the Kenney clips) |
 | `Assets/Resources` | `Globals` (UnityCommon's globals asset) |
 | `Assets/Sprites` | `Items/` (item icons: `Shovel`, `Key`, `Bow`), `UI/` (`Slate`, the takes icon) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text; `BarlowCondensed-Black SDF Outline` (material preset: outline and shadow, for text over the set) |

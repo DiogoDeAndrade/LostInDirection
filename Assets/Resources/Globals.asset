@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Bits: 0
   _healthResource: {fileID: 0}
   _weaponSlot: {fileID: 0}
-  _uiMoveSnd: {fileID: 0}
-  _uiSelectSnd: {fileID: 0}
-  _uiChangeValueSnd: {fileID: 0}
+  _uiMoveSnd: {fileID: 11400000, guid: abc5b713f23925a4facb33ad406a7803, type: 2}
+  _uiSelectSnd: {fileID: 11400000, guid: 2db4bac6393051144878a9381c26106f, type: 2}
+  _uiChangeValueSnd: {fileID: 11400000, guid: e5f75411c9fb08b4aa81f7dba769f287, type: 2}
   _textTooltip: {fileID: 0}

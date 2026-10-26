@@ -876,7 +876,8 @@ MonoBehaviour:
   holdBeforeClap: 0.3
   clapTime: 0.55
   holdAfterClap: 0.4
-  clapSound: {fileID: 0}
+  clapSound: {fileID: 11400000, guid: 456f438efa952574d9669e4e06115bfa, type: 2}
+  clapSoundDelay: 0.23
 --- !u!95 &1067915534
 Animator:
   serializedVersion: 7

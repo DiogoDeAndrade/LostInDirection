@@ -4,8 +4,9 @@ using UC;
 using UnityEngine;
 
 // The clapperboard in the Director scene, waiting out of the director camera's view. Play slides it to the shown
-// point, claps it (the Animator's clap trigger) and slides it back out, then resets it to idle. While that runs
-// isPlaying is true, which holds the gameplay (see Gameplay). One per Director scene.
+// point, claps it (the Animator's clap trigger, with clapSound when the arm shuts) and slides it back out, then
+// resets it to idle. While that runs isPlaying is true, which holds the gameplay (see Gameplay). One per Director
+// scene.
 public class Slate : MonoBehaviour
 {
     [SerializeField, Tooltip("The first one in the children if left empty")]
@@ -26,6 +27,8 @@ public class Slate : MonoBehaviour
     private float       holdAfterClap = 0.4f;
     [SerializeField, Tooltip("Played on the clap (optional)")]
     private SoundDef    clapSound;
+    [SerializeField, Min(0), Tooltip("Seconds from the trigger to the arm shutting (the clip shuts 0.92 s in, played at 4x)")]
+    private float       clapSoundDelay = 0.23f;
 
     public static Slate instance { get; private set; }
 
@@ -60,8 +63,9 @@ public class Slate : MonoBehaviour
         yield return new WaitForSeconds(holdBeforeClap);
 
         if (animator != null) animator.SetTrigger(clapTrigger);
+        yield return new WaitForSeconds(clapSoundDelay);
         if (clapSound != null) clapSound.Play();
-        yield return new WaitForSeconds(clapTime + holdAfterClap);
+        yield return new WaitForSeconds(Mathf.Max(0.0f, clapTime + holdAfterClap - clapSoundDelay));
 
         yield return Move(shownPoint.position, hiddenPosition, false);
         if (animator != null)
