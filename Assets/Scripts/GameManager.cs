@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     [Header("Sounds (each with its line)")]
     [SerializeField]
     private SoundDef    cutSound;
+    [SerializeField, Tooltip("The slate's clap, with \"CUT!\" and \"CUT! PRINT IT!\"")]
+    private SoundDef    slateSound;
     [SerializeField, Tooltip("When the takes display drops a slate")]
     private SoundDef    takeLostSound;
     [SerializeField]
@@ -115,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         if (DirectorDriver.instance != null) DirectorDriver.instance.SetFrustration(0.0f);
         cutSound?.Play();
+        slateSound?.Play();
         yield return Say(cutLine);
 
         // The takes display drops a slate
@@ -145,6 +148,7 @@ public class GameManager : MonoBehaviour
             driver.SetMood(1.0f);
         }
         printSound?.Play();
+        slateSound?.Play();
         yield return Say(printLine);
         yield return new WaitForSeconds(pauseAfterLine);
 

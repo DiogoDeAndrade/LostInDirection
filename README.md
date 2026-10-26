@@ -44,7 +44,7 @@ directions, and he doesn't understand any of it and feels the translation is not
       three waves of orcs (with blood), find the key to her cage (hidden in one of the orc alcoves), free her (a
       kiss for the hero), she casts a spell that dissolves the artifact's force
       field, take it
-- [ ] Director voice (babble blips while he talks)
+- [x] Director voice: babble blips while he talks, a voice reacting to the mood going up or down
 - [x] "Cut!" when the director's mood runs out: everything stops, fade out, the take starts again
 - [x] Takes (lives): three for the whole movie, shown as slates in the top-right corner; losing the last one gets
       a "YOU'RE FIRED!"
@@ -52,9 +52,10 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [x] Main menu over the director's set (Play claps the slate), with scrolling credits; being fired or finishing the
       movie comes back to it
 - [x] Music: a song for each scene, the movie's starting on the slate's clap
-- [ ] Sound effects
+- [x] Sound effects (the list: [docs/sounds.md](docs/sounds.md))
 - [x] Options in the menu: music volume and brightness (gamma)
-- [ ] Itch.io page
+- [x] Spellcaster Studios' logo on the splash screen and the menu, the version on the menu, no mouse cursor
+- [ ] Itch.io page (Windows build; the banner prompt and the page text: [docs/itch.md](docs/itch.md))
 
 ## Art
 
@@ -89,6 +90,10 @@ directions, and he doesn't understand any of it and feels the translation is not
 - [Finger Kiss](https://freesound.org/people/bowlingballout/sounds/577780/) by [bowlingballout](https://freesound.org/people/bowlingballout/), [CC0] license.
 - [Magic Powerup Loop](https://freesound.org/people/simranzenov/sounds/859497/) by [simranzenov](https://freesound.org/people/simranzenov/), [CC0] license.
 - [Magic - Magnetic Force Field](https://freesound.org/people/Vrymaa/sounds/810896/) by [Vrymaa](https://freesound.org/people/Vrymaa/), [CC0] license.
+- [Hidden Wall Opening](https://freesound.org/people/ertfelda/sounds/243699/) by [ertfelda](https://freesound.org/people/ertfelda/), [CC0] license.
+- [Angry frustrated and disappointed - Male - Various Sounds](https://freesound.org/people/khenshom/sounds/527737/) by [khenshom](https://freesound.org/people/khenshom/), [CC0] license.
+- [Mmm or Mm - Female Voice Various](https://freesound.org/people/AudioRichter/sounds/169342/) by [AudioRichter](https://freesound.org/people/AudioRichter/), [CC-BY 4.0] license.
+- [Bubble_5](https://freesound.org/people/BenParamoreAudio/sounds/868713/) by [BenParamoreAudio](https://freesound.org/people/BenParamoreAudio/), [CC0] license.
 - [''the muppet's aren't in, party party fight'' remix of a bit of Freesound #93668](https://freesound.org/people/Timbre/sounds/198054/) by [Timbre](https://freesound.org/people/Timbre/), [CC-BY-NC 4.0] license.
 - Music made with [Suno](https://suno.com).
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.

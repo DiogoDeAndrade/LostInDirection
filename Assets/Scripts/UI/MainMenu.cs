@@ -39,6 +39,8 @@ public class MainMenu : MonoBehaviour
     private AudioClip       music;
     [SerializeField, Min(0.01f), Tooltip("Seconds the music takes to fade out once Play is pressed (the movie's starts on its slate)")]
     private float           musicFadeTime = 1.0f;
+    [SerializeField, Tooltip("The menu going, once Play is pressed")]
+    private SoundDef        playSound;
     [SerializeField, Range(0.0f, 1.0f)]
     private float           creditsDimAlpha = 0.6f;
     [SerializeField, Scene]
@@ -54,6 +56,9 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        // Gamepad and keyboard only: no mouse cursor from here on (the menu is the first scene)
+        Cursor.visible = false;
+
         playButton.onInteract += Play;
         if (backControl != null) backControl.playerInput = playerInput;
         StartCoroutine(GestureCR());
@@ -106,6 +111,7 @@ public class MainMenu : MonoBehaviour
         if (menuGroup != null) menuGroup.EnableUI(false);
         if (menuCanvasGroup != null) menuCanvasGroup.FadeOut(fadeTime);
         SoundManager.PlayMusic(null, 1.0f, 1.0f, musicFadeTime);
+        if (playSound != null) playSound.Play();
         if (Director.instance != null) Director.instance.talking = false;
 
         if (Slate.instance != null) yield return Slate.instance.Play();

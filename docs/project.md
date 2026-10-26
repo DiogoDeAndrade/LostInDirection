@@ -321,9 +321,13 @@ fire baskets and the lamps.
     as Set Player Target clears it): within the radius on the ground plane -`stayInsideRate` (0.3/s), beyond it
     +`stayOutsideRate` (0.35/s), whichever way he faces; the mood rules as above. Measured: 0.29 to 0.99 in 2 s
     at 9.6 from the place.
-  - Zombies: a following zombie closer than `zombieRange` (0.8, on the ground plane) drains the mood at
-    `zombieMoodRate` (0.03/s, a face in about 5 s), target or not; the inspector shows `zombieDistance` (-1 when
-    none follows). Measured: the zombie caught the standing actor 1 s after the dig, then 0.786 to 0.575 in 7 s.
+  - Zombies: a following zombie closer than `zombieRange` (2, on the ground plane) drains the mood, target or not,
+    the faster the closer: `zombieMoodRate` (0.15/s) times how close it is (1 right on him, 0 at the range), so
+    about 0.075/s at 1 m, already more than standing frustrated (0.05/s); the inspector shows `zombieDistance` (-1
+    when none follows). The first rule (0.03/s within 0.8) was barely more than standing still, the user found
+    (2026-10-26), and the zombie (1.4 against the actor's 2) seldom got that close. Measured, frustration held at
+    0 and the actor standing still: nothing at 2.5 m, 0.04/s at 1.1 m, then 0.14/s with the zombie on him
+    (0.13 m), a face a second, the take cut 9.7 s after it walked up from 4.5 m.
   - No target: -`relaxRate` (0.2/s). During cutscenes nothing changes. Starts at frustration 0.3, mood 1.
   - The inspector shows the live state, frustration, mood, distance and progress.
 - Zombie scene targets: StartupActions targets the shovel; "Pick up" ends with the grave; "Dig" ends with
@@ -698,6 +702,15 @@ and `CreditsGamepad Variant` quick prefabs, as in Deathfloor and WrongWay) over 
 - `Assets/Resources/Globals.asset` (`Globals`, `Assets/Scripts`, a `UC.GlobalsBase`): UnityCommon's menus look it up
   for their UI sounds (none set yet) and log an error every move without one.
 - `PlayerSettings.productName` is "Lost in Direction".
+- Branding (2026-10-26, the user's request, after Vektor Link and Shroomjumper): `Menu/Logo` at the bottom left,
+  Spellcaster Studios' white logo (`Assets/Sprites/UI/SpellcasterStudios_WhiteTransparent.png`, the same file as
+  the user's other games; 170 px, 40 from the corner, alpha 0.85), and `Menu/Version` at the bottom right,
+  UnityCommon's `VersionText` ("V{0}" with the build date under it at half size, as in Vektor Link: the version is
+  `PlayerSettings.bundleVersion`, the date `Assets/Resources/BuildInfo.txt`, which UnityCommon's build tool, Unity
+  Common/Build, rewrites on each build; Barlow 36 with the outline). Both fade with the menu on Play and hide while
+  the credits roll (`hideDuringCredits`). The splash screen shows Unity's logo, then the studio's (All Sequential,
+  2 s each, as in Shroomjumper). The mouse cursor is hidden from the menu on (`MainMenu.Start`, as in WrongWay): the
+  game is played with a gamepad or the keyboard. Measured in Play mode: "V1.0.0" over the date, the logo, no cursor.
 - Measured in Play mode, started from the menu: navigation wraps; Credits dims the set and hides the title, Back
   restores them; Play fades the menu, the slate claps in front of the director, and ZombieMovie is up 1.6 s later
   with 3 takes; fired, the game comes back to the menu with the takes reset. Options (2026-10-25): the panel comes
@@ -749,7 +762,7 @@ variants), plain `AudioClip`s only where a SoundDef doesn't fit (positional loop
   after the trigger: the clip shuts the arm 0.92 s in and the state plays at 4x, so it lands on the clack.
 - Measured in Play mode from the menu: each move one `select_001`, confirming `confirmation_001`, the volume's steps
   `tick_002` at varying pitch, Back out of the options and the credits `back_002`, Play `confirmation_001` then the
-  clap 0.93 s later; UI through FX2, the clap through FX. The room tone and Play's whoosh (polish) are still to do.
+  clap 0.93 s later; UI through FX2, the clap through FX. Play's whoosh came with the polish; the room tone wasn't needed.
 - The zombie movie (2026-10-26), with two more packs, `RPGAudio` (52: creaks, doors, knives, cloth, metal, books)
   and `MusicJingles` (85 short stings in five styles: 8-bit, hits, pizzicato, sax, steel drums). The stings were
   picked by their length and measured pitch, unheard: placeholders as much as the rest.
@@ -758,7 +771,9 @@ variants), plain `AudioClip`s only where a SoundDef doesn't fit (positional loop
   object's verbs, only with more than one), `Pickup` (each Inventory/Add Item).
 - The director reacts to the mood in his own voice (`DirectorSpeech.React`, from `DirectorDriver.ChangeMood`: the
   right and wrong actions and the hits, from `moodUpSoundMin`, 0.1, so a kill's 0.07 is silent, and
-  `moodDownSoundMin`, 0.05, so a red herring's half face isn't; the frustration and zombie drifts aren't changes):
+  `moodDownSoundMin`, 0.05, so a red herring's half face isn't), and from the gradual drops (frustration and
+  zombies) each time they take a face off him (`Director.FaceFor`, 8 faces; added 2026-10-26: the user heard the
+  annoyed voice on the full steps only):
   `reactDelay` (0.3 s) after it, so the action's own sound is heard first, three rising blips when pleased (pitch
   1.15, 1.3, 1.5), two low ones when annoyed (0.8, 0.65), `reactInterval` (0.15 s) apart, longer than the blip at
   its lowest, since the voice plays one at a time; none while he's talking. The first try was Interface sweeps
@@ -877,6 +892,28 @@ variants), plain `AudioClip`s only where a SoundDef doesn't fit (positional loop
     on the shield, at pitch 1.5 and 0.2, stopping when it's taken. Both 3D, linear (to 12 and 8), the mixer's Ambient.
   - Measured: 72 releases, 37 appearances and 37 deaths, three Dramatic9s, the kiss; through the cast, the spell's
     volume rising to 0.6 in about 0.6 s and falling after, the field's from 0.5 to nothing over its 1.2 s.
+- The polish (2026-10-26), Kenney's where they could be, the user's picks for the rest:
+  - The director reacts to the mood in a voice now (`DirectorSpeech.pleasedSound` / `annoyedSound`, `reactDelay`
+    after the change): `DirectorPleased` (AudioRichter's "Mmm", CC-BY 4.0) and `DirectorAnnoyed` (khenshom's angry,
+    frustrated and disappointed, CC0); the blips of his voice stay as the fallback with neither set. Each balloon
+    pops up with `BalloonPop` (`DirectorSpeech.balloonSound`): the user's pick, BenParamoreAudio's Bubble_5 (CC0,
+    30 ms, quiet: 0.9), after Interface `open_001`.
+  - The slate claps with "CUT!" and "CUT! PRINT IT!" too (`GameManager.slateSound`, `SlateClap`).
+  - The crypt (the user's call: the door must be heard before the cut): `CryptEntrance` now runs Cutscene/Start (no
+    camera: the bars, and the actor and the zombie hold), `CryptDoor` (ertfelda's Hidden Wall Opening, 1.1 s), the
+    actor's animation, a 1.3 s wait, then Movie/Scene Complete.
+  - Kenney's: the cutscene bars (`Cutscene.barsInSound` / `barsOutSound`: RPG Audio `cloth1`, and the same
+    backwards); the menu's whoosh on Play (`MainMenu.playSound`, `cloth4`, low); the graves' Read (`bookFlip`) and
+    Pray (Interface `glass_004`, low); the zombie's (`ZombieStep`, grass, low) and the orcs' footsteps (`OrcStep`,
+    concrete, low, at most 4 at once), 3D (`Footsteps` now plays from where the character is); the blood splats
+    (`Orc.splatSound`, `BloodSplat`, Impact `impactSoft_medium`, high and quiet, 3D, each splat as it lands).
+  - Measured in Play mode: a pop per balloon; Read's page and Pray's chime, each with the annoyed voice 0.3 s
+    after, the shovel's pickup with the pleased one; the dig's bars swishing in and backwards out; 5 of the
+    zombie's steps in 3 s; the crypt's wall sound, then 1.32 s later the slate and the print sting, the zombie
+    having moved 0.02 meanwhile; the Labyrinth's cut: the slate with the scratch, then the lost take; an orc
+    walking up (5 steps), shot (the hit, its death grunt, three splats).
+  - The rest of the polish (the director growing impatient, the menu's room tone, the zombie growling right next
+    to the actor) isn't needed, the user decided: the sounds are closed.
 - Playing backwards, in UnityCommon (the user's design, 2026-10-26): `SoundDef.reverse` makes `Play` hand the
   SoundManager a negative pitch, and `SoundManager._PlaySound` (every `Play*`) plays a clip with a negative pitch
   backwards: it starts it at its last sample (and a positive one at 0, so a pooled source doesn't carry a position
@@ -935,7 +972,7 @@ README's `## Todo` list.
   `GameAction`s. Not used: the user wanted verbs as plain strings on one component, so the game has its own
   `Interactable` (no namespace); `UC.ScreenSpaceOutline` is used for the highlight.
 
-## Current state (2026-10-25)
+## Current state (2026-10-26)
 
 - Unity 6.6 "Universal 3D" (URP) template, plus UnityCommon, NaughtyAttributes and `com.unity.pipeline` (Unity
   CLI control of the Editor). Compiles cleanly.
@@ -944,9 +981,9 @@ README's `## Todo` list.
   conditions and actions, the shovel pickup; the dig cutscene (bars, cutscene camera, animation, dirt, the zombie
   coming out) and the zombie chasing the actor on the NavMesh; the director (portrait, hot/cold and mood, briefing,
   slate); red herrings; takes, the cut and scene complete, so the zombie scene can be lost and won; the main menu
-  and credits; the labyrinth and the temple; music and the options (music volume, brightness). All tested in Play
-  mode. Next (README Todo): the director's voice and sound effects (the list: [sounds.md](sounds.md)), the itch.io
-  page.
+  and credits; the labyrinth and the temple; music and the options (music volume, brightness); the director's
+  voice and the sound effects (closed: [sounds.md](sounds.md)). All tested in Play mode. Next (README Todo): the
+  itch.io page, a Windows build only (the banner prompt and the page text: [itch.md](itch.md)).
 - Scenes: `MainMenu` (first in the build list, with its own copy of the director's set), the movie's `ZombieMovie`
   (the template's `SampleScene`, renamed; it keeps the template's Global Volume), `Labyrinth` and `Temple`, and
   `Director` (loaded additively by the movies).
@@ -968,8 +1005,8 @@ README's `## Todo` list.
 | `Assets/Prefabs` | `GameManager`, `SoundManager` (the user's), `Zombie` (spawned from the grave), `Candles`, `FireBasket`, `LightpostDouble`, `LightpostSingle`, `UI_InventoryItem`, `UI_FloatingText`, `UI_TakeIcon`, `UI_CreditsLine`, `Arrow`, `Orc`, `BloodSplash`, `BloodDecal` |
 | `Assets/Audio` | `Music/` (the user's four songs: Searching the Lost Maze, The Call to Adventure, The Creeping Motif, Waltz of the Café); `SFX/` (the SoundDefs); `Foley/` (the user's own sounds: `boss_blips`, from SkinFactory) |
 | `Assets/Externals/Other` | Sounds from elsewhere (Freesound: the slate's clap, the zombie, the candle's puff, the crickets, the fire; credited in the README) |
-| `Assets/Resources` | `Globals` (UnityCommon's globals asset) |
-| `Assets/Sprites` | `Items/` (item icons: `Shovel`, `Key`, `Bow`), `UI/` (`Slate`, the takes icon) |
+| `Assets/Resources` | `Globals` (UnityCommon's globals asset); `BuildInfo.txt` (the build date on the menu, rewritten by UnityCommon's build tool) |
+| `Assets/Sprites` | `Items/` (item icons: `Shovel`, `Key`, `Bow`), `UI/` (`Slate`, the takes icon; `SpellcasterStudios_WhiteTransparent`, the studio's logo on the splash and the menu) |
 | `Assets/Fonts` | `BarlowCondensed-Black` (TTF and its TMP SDF asset), for all the text; `BarlowCondensed-Black SDF Outline` (material preset: outline and shadow, for text over the set) |
 | `Assets/TextMesh Pro` | TMP essential resources |
 | `Assets/Data` | Hypertags (`MainPlayer`, `MainCamera`, `ZombieSpawn`, `Zombie`, `InventoryDisplay`, `CryptEntrance`, `LabyrinthExit`, `TempleCage`); `Items/` (`Shovel`, `Key`, `Bow`); `credits.txt` (the menu's credits) |
@@ -977,6 +1014,7 @@ README's `## Todo` list.
 | `Assets/Settings` | URP assets (`PC_RPAsset`, `Mobile_RPAsset`), renderers, volume profiles, `MainMixer.mixer` (the user's audio mixer), `InputSystem_Actions.inputactions` (the template's Input System actions, plus the game's: `Interact`, `NextOption`, `Aim`, the menus' `MoveHorizontal`, `MoveVertical`, `UIConfirm`, `UIBack`, and `Shoot` for the bow) |
 | `docs/` | This context |
 | `README.md`, `LICENSE` | Player-facing description and credits; MIT license |
+| `RELEASE_NOTES.md` | What changed in each version, newest first, in the other GCC projects' format (`# 1.0.0 (date - GCC October)`); 1.0.0 is the GCC version |
 
 New content follows the other GCC projects: code in `Assets/Scripts/`, and sibling folders `Prefabs/`,
 `Materials/`, `Audio/`, `Data/`, `Fonts/`, ... as needed.

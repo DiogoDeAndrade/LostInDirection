@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3040658117219718342}
   - component: {fileID: 1850079723462159978}
   - component: {fileID: 7864115620442158651}
+  - component: {fileID: 1994297312971642549}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -157,10 +158,27 @@ MonoBehaviour:
   bloodSplats: {x: 2, y: 4}
   splatSize: {x: 0.3, y: 0.6}
   poolSize: 1
+  splatSound: {fileID: 11400000, guid: 37f0ad4c7bbaf8b4e84ff3320859fdb4, type: 2}
   spawnSound: {fileID: 11400000, guid: dcb7dc348023fc1409a837da81e202b3, type: 2}
   attackSound: {fileID: 11400000, guid: 31d33eea03c38cb4593df07d242b41ca, type: 2}
   hitSound: {fileID: 11400000, guid: 4077f9a09a1e17749b8f5ba6c81b40eb, type: 2}
   deathSound: {fileID: 11400000, guid: 5a5ffc90285cf254b86a4616844d93a5, type: 2}
+--- !u!114 &1994297312971642549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552690000979337110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21798516eb818640b7aa3e55167444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Footsteps
+  sound: {fileID: 11400000, guid: 75482b19e1b60fd4b9d42903fc6404b3, type: 2}
+  stride: 0.6
+  minSpeed: 0.3
+  stillTime: 0.2
 --- !u!1001 &1876644722233977113
 PrefabInstance:
   m_ObjectHideFlags: 0

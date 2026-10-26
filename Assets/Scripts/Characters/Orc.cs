@@ -54,6 +54,8 @@ public class Orc : MonoBehaviour
     private Vector2         splatSize = new Vector2(0.15f, 0.35f);
     [SerializeField, Min(0.0f), Tooltip("The pool under the body (0: none)")]
     private float           poolSize = 0.6f;
+    [SerializeField, Tooltip("Each splat landing")]
+    private SoundDef        splatSound;
     [SerializeField]
     private SoundDef        spawnSound;
     [SerializeField]
@@ -198,6 +200,7 @@ public class Orc : MonoBehaviour
             float at = distance * 0.25f;
             if (at > elapsed) { yield return new WaitForSeconds(at - elapsed); elapsed = at; }
             BloodDecal.Spawn(bloodDecal, point, Random.Range(splatSize.x, splatSize.y), 0.08f);
+            if (splatSound != null) splatSound.Play(1.0f, 1.0f, -float.MaxValue, point);
         }
     }
 

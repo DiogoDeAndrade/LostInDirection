@@ -10,8 +10,9 @@ using UnityEngine.InputSystem;
 // (with a voice blip every few letters, when there's a voice) and then held for a moment; the skip button (the
 // actor's Interact) goes straight to the next line, or ends the speech on the last one. While that runs the
 // director is talking (isTalking): the actor can't move or interact, and the DirectorDriver doesn't change
-// frustration or mood. The director gestures while a line is being typed. React is his quick reaction, in the same
-// voice, to the mood going up (rising blips) or down (lower, falling), a moment after what caused it.
+// frustration or mood. The director gestures while a line is being typed, and each balloon pops up with
+// balloonSound. React is his reaction to the mood going up (pleasedSound) or down (annoyedSound), a moment after what
+// caused it; without those, a few blips of his voice (rising, or lower and falling).
 public class DirectorSpeech : MonoBehaviour
 {
     [SerializeField, Tooltip("Shown while he talks")]
@@ -28,6 +29,12 @@ public class DirectorSpeech : MonoBehaviour
     private SoundDef        voice;
     [SerializeField, Min(1)]
     private int             charactersPerBlip = 3;
+    [SerializeField, Tooltip("Each balloon popping up (optional)")]
+    private SoundDef        balloonSound;
+    [SerializeField, Tooltip("His reaction to the mood going up (blips of his voice if empty)")]
+    private SoundDef        pleasedSound;
+    [SerializeField, Tooltip("And to it going down")]
+    private SoundDef        annoyedSound;
     [SerializeField, Min(0.0f), Tooltip("Seconds after a mood change before he reacts (so the action's own sound is heard first)")]
     private float           reactDelay = 0.3f;
     [SerializeField, Min(0.01f), Tooltip("Seconds between the blips of a reaction (longer than a blip at the lowest pitch: the voice plays one at a time)")]
@@ -69,8 +76,16 @@ public class DirectorSpeech : MonoBehaviour
     // A reaction to the mood going up or down, in his voice (none while he's talking)
     public void React(bool pleased)
     {
-        if ((voice == null) || (talking)) return;
-        StartCoroutine(ReactCR((pleased) ? (pleasedPitches) : (annoyedPitches)));
+        if (talking) return;
+        var sound = (pleased) ? (pleasedSound) : (annoyedSound);
+        if (sound != null) StartCoroutine(ReactCR(sound));
+        else if (voice != null) StartCoroutine(ReactCR((pleased) ? (pleasedPitches) : (annoyedPitches)));
+    }
+
+    IEnumerator ReactCR(SoundDef sound)
+    {
+        yield return new WaitForSeconds(reactDelay);
+        if (!talking) sound.Play();
     }
 
     IEnumerator ReactCR(float[] pitches)
@@ -95,6 +110,7 @@ public class DirectorSpeech : MonoBehaviour
             if (string.IsNullOrWhiteSpace(line)) continue;
 
             balloon.SetActive(true);
+            if (balloonSound != null) balloonSound.Play();
             text.text = (translate) ? (Gibberish.Translate(line)) : (line);
             text.maxVisibleCharacters = 0;
             text.ForceMeshUpdate();

@@ -10,10 +10,11 @@ using UnityEngine.AI;
 // - Near the target it follows the aim: down while the actor aims at the target (it's what he'd interact with, or,
 //   aiming at nothing, he faces it), up while he faces away, and faster while he's aiming at another object.
 // - Frustration above moodThreshold for longer than moodGraceTime makes the mood drop.
-// - A following zombie within zombieRange of the actor makes the mood drop too, target or not.
+// - A following zombie within zombieRange of the actor makes the mood drop too, target or not: the closer, the
+//   faster, up to zombieMoodRate with it right on him.
 // - When the mood runs out, the GameManager cuts the take.
 // - Right and wrong actions (ChangeMood) get a reaction in his voice (DirectorSpeech.React), from a set size up; the
-//   drifts above don't.
+//   drops above get the annoyed one when they take a face off him.
 // Instead of a target there can be a place to stay near (SetStayNear: guarding the girl's cage): within its radius
 // frustration goes down, beyond it up, whichever way the actor faces.
 // Without a target the director calms down; while gameplay is on hold (cutscene, director talking, slate) nothing
@@ -68,9 +69,9 @@ public class DirectorDriver : MonoBehaviour
 
     [Header("Zombies")]
     [SerializeField, Min(0), Tooltip("A following zombie closer than this to the actor (on the ground plane) makes the mood drop")]
-    private float   zombieRange = 0.8f;
-    [SerializeField, Min(0), Tooltip("Mood lost per second while one is")]
-    private float   zombieMoodRate = 0.03f;
+    private float   zombieRange = 2.0f;
+    [SerializeField, Min(0), Tooltip("Mood lost per second with it right on him; less the farther it is, none at zombieRange")]
+    private float   zombieMoodRate = 0.15f;
 
     [Header("Stay near")]
     [SerializeField, Min(0), Tooltip("Frustration lost per second while the actor stays within the radius")]
@@ -177,6 +178,7 @@ public class DirectorDriver : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
+        float moodBefore = mood;
 
         // Out of mood (after whatever holds the gameplay, e.g. the cutscene a wrong action started)
         if ((mood <= 0.0f) && (!Gameplay.isHeld))
@@ -234,6 +236,11 @@ public class DirectorDriver : MonoBehaviour
         var director = Director.instance;
         if (director != null)
         {
+            // The drops above go gradually, so ChangeMood's reaction doesn't come: he reacts as his face gets worse
+            if ((director.FaceFor(mood) > director.FaceFor(moodBefore)) && (DirectorSpeech.instance != null))
+            {
+                DirectorSpeech.instance.React(false);
+            }
             director.frustration = frustration;
             director.mood = mood;
         }
@@ -304,7 +311,11 @@ public class DirectorDriver : MonoBehaviour
         }
         zombieDistance = closest;
 
-        if ((closest >= 0.0f) && (closest < zombieRange)) mood = Mathf.Clamp01(mood - zombieMoodRate * dt);
+        if ((closest >= 0.0f) && (closest < zombieRange))
+        {
+            float closeness = 1.0f - closest / zombieRange;
+            mood = Mathf.Clamp01(mood - zombieMoodRate * closeness * dt);
+        }
     }
 
     void ChangeFrustration(float delta)

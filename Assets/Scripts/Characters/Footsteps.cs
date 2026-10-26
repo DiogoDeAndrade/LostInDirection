@@ -5,7 +5,7 @@ using UnityEngine;
 // faster than minSpeed (so none while it turns on the spot or pushes against a wall), the first soon after it sets
 // off. Jumps (a teleport, the scene starting) don't count. Stopping means stillTime without moving: a body moved by
 // physics only moves on physics steps, so it seems to stand still on the frames in between. The sound is per scene,
-// for its ground (grass, stone, ...).
+// for its ground (grass, stone, ...); a 3D one is heard from where the character is.
 public class Footsteps : MonoBehaviour
 {
     [SerializeField]
@@ -55,7 +55,7 @@ public class Footsteps : MonoBehaviour
         if (travelled >= stride)
         {
             travelled -= stride;
-            if (sound != null) sound.Play();
+            if (sound != null) sound.Play(1.0f, 1.0f, -float.MaxValue, transform.position);
         }
     }
 }

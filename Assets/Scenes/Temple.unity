@@ -27602,8 +27602,8 @@ MonoBehaviour:
   moodDecayRate: 0.05
   moodUpSoundMin: 0.1
   moodDownSoundMin: 0.05
-  zombieRange: 0.8
-  zombieMoodRate: 0.03
+  zombieRange: 2
+  zombieMoodRate: 0.15
   stayInsideRate: 0.3
   stayOutsideRate: 0.35
   relaxRate: 0.2
@@ -28841,6 +28841,9 @@ MonoBehaviour:
   holdPerCharacter: 0.03
   voice: {fileID: 11400000, guid: ec6672deb37622e48976af549316b5f0, type: 2}
   charactersPerBlip: 10
+  balloonSound: {fileID: 11400000, guid: 0d57a2c0e93bb374bb98add4ededd0fd, type: 2}
+  pleasedSound: {fileID: 11400000, guid: 9759a6a1789d20c4fae7414fa2eb600e, type: 2}
+  annoyedSound: {fileID: 11400000, guid: 28eb1876275a7bc48ac3fc042fc6a6a3, type: 2}
   reactDelay: 0.3
   reactInterval: 0.15
   pleasedPitches:
@@ -29123,6 +29126,8 @@ MonoBehaviour:
   transitionTime: 0.5
   fadeDuringCutscene:
   - {fileID: 928194259}
+  barsInSound: {fileID: 11400000, guid: fac421f892e2b7f40bbbeecf5297058c, type: 2}
+  barsOutSound: {fileID: 11400000, guid: 94d79cadf4271a145a5bcc27eb6d4c18, type: 2}
 --- !u!114 &1732337015
 MonoBehaviour:
   m_ObjectHideFlags: 0

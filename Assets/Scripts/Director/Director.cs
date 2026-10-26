@@ -57,13 +57,18 @@ public class Director : MonoBehaviour
         if (instance == this) instance = null;
     }
 
+    // The face a mood shows: mood 1 is the first (best) face, mood 0 the last
+    public int FaceFor(float mood)
+    {
+        return Mathf.RoundToInt((1.0f - Mathf.Clamp01(mood)) * (face.faceCount - 1));
+    }
+
     void Update()
     {
         shownFrustration = Mathf.MoveTowards(shownFrustration, _frustration, easeSpeed * Time.deltaTime);
         shownMood = Mathf.MoveTowards(shownMood, _mood, easeSpeed * Time.deltaTime);
 
         body.frustration = shownFrustration;
-        // Mood 1 is the first (best) face, mood 0 the last
-        face.SetFace(Mathf.RoundToInt((1.0f - shownMood) * (face.faceCount - 1)));
+        face.SetFace(FaceFor(shownMood));
     }
 }

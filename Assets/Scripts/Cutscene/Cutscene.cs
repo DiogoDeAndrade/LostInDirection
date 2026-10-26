@@ -5,7 +5,8 @@ using UnityEngine;
 
 // Cutscene mode, started and ended by verb actions. Begin slides black bars in at the top and bottom of the screen,
 // fades the gameplay UI out and can switch to another camera; while it's on, the actor's controls are locked (Player
-// checks isActive). End switches the camera back, slides the bars out and fades the UI back in.
+// checks isActive). End switches the camera back, slides the bars out and fades the UI back in. The bars come and
+// go with their sounds.
 // One per scene, on its own canvas above the gameplay UI. The bars (children of this object) are collapsed to zero
 // height outside cutscenes; the inspector buttons show them for editing.
 public class Cutscene : MonoBehaviour
@@ -20,6 +21,10 @@ public class Cutscene : MonoBehaviour
     private float           transitionTime = 0.5f;
     [SerializeField, Tooltip("Faded out while a cutscene plays (the gameplay UI)")]
     private CanvasGroup[]   fadeDuringCutscene;
+    [SerializeField]
+    private SoundDef        barsInSound;
+    [SerializeField]
+    private SoundDef        barsOutSound;
 
     public static Cutscene instance { get; private set; }
 
@@ -62,6 +67,7 @@ public class Cutscene : MonoBehaviour
             if ((gameplayCamera != null) && (gameplayCamera != cutsceneCamera)) gameplayCamera.enabled = false;
         }
 
+        if (barsInSound != null) barsInSound.Play();
         yield return MoveBars(1.0f);
     }
 
@@ -83,6 +89,7 @@ public class Cutscene : MonoBehaviour
             if (group != null) group.FadeIn(transitionTime);
         }
 
+        if (barsOutSound != null) barsOutSound.Play();
         yield return MoveBars(0.0f);
 
         active = false;
