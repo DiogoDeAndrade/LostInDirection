@@ -478,7 +478,10 @@ Dungeon (added by the user; 1-unit blocks: `wall` 1 x 1.1 x 1, `floor`, `stairs`
 - Barrels in 12 of the other dead ends: Interactable "Barrel", "Inspect" (`interact-right`, one of 12 lines about the
   barrel, -0.07 mood).
 - `SpikeTrap` (`Assets/Scripts/Props`) on 13 traps: 9 on straight stretches spread along the way through, 4 off it.
-  It samples the model's show / hide clips; down `downTime` (1.6 s), up `upTime` (1.0 s), from a random `phase`.
+  It samples the model's show / hide clips on an Animator it adds to the model (no controller: the clips are Generic,
+  and outside the Editor those only sample on an object with an Animator; without one the spikes never moved in the
+  build, and the player's log filled with the warning); down `downTime` (1.6 s), up `upTime` (1.0 s), from a random
+  `phase`.
   Standing on it (within `halfSize` 0.39 of its centre) while the spikes are up hurts once per cycle:
   `hitMoodCost` (2/7, two faces), `ScreenFlash.Flash()` (the HUD's `HitFlash`: red, up to 40% in 0.05 s and gone in
   0.6 s), "Ouch!" in red, and the actor is put `pushDistance` (0.65) off its centre along the corridor, on the side

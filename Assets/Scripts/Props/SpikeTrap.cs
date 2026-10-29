@@ -2,12 +2,13 @@ using UC;
 using UnityEngine;
 
 // A spike trap (Kenney's Mini Dungeon trap: its "spikes" part rises and sinks with the model's show / hide clips,
-// sampled here). It cycles: down for downTime, up for upTime, starting phase seconds into the cycle so the traps
-// along a corridor don't move in step. An actor standing on it while the spikes are up gets hurt once per cycle: the
-// director's mood drops by hitMoodCost (two faces), the screen flashes red, "Ouch!" floats over him, and he's pushed
-// off it along the corridor, out the side he's nearest to (back against his facing when he's dead centre). Nothing
-// hurts while gameplay is on hold. The spikes make a sound going up and coming down, from the trap, only within
-// hearingDistance of the listener (there are many traps, cycling all the time, and a 3D sound never quite fades out).
+// sampled here on an Animator with no controller, see Start). It cycles: down for downTime, up for upTime, starting
+// phase seconds into the cycle so the traps along a corridor don't move in step. An actor standing on it while the
+// spikes are up gets hurt once per cycle: the director's mood drops by hitMoodCost (two faces), the screen flashes
+// red, "Ouch!" floats over him, and he's pushed off it along the corridor, out the side he's nearest to (back against
+// his facing when he's dead centre). Nothing hurts while gameplay is on hold. The spikes make a sound going up and
+// coming down, from the trap, only within hearingDistance of the listener (there are many traps, cycling all the
+// time, and a 3D sound never quite fades out).
 public class SpikeTrap : MonoBehaviour
 {
     [SerializeField, Tooltip("The trap model (the clips are sampled on it); this object if empty")]
@@ -48,6 +49,10 @@ public class SpikeTrap : MonoBehaviour
     void Start()
     {
         if (model == null) model = gameObject;
+        // The clips are Generic (Mecanim), and outside the Editor those only sample on an object with an Animator
+        // ("Non-Legacy animations cannot be sampled outside the Editor without an Animator" in the player's log, and
+        // the spikes never moved in the build). No controller: the Animator does nothing on its own
+        if (model.GetComponent<Animator>() == null) model.AddComponent<Animator>();
         actor = FindAnyObjectByType<Player>();
         if (actor != null) actorBody = actor.GetComponent<Rigidbody>();
         time = phase;
